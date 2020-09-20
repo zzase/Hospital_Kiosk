@@ -1,0 +1,143 @@
+﻿<local:VirtualKeyboard x:Class="HKiosk.Controls.Keyboard.GeneralKeyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HKiosk.Controls.Keyboard"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="1080">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <local:KeyButton KeyCode="OEM_3" Grid.Column="0"/>
+                <local:KeyButton KeyCode="VK_1" Grid.Column="1"/>
+                <local:KeyButton KeyCode="VK_2" Grid.Column="2"/>
+                <local:KeyButton KeyCode="VK_3" Grid.Column="3"/>
+                <local:KeyButton KeyCode="VK_4" Grid.Column="4"/>
+                <local:KeyButton KeyCode="VK_5" Grid.Column="5"/>
+                <local:KeyButton KeyCode="VK_6" Grid.Column="6"/>
+                <local:KeyButton KeyCode="VK_7" Grid.Column="7"/>
+                <local:KeyButton KeyCode="VK_8" Grid.Column="8"/>
+                <local:KeyButton KeyCode="VK_9" Grid.Column="9"/>
+                <local:KeyButton KeyCode="VK_0" Grid.Column="10"/>
+                <local:KeyButton KeyCode="BACK" Grid.Column="11" Background="#FF31B465" Foreground="White"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <local:KeyButton KeyCode="OEM_MINUS" Grid.Column="0"/>
+                <local:KeyButton KeyCode="OEM_PLUS" Grid.Column="1"/>
+                <local:KeyButton KeyCode="OEM_5" Grid.Column="2"/>
+                <local:KeyButton KeyCode="VK_Q" Grid.Column="3"/>
+                <local:KeyButton KeyCode="VK_W" Grid.Column="4"/>
+                <local:KeyButton KeyCode="VK_E" Grid.Column="5"/>
+                <local:KeyButton KeyCode="VK_R" Grid.Column="6"/>
+                <local:KeyButton KeyCode="VK_T" Grid.Column="7"/>
+                <local:KeyButton KeyCode="VK_Y" Grid.Column="8"/>
+                <local:KeyButton KeyCode="VK_U" Grid.Column="9"/>
+                <local:KeyButton KeyCode="VK_I" Grid.Column="10"/>
+                <local:KeyButton KeyCode="VK_O" Grid.Column="11"/>
+                <local:KeyButton KeyCode="VK_P" Grid.Column="12"/>
+                <local:KeyButton KeyCode="OEM_4" Grid.Column="13"/>
+                <local:KeyButton KeyCode="OEM_6" Grid.Column="14"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <local:KeyButton KeyCode="HANGUL" Grid.Column="0"/>
+                <local:KeyButton KeyCode="VK_A" Grid.Column="1"/>
+                <local:KeyButton KeyCode="VK_S" Grid.Column="2"/>
+                <local:KeyButton KeyCode="VK_D" Grid.Column="3"/>
+                <local:KeyButton KeyCode="VK_F" Grid.Column="4"/>
+                <local:KeyButton KeyCode="VK_G" Grid.Column="5"/>
+                <local:KeyButton KeyCode="VK_H" Grid.Column="6"/>
+                <local:KeyButton KeyCode="VK_J" Grid.Column="7"/>
+                <local:KeyButton KeyCode="VK_K" Grid.Column="8"/>
+                <local:KeyButton KeyCode="VK_L" Grid.Column="9"/>
+                <local:KeyButton KeyCode="OEM_1" Grid.Column="10"/>
+                <local:KeyButton KeyCode="OEM_7" Grid.Column="11"/>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <local:KeyButton KeyCode="SHIFT" Grid.Column="0"/>
+                <local:KeyButton KeyCode="VK_Z" Grid.Column="1"/>
+                <local:KeyButton KeyCode="VK_X" Grid.Column="2"/>
+                <local:KeyButton KeyCode="VK_C" Grid.Column="3"/>
+                <local:KeyButton KeyCode="VK_V" Grid.Column="4"/>
+                <local:KeyButton KeyCode="VK_B" Grid.Column="5"/>
+                <local:KeyButton KeyCode="VK_N" Grid.Column="6"/>
+                <local:KeyButton KeyCode="VK_M" Grid.Column="7"/>
+                <local:KeyButton KeyCode="OEM_COMMA" Grid.Column="8"/>
+                <local:KeyButton KeyCode="OEM_PERIOD" Grid.Column="9"/>
+                <local:KeyButton KeyCode="OEM_2" Grid.Column="10"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</local:VirtualKeyboard>

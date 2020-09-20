@@ -1,0 +1,41 @@
+﻿<Page x:Class="HKiosk.Pages.IdentityVerification.IdentityVerificationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HKiosk.Pages.IdentityVerification"
+      mc:Ignorable="d" 
+       d:DesignHeight="1145" d:DesignWidth="1080"
+      Title="IdentityVerification">
+    <Page.DataContext>
+        <local:IdentityVerificationPageViewModel/>
+    </Page.DataContext>
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Background="#FFE7E7E5">
+           
+        </Grid>
+
+        <Grid DockPanel.Dock="Bottom">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button DockPanel.Dock="Top" Name="startBtn" HorizontalAlignment="Center"  
+                    Margin="0,0,0,0"  Width="1080" Height="100" Background="Transparent" Command="{Binding NextPageCommand}" >
+                            <Grid>
+                        <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Gubun_2.png"/>
+                                <TextBlock Text="시작하기" FontSize="30" Foreground="White"></TextBlock>
+                            </Grid>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="180 50 180 0">
+           
+            <Grid>
+              
+                <StackPanel Orientation="Vertical">
+                   
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </DockPanel>
+   
+</Page>

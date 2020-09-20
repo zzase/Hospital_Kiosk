@@ -1,0 +1,63 @@
+﻿<local:VirtualKeyboard x:Class="HKiosk.Controls.Keyboard.NumbericKeyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HKiosk.Controls.Keyboard"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <local:KeyButton KeyCode="NUMPAD1" Grid.Column="0"/>
+            <local:KeyButton KeyCode="NUMPAD2" Grid.Column="1"/>
+            <local:KeyButton KeyCode="NUMPAD3" Grid.Column="2"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <local:KeyButton KeyCode="NUMPAD4" Grid.Column="0"/>
+            <local:KeyButton KeyCode="NUMPAD5" Grid.Column="1"/>
+            <local:KeyButton KeyCode="NUMPAD6" Grid.Column="2"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <local:KeyButton KeyCode="NUMPAD7" Grid.Column="0"/>
+            <local:KeyButton KeyCode="NUMPAD8" Grid.Column="1"/>
+            <local:KeyButton KeyCode="NUMPAD9" Grid.Column="2"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <local:KeyButton KeyCode="NUMPAD0" Grid.Column="0"/>
+            <local:KeyButton KeyCode="BACK" Background="#FF31B465" Foreground="White" Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</local:VirtualKeyboard>

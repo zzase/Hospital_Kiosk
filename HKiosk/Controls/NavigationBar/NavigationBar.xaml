@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="HKiosk.Controls.NavigationBar.NavigationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HKiosk.Controls.NavigationBar"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Visibility="{Binding Visibility}">
+    
+    <Grid Background="#FFDEDEDE">
+        <StackPanel Orientation="Horizontal" Margin="{Binding MarginBetweenElement}">
+            <ItemsControl ItemsSource="{Binding NaviParts}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:NaviPart}">
+                        <Grid Margin="{Binding GridMargin}">
+                            <Image Source="{Binding NaviImage}" Stretch="Fill"/>
+                            <TextBlock Text="{Binding Text}" FontSize="20"
+                                   Foreground="{Binding ForegroundColor}" Margin="{Binding TextBlockMargin}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</UserControl>
