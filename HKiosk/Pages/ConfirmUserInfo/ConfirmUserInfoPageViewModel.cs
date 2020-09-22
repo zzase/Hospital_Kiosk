@@ -29,7 +29,7 @@ namespace HKiosk.Pages.ConfirmUserInfo
 
         public void ReadCert()
         {
-            Certs = jobFactory.GetAllCerts();
+           // Certs = jobFactory.GetAllCerts();
 
         }
         public ConfirmUserInfoPageViewModel()

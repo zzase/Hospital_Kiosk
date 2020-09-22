@@ -45,6 +45,8 @@ namespace HKiosk.Pages.SelectCert
             get => korYN;
             set => SetProperty(ref korYN, value);
         }
+
+      
     }
     
 }

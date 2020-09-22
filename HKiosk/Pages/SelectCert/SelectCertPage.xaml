@@ -14,9 +14,7 @@
 
     <DockPanel>
         <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
-
             <TextBlock Text="발급을 원하시는 증명서를 확인해주세요" FontSize="35" FontWeight="Bold" Foreground="Black" />
-
         </Grid>
 
         <Grid DockPanel.Dock="Bottom">
@@ -47,16 +45,31 @@
         </Grid>
 
 
-        <Grid DockPanel.Dock="Top" Width="1080" Height="700">
-            <DataGrid x:Name="CertData" ItemsSource="{Binding Certs}" SelectedItem="{Binding SelectedJob}" Background="Transparent"  Height="{Binding ReadCertCountCommand}">
-                <DataGrid.Columns >
-                    <DataGridTextColumn Header="증명서 코드"  Binding="{Binding Path=CertCd}" Width="216" FontSize="20" />
-                    <DataGridTextColumn Header="증명서명" Binding="{Binding Path=CertNe}" Width="216" FontSize="20"/>
-                    <DataGridTextColumn Header="병원연계 코드" Binding="{Binding Path=HostCertCd}" Width="216" FontSize="20"/>
-                    <DataGridTextColumn Header="수수료" Binding="{Binding Path=Price}" Width="216" FontSize="20"/>
-                    <DataGridTextColumn Header="한글" Binding="{Binding Path=KorYN}" Width="216" FontSize="20"/>
-                </DataGrid.Columns>
-            </DataGrid>
+        <Grid DockPanel.Dock="Top" Width="1080" Height="500">
+            <ListView x:Name="CertList" Background="Transparent"  ItemsSource="{Binding Jobs}" VerticalAlignment="Top" Grid.Column="6" Grid.Row="1" FontWeight="Bold" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="5" Width="330" Height="230" >
+                            <Grid>
+                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/기관선택버튼.png" Width="330"/>
+                                <TextBlock Text="{Binding CertNe}" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Width="300" TextAlignment="Center" TextWrapping="Wrap"/>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="Focusable" Value="False"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="1080"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
         </Grid>
     </DockPanel>
 </Page>

@@ -259,5 +259,8 @@
   <ItemGroup>
     <Resource Include="Resources\Common\Buttons\Gubun_2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\기관선택버튼.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
