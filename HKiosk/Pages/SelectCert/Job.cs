@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace HKiosk.Pages.SelectCert
 {
@@ -14,6 +15,7 @@ namespace HKiosk.Pages.SelectCert
         private string hosCertCd; // 병원연계 코드
         private string price;     // 수수료
         private string korYN;     // Y(한글),N(영문)
+        private ICommand selectCommand;
 
 
         public string CertCd 
@@ -46,7 +48,12 @@ namespace HKiosk.Pages.SelectCert
             set => SetProperty(ref korYN, value);
         }
 
-      
+        public ICommand SelectCommand
+        {
+            get => selectCommand;
+            set => SetProperty(ref selectCommand, value);
+        }
+
     }
     
 }

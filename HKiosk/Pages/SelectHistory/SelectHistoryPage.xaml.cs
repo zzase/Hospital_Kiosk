@@ -20,9 +20,33 @@ namespace HKiosk.Pages.SelectHistory
     /// </summary>
     public partial class SelectHistoryPage : Page
     {
+
+        private void ComboBoxLoad(object sender, RoutedEventArgs e)
+        {
+            List<string> num = new List<string>();
+            for (int i = 1; i < 10; i++)
+            {
+                num.Add(i.ToString());
+            }
+
+            var comboBox = sender as ComboBox;
+
+            comboBox.ItemsSource = num;
+            comboBox.SelectedIndex = 0;
+        }
+        private void ComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          
+            var comboBox = sender as ComboBox;
+
+            string value = comboBox.SelectedItem as string;
+            this.Title = value;
+        }
         public SelectHistoryPage()
         {
+           
             InitializeComponent();
         }
+
     }
 }

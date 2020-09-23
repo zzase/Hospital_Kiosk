@@ -21,25 +21,11 @@ namespace HKiosk.Pages.ConfirmUserInfo
             set => SetProperty(ref certs, value);
         }
 
-        private ICommand readCertCommand;
-        public ICommand ReadCertCommand
-        {
-            get { return (this.readCertCommand) ?? (this.readCertCommand = new DelegateCommand(ReadCert)); }
-        }
-
-        public void ReadCert()
-        {
-           // Certs = jobFactory.GetAllCerts();
-
-        }
         public ConfirmUserInfoPageViewModel()
         {
             MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
 
             CheckUserInfoCommand = new Command((obj) => NavigationManager.Navigate(PageElement.SelectCert));
         }
-
-
-
     }
 }

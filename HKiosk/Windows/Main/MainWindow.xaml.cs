@@ -6,6 +6,7 @@ using HKiosk.Pages.Main;
 using HKiosk.Pages.ConfirmUserInfo;
 using HKiosk.Pages.SelectCert;
 using HKiosk.Pages.SelectHistory;
+using HKiosk.Pages.ConfirmRequestInfoPage;
 using HKiosk.Util;
 using System;
 using System.Windows;
@@ -13,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.ComponentModel;
+using HKiosk.Pages.Payment;
 
 namespace HKiosk.Windows.Main
 {
@@ -69,9 +71,33 @@ namespace HKiosk.Windows.Main
                     break;
 
                 case PageElement.ConfirmRequestInfo:
+                    pageToNavigate = new ConfirmRequestInfoPage();
+                    vm?.MoveNavigationBar(NaviElement.ConfirmRequestInfo);
                     break;
 
-                case PageElement.Payment:
+                case PageElement.SelectPayment:
+                    pageToNavigate = new SelectPaymentPage();
+                    vm?.MoveNavigationBar(NaviElement.Payment);
+                    break;
+
+                case PageElement.CardPayment:
+                    pageToNavigate = new CardPaymentPage();
+                    vm?.MoveNavigationBar(NaviElement.Payment);
+                    break;
+
+                case PageElement.PhonePayment:
+                    pageToNavigate = new PhonePaymentPage();
+                    vm?.MoveNavigationBar(NaviElement.Payment);
+                    break;
+
+                case PageElement.CashbeePayment:
+                    pageToNavigate = new CashbeePaymentPage();
+                    vm?.MoveNavigationBar(NaviElement.Payment);
+                    break;
+
+                case PageElement.TmoneyPayment:
+                    pageToNavigate = new TmoneyPaymentPage();
+                    vm?.MoveNavigationBar(NaviElement.Payment);
                     break;
 
                 case PageElement.SelectIssuanceMethod:

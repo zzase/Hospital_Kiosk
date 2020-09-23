@@ -23,16 +23,20 @@ namespace HKiosk.Manager.Navigation
     public enum PageElement
     {
         Main, // MAIN
-        IdentityVerification, //로그인(휴대폰인증)
-        ConfirmUserInfo,//사용자 정보 확인
-        SelectCert,//증명서 선택
+        IdentityVerification, // 로그인(휴대폰인증)
+        ConfirmUserInfo,// 사용자 정보 확인
+        SelectCert,// 증명서 선택
         SelectHistory, // 수진이력 선택
-        ConfirmRequestInfo, //신청내용 확인
-        Payment, //수수료 결제
+        ConfirmRequestInfo, // 신청내용 확인
+        SelectPayment, // 결제방법 선택
+        CardPayment, // 카드 결제
+        PhonePayment, // 핸드폰 결제
+        CashbeePayment, // 캐시비 결제
+        TmoneyPayment, // 티머니 결제
         SelectIssuanceMethod, // 출력 방법 선택
-        Print,//증명서 출력 화면
-        Fax, //팩스 전송 화면
-        Mail //메일 전송 화면 
+        Print,// 증명서 출력 화면
+        Fax, // 팩스 전송 화면
+        Mail // 메일 전송 화면 
     }
 
     

@@ -19,22 +19,14 @@ namespace HKiosk.Pages.SelectCert
         }
 
         public ICommand MainPageCommand { get; }
-        public ICommand NextPageCommand { get; }
-        public ICommand PreviousPageCommand { get; }
 
 
-       
 
         public SelectCertPageViewModel()
         {
             jobFactory = new JobFactory();
  
             MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
-
-            NextPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.SelectHistory));
-
-            PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.ConfirmUserInfo));
-
         }
     }
 

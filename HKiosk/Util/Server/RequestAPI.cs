@@ -60,8 +60,7 @@ namespace HKiosk.Util.Server
 
             var postdata = new JObject
             {
-                {"reqData", "" }
-                //$"await KioskAgent.UseEncAria("10001", paramdata.ToString())";
+                {"reqData", await KioskAgent.UseEncAria("10001", paramdata.ToString())}
             };
 
             return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);
@@ -90,8 +89,7 @@ namespace HKiosk.Util.Server
 
             var postdata = new JObject
             {
-                {"reqData", "" }
-                //$"await KioskAgent.UseEncAria("10001", paramdata.ToString())";
+                {"reqData", await KioskAgent.UseEncAria("10001", paramdata.ToString())}
             };
 
             return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);
@@ -129,8 +127,7 @@ namespace HKiosk.Util.Server
 
             var postdata = new JObject
             {
-                {"reqData", "" }
-                //$"await KioskAgent.UseEncAria("10001", paramdata.ToString())";
+                {"reqData", await KioskAgent.UseEncAria("10001", paramdata.ToString())}
             };
 
             return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);

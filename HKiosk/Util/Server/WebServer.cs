@@ -93,17 +93,17 @@ namespace HKiosk.Util.Server
                 response = string.IsNullOrEmpty(response) ? "" : response.Trim();
 
                 //암호화 모듈
-                //if (!string.IsNullOrEmpty(response))
-                //{
-                //    if (!response.Contains("{"))
-                //    {
-                //        if (usearia)
-                //        {
-                //            string dec = await KioskAgent.UseDecAria("10001", response);
-                //            response = dec.Replace("˝", "\"");
-                //        }
-                //    }
-                //}
+                if (!string.IsNullOrEmpty(response))
+                {
+                    if (!response.Contains("{"))
+                    {
+                        if (usearia)
+                        {
+                            string dec = await KioskAgent.UseDecAria("10001", response);
+                            response = dec.Replace("˝", "\"");
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
