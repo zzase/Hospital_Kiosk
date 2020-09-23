@@ -44,7 +44,7 @@ namespace HKiosk.Pages.SelectHistory
         }
         public SelectHistoryPage()
         {
-           
+            
             InitializeComponent();
         }
 

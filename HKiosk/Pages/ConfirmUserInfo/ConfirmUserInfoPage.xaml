@@ -63,7 +63,7 @@
                                  VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="160" />
                         <TextBlock Grid.Column="1" FontSize="50" Text="-"/>
                         <PasswordBox Grid.Column="2" x:Name="textBox2" FontSize="20" 
-                                   MaxLength="7" VerticalContentAlignment="Center" Width="160" />
+                                   MaxLength="7" VerticalContentAlignment="Center" Width="160" PasswordChanged="PasswordChanged"/>
                         <Button Grid.Column="3" Width="150" Height="80" Margin="20,0,0,0" Background="Transparent" Command="{Binding CheckUserInfoCommand}">
                             <Grid>
                                 <Image Source="pack://application:,,,/Resources/Common/Buttons/Popup_Green.png"/>

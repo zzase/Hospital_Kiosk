@@ -24,5 +24,11 @@ namespace HKiosk.Pages.ConfirmUserInfo
         {
             InitializeComponent();
         }
+
+        private void PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+                ((ConfirmUserInfoPageViewModel)this.DataContext).BackNationNo = ((PasswordBox)sender).SecurePassword;
+        }
     }
 }

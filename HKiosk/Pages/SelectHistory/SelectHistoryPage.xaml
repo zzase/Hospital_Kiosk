@@ -8,8 +8,10 @@
       d:DesignHeight="1145" d:DesignWidth="1080"
       Title="SelectHistoryPage">
 
+
+
     <Page.DataContext>
-        <local:SelecyHistoryPageViewModel/>
+        <local:SelectHistoryPageViewModel/>
     </Page.DataContext>
 
     <DockPanel>
@@ -64,34 +66,108 @@
             <Grid Grid.Column="0" Grid.Row="0">
                 <TextBlock Text="조회시작일자        :" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Left"/>
             </Grid>
-            <DatePicker x:Name="FromDate" Grid.Column="1" Grid.Row="0" Width="500" Height="60"/>
-            
+            <DatePicker x:Name="FromDate" Grid.Column="1" Grid.Row="0" Width="500" Height="60" FontSize="25" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectFromDateTime, Mode=TwoWay}">
+                <DatePicker.Resources>
+                    <Style x:Key="CalendarStyle"  TargetType="{x:Type Calendar}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Calendar}">
+                                    <!-- Wrapping in ViewBox will enlarge calendar of that size.-->
+                                    <Viewbox Height="400" Width="400">
+                                        <CalendarItem x:Name="PART_CalendarItem"
+                                  Background="{TemplateBinding Background}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"/>
+                                    </Viewbox>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+
             <Grid Grid.Column="0" Grid.Row="1">
-                <TextBlock Text="조회종료일자        :" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Left"/>
+                <TextBlock Text="조회종료일자        :" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Left" />
             </Grid>
-            <DatePicker x:Name="ToDate" Grid.Column="1" Grid.Row="1" Width="500" Height="60"/>
-            
+            <DatePicker x:Name="ToDate" Grid.Column="1" Grid.Row="1" Width="500" Height="60" FontSize="25" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectToDateTime, Mode=TwoWay}">
+                <DatePicker.Resources>
+                    <Style x:Key="CalendarStyle"  TargetType="{x:Type Calendar}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Calendar}">
+                                    <!-- Wrapping in ViewBox will enlarge calendar of that size.-->
+                                    <Viewbox Height="400"
+                         Width="400">
+                                        <CalendarItem x:Name="PART_CalendarItem"
+                                  Background="{TemplateBinding Background}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"/>
+                                    </Viewbox>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+
             <Grid Grid.Column="0" Grid.Row="2">
                 <TextBlock FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Left" Text="매수                       :"/>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="2" Width="300" Height="40">
-                <ComboBox Name="CountCert" Loaded="ComboBoxLoad" SelectionChanged="ComboBoxSelectionChanged">
-                    
-                    
+                <ComboBox Name="CountCert" Loaded="ComboBoxLoad" SelectionChanged="ComboBoxSelectionChanged" FontSize="25">
+
+
                 </ComboBox>
             </Grid>
         </Grid>
+        <Grid DockPanel.Dock="Top" Width="1000" Height="50">
+            <Button Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ReadHistoriesCommand}">
+                <Grid>
+                    <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Popup_Green.png"/>
+                    <TextBlock Text="검색" FontSize="25" Foreground="White"/>
+                </Grid>
+            </Button>
+            <TextBlock Text="{Binding SelectFromDateTime}" FontSize="30"/>
+        </Grid>
         <Grid DockPanel.Dock="Top" Width="1000" Height="500">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250" />
-                <ColumnDefinition Width="250" />
-                <ColumnDefinition Width="350" />
-                <ColumnDefinition Width="150" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
-                <RowDefinition Height="150"/>
-            </Grid.RowDefinitions>
+            <ListView x:Name="HistoryList" ItemsSource="{Binding Histories}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" FontSize="20" Grid.IsSharedSizeScope="True">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn  Width="100">
+                                <GridViewColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <CheckBox />
+                                    </DataTemplate>
+                                </GridViewColumn.HeaderTemplate>
+                                <GridViewColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Grid Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <CheckBox IsChecked="{Binding Path=IsChecked}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="25"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="발급일자" Width="450">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Date,StringFormat='yyyy-MM-dd'}" FontSize="25" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="450" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="진료과" Width="450">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=DeptNe}" FontSize="25" TextAlignment="Center" Width="450"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
         </Grid>
     </DockPanel>
 </Page>

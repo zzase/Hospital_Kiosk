@@ -138,10 +138,11 @@
     </Compile>
     <Compile Include="Pages\SelectCert\SelectCertPageViewModel.cs" />
     <Compile Include="Pages\SelectHistory\History.cs" />
+    <Compile Include="Pages\SelectHistory\HistroyProvider.cs" />
     <Compile Include="Pages\SelectHistory\SelectHistoryPage.xaml.cs">
       <DependentUpon>SelectHistoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SelectHistory\SelecyHistoryPageViewModel.cs" />
+    <Compile Include="Pages\SelectHistory\SelectHistoryPageViewModel.cs" />
     <Compile Include="Util\ClickEffect.cs" />
     <Compile Include="Util\KioskAgent.cs" />
     <Compile Include="Util\Log.cs" />

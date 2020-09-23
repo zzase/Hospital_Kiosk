@@ -12,7 +12,7 @@ namespace HKiosk.Pages.SelectCert
 {
     class JobFactory
     {
-        public void ParseJson(String json)
+        private void ParseJson(String json)
         {
             var jsonArrayString = MakeJArray().ToString();
             try
@@ -69,7 +69,7 @@ namespace HKiosk.Pages.SelectCert
         //    return json;
         //}
 
-        public JArray MakeJArray()
+        private JArray MakeJArray()
         {
             JArray list = new JArray();
 
