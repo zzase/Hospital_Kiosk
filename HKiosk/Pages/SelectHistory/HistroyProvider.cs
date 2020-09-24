@@ -8,11 +8,9 @@ namespace HKiosk.Pages.SelectHistory
 {
     class HistroyProvider
     {
-       // readonly SelectHistoryPage shp = new SelectHistoryPage();
-        
-        public List<History> histories;
-        public List<History> selectedHistories;
 
+        public List<History> histories;
+       
         readonly DateTime dt = DateTime.Now;
         public List<History> AddHistory()
         {
@@ -29,35 +27,9 @@ namespace HKiosk.Pages.SelectHistory
             return histories;
         }
 
-        //public List<History> SelectHistory()
-        //{
-        //    DateTime toDateTime = shp.ToDate.DisplayDateStart.Value.Date;
-        //    DateTime fromDateTime = shp.FromDate.DisplayDateStart.Value.Date;
-
-        //    Console.WriteLine(toDateTime.ToString());
-        //    Console.WriteLine(fromDateTime.ToString());
-
-        //    foreach (var p in histories)
-        //    {
-        //        if ((DateTime.Compare(p.Date, fromDateTime) > 0 || DateTime.Compare(p.Date, fromDateTime) == 0) && (DateTime.Compare(p.Date, toDateTime) < 0 || DateTime.Compare(p.Date, toDateTime) == 0))
-        //        {
-        //            selectedHistories.Add(new History()
-        //            {
-        //                Date = p.Date,
-        //                DeptNe = p.DeptNe,
-        //                IsChecked = false
-        //            });
-        //        }
-        //    }
-
-        //    return selectedHistories;
-        //}
-
-
         public HistroyProvider()
         {
             histories = new List<History>();
-           // selectedHistories = new List<History>();
         }
        
     }

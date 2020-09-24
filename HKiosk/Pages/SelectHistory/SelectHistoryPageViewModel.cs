@@ -11,27 +11,22 @@ namespace HKiosk.Pages.SelectHistory
     class SelectHistoryPageViewModel : PropertyChange
     {
         readonly HistroyProvider hp = new HistroyProvider();
-      
-        private List<History> histories;
-        private List<History> selectedHistories;
-        private Nullable<DateTime> selectFromDateTime = null;
-        private Nullable<DateTime> selectToDateTime = null;
+
+        private List<History> histories; 
         public List<History> Histories
         {
             get { return histories; }
             set => SetProperty(ref histories, value);
         }
+        private Nullable<DateTime> selectFromDateTime = null;
+        private Nullable<DateTime> selectToDateTime = null;
 
-        public List <History> SelectedHistories
-        {
-            get { return selectedHistories; }
-            set => SetProperty(ref selectedHistories, value);
-        }
         public Nullable<DateTime> SelectFromDateTime
         {
             get
             {
                 if (selectFromDateTime == null) selectFromDateTime = DateTime.Now;
+                if (selectFromDateTime > selectToDateTime) selectFromDateTime = selectToDateTime;
 
                 return selectFromDateTime;
             }
@@ -43,7 +38,7 @@ namespace HKiosk.Pages.SelectHistory
             get
             {
                 if (selectToDateTime == null) selectToDateTime = DateTime.Now;
-
+                if (selectToDateTime < selectFromDateTime) selectToDateTime = selectFromDateTime;
                 return selectToDateTime;
             }
             set => SetProperty(ref selectToDateTime, value);
@@ -56,18 +51,17 @@ namespace HKiosk.Pages.SelectHistory
         private ICommand readHistoriesCommand;
         public ICommand ReadHistoriesCommand
         {
-            get { return (this.readHistoriesCommand) ?? (this.readHistoriesCommand = new Command((obj) => { ReadHistories(); })); }
+            get { return (this.readHistoriesCommand) ?? (this.readHistoriesCommand = new Command((obj) => { ReadHistories();})); }
         }
 
         public void ReadHistories()
         {
             Histories = hp.AddHistory();
-           // SelectedHistories = hp.SelectHistory();
         }
 
         public SelectHistoryPageViewModel()
         {
-      
+
             MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
 
             NextPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.ConfirmRequestInfo));

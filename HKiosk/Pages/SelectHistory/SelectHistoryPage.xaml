@@ -66,7 +66,7 @@
             <Grid Grid.Column="0" Grid.Row="0">
                 <TextBlock Text="조회시작일자        :" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Left"/>
             </Grid>
-            <DatePicker x:Name="FromDate" Grid.Column="1" Grid.Row="0" Width="500" Height="60" FontSize="25" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectFromDateTime, Mode=TwoWay}">
+            <DatePicker x:Name="FromDate" Grid.Column="1" Grid.Row="0" Width="500" Height="40" FontSize="25" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectFromDateTime, Mode=TwoWay}">
                 <DatePicker.Resources>
                     <Style x:Key="CalendarStyle"  TargetType="{x:Type Calendar}">
                         <Setter Property="Template">
@@ -89,7 +89,7 @@
             <Grid Grid.Column="0" Grid.Row="1">
                 <TextBlock Text="조회종료일자        :" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Left" />
             </Grid>
-            <DatePicker x:Name="ToDate" Grid.Column="1" Grid.Row="1" Width="500" Height="60" FontSize="25" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectToDateTime, Mode=TwoWay}">
+            <DatePicker x:Name="ToDate" Grid.Column="1" Grid.Row="1" Width="500" Height="40" FontSize="25" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectToDateTime, Mode=TwoWay}">
                 <DatePicker.Resources>
                     <Style x:Key="CalendarStyle"  TargetType="{x:Type Calendar}">
                         <Setter Property="Template">
@@ -127,10 +127,9 @@
                     <TextBlock Text="검색" FontSize="25" Foreground="White"/>
                 </Grid>
             </Button>
-            <TextBlock Text="{Binding SelectFromDateTime}" FontSize="30"/>
         </Grid>
         <Grid DockPanel.Dock="Top" Width="1000" Height="500">
-            <ListView x:Name="HistoryList" ItemsSource="{Binding Histories}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            <ListView x:Name="HistoryList" ItemsSource="{Binding Histories}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="2"
                       HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" FontSize="20" Grid.IsSharedSizeScope="True">
                 <ListView.View>
                     <GridView>

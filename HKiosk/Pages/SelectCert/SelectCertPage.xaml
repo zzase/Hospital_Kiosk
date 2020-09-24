@@ -30,7 +30,8 @@
         </Grid>
 
         <Grid DockPanel.Dock="Top" Width="1080" Height="500">
-            <ListView x:Name="CertList" Background="Transparent"  ItemsSource="{Binding Jobs}" VerticalAlignment="Top" Grid.Column="6" Grid.Row="1" FontWeight="Bold" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Center" >
+            <ListView x:Name="CertList" Background="Transparent"  ItemsSource="{Binding Jobs}" VerticalAlignment="Top" Grid.Column="6" Grid.Row="1" 
+                      FontWeight="Bold" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Center" BorderThickness="0" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Button Width="340" Height="230" Command="{Binding SelectCommand }" Background="Transparent">

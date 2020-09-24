@@ -107,10 +107,19 @@
       <DependentUpon>Confirm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Popup\PopupViewModel.cs" />
+    <Compile Include="Manager\Data\CertInfo.cs" />
+    <Compile Include="Manager\Data\DataManager.cs" />
+    <Compile Include="Manager\Data\Job.cs" />
+    <Compile Include="Manager\Data\PatientInfo.cs" />
+    <Compile Include="Manager\Data\PaymentInfo.cs" />
+    <Compile Include="Manager\Data\SettingInfo.cs" />
+    <Compile Include="Manager\Data\SujinHistroy.cs" />
     <Compile Include="Pages\ConfirmRequestInfoPage\ConfirmRequestInfoPageViewModel.cs" />
     <Compile Include="Pages\ConfirmRequestInfoPage\ConfirmRequestInfoPage.xaml.cs">
       <DependentUpon>ConfirmRequestInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ConfirmRequestInfoPage\RequestInfo.cs" />
+    <Compile Include="Pages\ConfirmRequestInfoPage\RequestInfoProvider.cs" />
     <Compile Include="Pages\ConfirmUserInfo\ConfirmUserInfoPage.xaml.cs">
       <DependentUpon>ConfirmUserInfoPage.xaml</DependentUpon>
     </Compile>
@@ -303,6 +312,9 @@
     <Resource Include="Resources\Common\Buttons\기관선택버튼.png" />
     <Resource Include="Resources\Common\Buttons\Btn_Bottom_13.png" />
     <Resource Include="Resources\Common\Buttons\Btn_Bottom_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Btn_Bottom_10.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

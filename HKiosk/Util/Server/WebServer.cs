@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,10 +18,11 @@ namespace HKiosk.Util.Server
         /// <param name="url">URL</param>
         /// <param name="method">HTTP 요청 방법</param>
         /// <returns></returns>
-        public static string Request(string data, string url, string method)
+        public static JObject Request(string data, string url, string method)
         {
             byte[] bytes = Encoding.Default.GetBytes(data);
             string response = string.Empty;
+            JObject result = null;
 
             try
             {
@@ -44,13 +46,15 @@ namespace HKiosk.Util.Server
                         response = sr.ReadToEnd();
                     }
                 }
+
+                result = JObject.Parse(response);
             }
             catch (Exception e)
             {
                 Log.Write($"Http 동기요청 예외발생 : {e.ToString()} URL:{url} DATA:{data}");
             }
 
-            return response;
+            return result;
         }
 
         /// <summary>
@@ -61,10 +65,11 @@ namespace HKiosk.Util.Server
         /// <param name="method">HTTP 요청 방법</param>
         /// <param name="usearia">암호화 모듈 사용</param>
         /// <returns></returns>
-        public async static Task<string> RequestAsync(string data, string url, string method, bool usearia)
+        public async static Task<JObject> RequestAsync(string data, string url, string method, bool usearia)
         {
             byte[] bytes = Encoding.Default.GetBytes(data);
             string response = string.Empty;
+            JObject result = null;
 
             try
             {
@@ -104,6 +109,8 @@ namespace HKiosk.Util.Server
                         }
                     }
                 }
+
+                result = JObject.Parse(response);
             }
             catch (Exception e)
             {
@@ -111,7 +118,7 @@ namespace HKiosk.Util.Server
                 Log.Write($"Http 비동기요청 예외발생 : {e.ToString()} URL:{url} DATA:{data}");
             }
 
-            return response;
+            return result;
         }
 
         public static async Task<string> Get(string url)

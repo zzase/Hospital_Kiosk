@@ -15,7 +15,7 @@
     <DockPanel>
         <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
 
-            <TextBlock Text="신청내용을 확인해주세요" FontSize="35" FontWeight="Bold" Foreground="Black" />
+            <TextBlock Text="신청내용을 확인하신 후 [결제]버튼을 누르세요" FontSize="35" FontWeight="Bold" Foreground="Black" />
 
         </Grid>
 
@@ -45,10 +45,115 @@
 
             </StackPanel>
         </Grid>
+        <Grid DockPanel.Dock="Top" Width="1080" Height="50">
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="타이머" HorizontalAlignment="Right"  VerticalAlignment="Center" TextAlignment="Right"  FontSize="30" FontWeight="Bold"  />
+        </Grid>
+        <Grid DockPanel.Dock="Top" Width="950" Height="50" Margin="0,0,0,0">
+            <TextBlock Text="다른 증명서를 추가 발급하실 경우 [증명서 추가]버튼을 선택하세요" FontSize="15" Foreground="DarkGray"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid DockPanel.Dock="Top" Width="950" Height="210">
+            <ListView x:Name="HistoryList" ItemsSource="{Binding RequestInfoList}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="3"
+                      HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" FontSize="20" Grid.IsSharedSizeScope="True">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Header="증명서종류" Width="290">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=CertNe}" FontSize="25" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="290" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                            <GridViewColumn Header="입원(발급)일자" Width="140">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=FromDate}" FontSize="25" TextAlignment="Center" Width="140"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
+                            <GridViewColumn Header="퇴원일자" Width="140">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=ToDate}" FontSize="25" TextAlignment="Center" Width="140"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-        <Grid DockPanel.Dock="Top" Width="900">
+                            <GridViewColumn Header="매수" Width="40">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Count}" FontSize="25" TextAlignment="Center" Width="40"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
+                            <GridViewColumn Header="발급 수수료" Width="140">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=IssuePrice}" FontSize="25" TextAlignment="Center" Width="140"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="대행 수수료" Width="140">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=AgencyPrice}" FontSize="25" TextAlignment="Center" Width="140"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="취소" Width="40">
+                                
+                                <GridViewColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Grid Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <CheckBox IsChecked="{Binding Path=IsCancel}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="25"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Width="950"  Margin="0,50,0,0">
+            <Button Width="200" Height="80">
+                <Grid>
+                    <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Btn_Bottom_10.png"/>
+                    <TextBlock Text="선택취소" FontSize="25" Margin="50,0,0,0" />
+                </Grid>
+            </Button>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Width="950" Height="100" Margin="0,50,0,0" Background="Gray">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="총 결제금액" FontSize="35" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Left" Margin="0,0,100,0" />
+                <DataGrid >
+                    <TextBlock Text="{Binding FinalPrice}" FontSize="35" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Right" Margin="0,0,100,0" />
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+        <Grid DockPanel.Dock="Top" Width="950" Height="100">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <RichTextBox   x:Name="Line1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <RichTextBox   x:Name="Line2" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <RichTextBox   x:Name="Line3" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0"/>
+            </Grid>
+            
         </Grid>
     </DockPanel>
 </Page>

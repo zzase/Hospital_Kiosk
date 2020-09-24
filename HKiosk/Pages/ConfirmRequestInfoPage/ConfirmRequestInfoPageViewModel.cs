@@ -9,12 +9,19 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
 {
     class ConfirmRequestInfoPageViewModel : PropertyChange
     {
+        private readonly RequestInfoProvider requestInfoProvider;
+
+        public List<RequestInfo> RequestInfoList
+        {
+            get { return requestInfoProvider.RequestInfoList; }
+        }
         public ICommand MainPageCommand { get; }
         public ICommand PlusCertCommand { get; }
         public ICommand PaymentCommand { get; }
 
         public ConfirmRequestInfoPageViewModel()
         {
+            requestInfoProvider = new RequestInfoProvider();
 
             MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
 

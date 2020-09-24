@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using HKiosk.Manager.Data;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,19 @@ namespace HKiosk.Util.Server
     public static class RequestAPI
     {
         internal static string operationURL = string.Empty;
+
+        internal static List<T> JArrayToList<T>(JArray jArray)
+        {
+            try
+            {
+                return (List<T>)Convert.ChangeType(JsonConvert.DeserializeObject<List<T>>(jArray.ToString()), typeof(List<T>));
+            }
+            catch (Exception ex)
+            {
+                Log.Write($"JArrayToList Error {ex}");
+                return null;
+            }
+        }
 
         #region XML
         /// <summary>
@@ -44,13 +59,14 @@ namespace HKiosk.Util.Server
         /// <summary>
         /// 환자정보 조회 API
         /// </summary>
-        /// <param name="giwanNo">기관번호</param>
         /// <param name="uName">성명</param>
         /// <param name="uJumin">주민번호</param>
         /// <returns></returns>
-        internal static async Task<string> PatNoRequest(string giwanNo, string uName, string uJumin)
+        internal static async Task<JObject> PatNoRequest(string uName, string uJumin)
         {
-            var paramdata = new JObject
+            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+
+            var paramData = new JObject
             {
                 { "command", "patNoReq" },
                 { "giwanNo", giwanNo },
@@ -60,10 +76,57 @@ namespace HKiosk.Util.Server
 
             var postdata = new JObject
             {
-                {"reqData", await KioskAgent.UseEncAria("10001", paramdata.ToString())}
+                {"reqData", await KioskAgent.UseEncAria("10001", paramData.ToString())}
             };
 
             return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);
+        }
+
+        internal static async Task<JObject> PatNoRequest_Test(string uName, string uJumin)
+        {
+            JObject paramData = null;
+
+            switch (uName)
+            {
+                case "1":
+                    paramData = new JObject
+                    {
+                        { "resultCode", "200" },
+                        { "uPatNo", "2020123456" }
+                    };
+                    break;
+                case "2":
+                    paramData = new JObject
+                    {
+                        { "resultCode", "400" },
+                        { "resultMessage", "등록된 환자정보가 없습니다." }
+                    };
+                    break;
+                case "3":
+                    paramData = new JObject
+                    {
+                        { "resultCode", "400" },
+                        { "resultMessage", "발급에 필요한 필수데이터가 누락되었습니다." }
+                    };
+                    break;
+                case "4":
+                    paramData = new JObject
+                    {
+                        { "resultCode", "400" },
+                        { "resultMessage", "서버가 다운되었거나 시스템오류가 발생하였습니다." }
+                    };
+                    break;
+                default:
+                    paramData = new JObject
+                    {
+                        { "resultCode", "" }
+                    };
+                    break;
+            }
+
+            await Task.Delay(1000);
+
+            return paramData;
         }
         #endregion
 
@@ -71,14 +134,15 @@ namespace HKiosk.Util.Server
         /// <summary>
         /// 발급가능 증명서 조회
         /// </summary>
-        /// <param name="giwanNo">기관번호</param>
-        /// <param name="uName">성명</param>
-        /// <param name="uBirth">생년월일</param>
-        /// <param name="uPatNo">환자번호</param>
         /// <returns></returns>
-        internal static async Task<string> JobListRequest(string giwanNo, string uName, string uBirth, string uPatNo)
+        internal static async Task<JObject> JobListRequest()
         {
-            var paramdata = new JObject
+            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+            var uName = DataManager.Instance.PatientInfo.Name;
+            var uBirth = DataManager.Instance.PatientInfo.Birth;
+            var uPatNo = DataManager.Instance.PatientInfo.PatientNo;
+
+            var paramData = new JObject
             {
                 { "command", "jobList" },
                 { "giwanNo", giwanNo },
@@ -89,7 +153,7 @@ namespace HKiosk.Util.Server
 
             var postdata = new JObject
             {
-                {"reqData", await KioskAgent.UseEncAria("10001", paramdata.ToString())}
+                {"reqData", await KioskAgent.UseEncAria("10001", paramData.ToString())}
             };
 
             return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);
@@ -98,20 +162,20 @@ namespace HKiosk.Util.Server
         /// <summary>
         /// 수진이력 조회
         /// </summary>
-        /// <param name="giwanNo">기관번호</param>
-        /// <param name="uPatNo">환자번호</param>
-        /// <param name="uName">성명</param>
-        /// <param name="uBirth">생년월일</param>
         /// <param name="certCd">증명서 코드</param>
-        /// <param name="CertNe">증명서 명칭</param>
+        /// <param name="certNe">증명서 명칭</param>
         /// <param name="hosCertCd">병원연계 코드</param>
         /// <param name="fromDate">조회 일자(시작일)</param>
         /// <param name="toDate">조회 일자(종료일)</param>
         /// <returns></returns>
-        internal static async Task<string> CertSujinRequest(string giwanNo, string uPatNo, string uName, string uBirth,
-            string certCd, string certNe, string hosCertCd, string fromDate, string toDate)
+        internal static async Task<JObject> CertSujinRequest(string certCd, string certNe, string hosCertCd, string fromDate, string toDate)
         {
-            var paramdata = new JObject
+            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+            var uPatNo = DataManager.Instance.PatientInfo.PatientNo;
+            var uName = DataManager.Instance.PatientInfo.Name;
+            var uBirth = DataManager.Instance.PatientInfo.Birth;
+
+            var paramData = new JObject
             {
                 { "command", "certSujinReq" },
                 { "giwanNo", giwanNo },
@@ -127,7 +191,7 @@ namespace HKiosk.Util.Server
 
             var postdata = new JObject
             {
-                {"reqData", await KioskAgent.UseEncAria("10001", paramdata.ToString())}
+                {"reqData", await KioskAgent.UseEncAria("10001", paramData.ToString())}
             };
 
             return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);

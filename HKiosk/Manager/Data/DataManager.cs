@@ -14,5 +14,19 @@ namespace HKiosk.Manager.Data
         public List<Job> Jobs { get; set; }
         public CertInfo CertInfo { get; set; }
         public PaymentInfo PaymentInfo { get; set; }
+
+        public DataManager()
+        {
+            InitData();
+        }
+
+        public void InitData()
+        {
+            SettingInfo = new SettingInfo();
+            PatientInfo = new PatientInfo();
+            Jobs = new List<Job>();
+            CertInfo = new CertInfo();
+            PaymentInfo = new PaymentInfo();
+        }
     }
 }
