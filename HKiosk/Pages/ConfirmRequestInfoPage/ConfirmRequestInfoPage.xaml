@@ -52,65 +52,56 @@
             <TextBlock Text="다른 증명서를 추가 발급하실 경우 [증명서 추가]버튼을 선택하세요" FontSize="15" Foreground="DarkGray"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
         <Grid DockPanel.Dock="Top" Width="950" Height="210">
-            <ListView x:Name="HistoryList" ItemsSource="{Binding RequestInfoList}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="3"
+            <ListView x:Name="RequestInfoList" ItemsSource="{Binding RequestInfoList}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="3"
                       HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" FontSize="20" Grid.IsSharedSizeScope="True">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
-                            <GridViewColumn Header="증명서종류" Width="290">
+                            <GridViewColumn Header="증명서종류" Width="313">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=CertNe}" FontSize="25" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="290" />
+                                        <TextBlock Text="{Binding Path=CertNe,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="25" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="313" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             
-                            <GridViewColumn Header="입원(발급)일자" Width="140">
+                            <GridViewColumn Header="입원(발급)일자" Width="163">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=FromDate}" FontSize="25" TextAlignment="Center" Width="140"/>
+                                        <TextBlock Text="{Binding Path=FromDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="25" TextAlignment="Center" Width="163"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="퇴원일자" Width="140">
+                            <GridViewColumn Header="퇴원일자" Width="163">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=ToDate}" FontSize="25" TextAlignment="Center" Width="140"/>
+                                        <TextBlock Text="{Binding Path=ToDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="25" TextAlignment="Center" Width="163"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="매수" Width="40">
+                            <GridViewColumn Header="매수" Width="63">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Count}" FontSize="25" TextAlignment="Center" Width="40"/>
+                                        <TextBlock Text="{Binding Path=Count,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="25" TextAlignment="Center" Width="40"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="발급 수수료" Width="140">
+                            <GridViewColumn Header="수수료" Width="163">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=IssuePrice}" FontSize="25" TextAlignment="Center" Width="140"/>
+                                        <TextBlock Text="{Binding Path=Price,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="25" TextAlignment="Center" Width="163"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="대행 수수료" Width="140">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Path=AgencyPrice}" FontSize="25" TextAlignment="Center" Width="140"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <GridViewColumn Header="취소" Width="40">
-                                
+                            <GridViewColumn Header="취소" Width="63">
                                 <GridViewColumn.CellTemplate >
                                     <DataTemplate >
                                         <Grid Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <CheckBox IsChecked="{Binding Path=IsCancel}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="25"/>
+                                            <CheckBox IsChecked="{Binding Path=IsCancel,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="25"/>
                                         </Grid>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -123,7 +114,7 @@
         </Grid>
 
         <Grid DockPanel.Dock="Top" Width="950"  Margin="0,50,0,0">
-            <Button Width="200" Height="80">
+            <Button Width="200" Height="80" Command="{Binding IsCancelCommand}">
                 <Grid>
                     <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Btn_Bottom_10.png"/>
                     <TextBlock Text="선택취소" FontSize="25" Margin="50,0,0,0" />
@@ -134,9 +125,7 @@
         <Grid DockPanel.Dock="Top" Width="950" Height="100" Margin="0,50,0,0" Background="Gray">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="총 결제금액" FontSize="35" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Left" Margin="0,0,100,0" />
-                <DataGrid >
-                    <TextBlock Text="{Binding FinalPrice}" FontSize="35" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Right" Margin="0,0,100,0" />
-                </DataGrid>
+                <TextBlock x:Name="FinalPrice" Text="{Binding FinalPrice,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="35" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Right" Margin="0,0,100,0" />
             </StackPanel>
         </Grid>
         <Grid DockPanel.Dock="Top" Width="950" Height="100">

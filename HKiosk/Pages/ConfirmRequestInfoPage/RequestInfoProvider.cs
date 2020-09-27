@@ -5,63 +5,63 @@ using System.Text;
 using System.Threading.Tasks;
 using HKiosk.Util;
 using HKiosk.Manager.Navigation;
+using System.Collections.ObjectModel;
 
 namespace HKiosk.Pages.ConfirmRequestInfoPage
 {
     class RequestInfoProvider
     {
-        public List<RequestInfo> RequestInfoList
+        public ObservableCollection<RequestInfo> requestInfoList;
+        public string finalPriceToString;
+        public string CalcFinalPrice()
         {
-            get;
-            private set;
-        }
-        private string CalcFinalPrice()
-        {
-            string finalPriceToString = "";
-            int finalCount = 0;
 
-            int finalAgencyPrice = 0;
-            int finalIssuePrice = 0;
             int finalPrice = 0;
 
-            for (int i=0; i<RequestInfoList.Count; i++)
+            for (int i=0; i<requestInfoList.Count; i++)
             {
-                finalCount += RequestInfoList[i].Count;
 
-                string[] agencyPriceArray = RequestInfoList[i].AgencyPrice.Split('원');
-                string[] issuePriceArray = RequestInfoList[i].IssuePrice.Split('원');
+                string[] issuePriceArray = requestInfoList[i].Price.Split('원');
 
-                finalAgencyPrice += Int32.Parse(agencyPriceArray[0]);
-                finalIssuePrice += Int32.Parse(issuePriceArray[0]);
+                finalPrice += Int32.Parse(issuePriceArray[0]) * requestInfoList[i].Count;
             }
-            finalPrice = (finalAgencyPrice + finalIssuePrice) * finalCount;
 
             finalPriceToString = finalPrice.ToString() + "원";
 
             return finalPriceToString;
         }
-        private void AddRequestInfo()
+        public ObservableCollection<RequestInfo> AddRequestInfo()
         {
             for(int i=0; i<6; i++)
             {
-                RequestInfoList.Add(new RequestInfo
+                requestInfoList.Add(new RequestInfo
                 {
                     CertNe = "증명서" + (i + 1).ToString(),
                     FromDate = DateTime.Now.AddDays(-i).ToString("yyyy.MM.dd"),
                     ToDate = DateTime.Now.ToString("yyyy.MM.dd"),
                     Count = 1,
-                    IssuePrice = "0원",
-                    AgencyPrice = "1000원",
-                    IsCancel = false,
-                    FinalPrice = CalcFinalPrice()
+                    Price = "1000원",
+                    IsCancel = false
                 }) ;
             }
+            return requestInfoList;
+        }
+
+        public ObservableCollection<RequestInfo> DeleteRequestInfo()
+        {
+            for (int i = 0; i < requestInfoList.Count; i++)
+            {
+                if (requestInfoList[i].IsCancel)
+                {
+                    requestInfoList.RemoveAt(i);
+                }
+            }
+            return requestInfoList;
         }
 
         public RequestInfoProvider()
         {
-            RequestInfoList = new List<RequestInfo>();
-            AddRequestInfo();
+            requestInfoList = new ObservableCollection<RequestInfo>();
         }
     }
 }
