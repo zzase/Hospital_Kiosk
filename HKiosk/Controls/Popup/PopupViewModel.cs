@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace HKiosk.Controls.Popup
 {
-    public class PopupViewModel : PropertyChange
+    public class PopupViewModel : PropertyChange, IPopup
     {
         private Visibility visibility = Visibility.Hidden;
         private string message = string.Empty;

@@ -7,23 +7,34 @@ using HKiosk.Pages.SelectCert;
 using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
+using HKiosk.Manager.Data;
+using System.Globalization;
 
 namespace HKiosk.Pages.ConfirmRequestInfoPage
 {
     class ConfirmRequestInfoPageViewModel : PropertyChange
     {
         private readonly RequestInfoProvider requestInfoProvider;
-        private ObservableCollection<RequestInfo> requestInfoList;
-        public ObservableCollection<RequestInfo> RequestInfoList
+        private ObservableCollection<CertRequestInfo> certRequestInfos;
+        public ObservableCollection<CertRequestInfo> CertRequestInfos
         {
-            get { requestInfoList = requestInfoProvider.requestInfoList; return requestInfoList; }
-            set => SetProperty(ref requestInfoList, value);
+            get 
+            {
+                return certRequestInfos; 
+            }
+
+            set => SetProperty(ref certRequestInfos, value);
         }
+
         private string finalPrice;
         
         public string FinalPrice
         {
-            get { finalPrice = requestInfoProvider.finalPriceToString; return finalPrice; }
+            get
+            {
+                finalPrice = DataManager.Instance.FinalPrice;
+                return finalPrice;
+            }
             set => SetProperty(ref finalPrice, value);
         }
         public ICommand MainPageCommand { get; }
@@ -39,16 +50,26 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
 
         private void CheckProcess()
         {
-            RequestInfoList = requestInfoProvider.DeleteRequestInfo();
-            FinalPrice = requestInfoProvider.CalcFinalPrice();
+            for(int i=0; i<DataManager.Instance.CertRequestInfos.Count; i++)
+            {
+                if (DataManager.Instance.CertRequestInfos[i].IsCheckedForCancel)
+                {
+                    DataManager.Instance.CertRequestInfos.RemoveAt(i);
+                }
+            }
+            DataManager.Instance.FinalPrice = requestInfoProvider.CalcFinalPrice();
+            FinalPrice = DataManager.Instance.FinalPrice;
         }
 
         public ConfirmRequestInfoPageViewModel()
         {
             requestInfoProvider = new RequestInfoProvider();
-            RequestInfoList = requestInfoProvider.AddRequestInfo();
-            FinalPrice = requestInfoProvider.CalcFinalPrice();
-            
+
+            DataManager.Instance.CertRequestInfos.Add(DataManager.Instance.CertRequestInfo);
+            DataManager.Instance.FinalPrice = requestInfoProvider.CalcFinalPrice();
+            CertRequestInfos = DataManager.Instance.CertRequestInfos;
+            FinalPrice = DataManager.Instance.FinalPrice;
+
             MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
 
             PlusCertCommand = new Command((obj) => NavigationManager.Navigate(PageElement.SelectCert));

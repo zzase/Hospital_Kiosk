@@ -6,46 +6,32 @@ using System.Threading.Tasks;
 using HKiosk.Util;
 using HKiosk.Manager.Navigation;
 using System.Collections.ObjectModel;
+using HKiosk.Manager.Data;
+using System.Globalization;
 
 namespace HKiosk.Pages.ConfirmRequestInfoPage
 {
     class RequestInfoProvider
     {
         public ObservableCollection<RequestInfo> requestInfoList;
-        public string finalPriceToString;
+
+
         public string CalcFinalPrice()
         {
-
+            string finalPriceToString;
             int finalPrice = 0;
 
-            for (int i=0; i<requestInfoList.Count; i++)
+            for (int i = 0; i < DataManager.Instance.CertRequestInfos.Count; i++)
             {
+                string[] PriceArray = DataManager.Instance.CertRequestInfos[i].Job.Price.Split('원');
 
-                string[] issuePriceArray = requestInfoList[i].Price.Split('원');
+                finalPrice += Int32.Parse(PriceArray[0], NumberStyles.AllowThousands) * Int32.Parse(DataManager.Instance.CertRequestInfo.Count);
 
-                finalPrice += Int32.Parse(issuePriceArray[0]) * requestInfoList[i].Count;
             }
-
-            finalPriceToString = finalPrice.ToString() + "원";
-
+            finalPriceToString = String.Format("{0:#,0}", finalPrice) + "원";
             return finalPriceToString;
         }
-        public ObservableCollection<RequestInfo> AddRequestInfo()
-        {
-            for(int i=0; i<6; i++)
-            {
-                requestInfoList.Add(new RequestInfo
-                {
-                    CertNe = "증명서" + (i + 1).ToString(),
-                    FromDate = DateTime.Now.AddDays(-i).ToString("yyyy.MM.dd"),
-                    ToDate = DateTime.Now.ToString("yyyy.MM.dd"),
-                    Count = 1,
-                    Price = "1000원",
-                    IsCancel = false
-                }) ;
-            }
-            return requestInfoList;
-        }
+
 
         public ObservableCollection<RequestInfo> DeleteRequestInfo()
         {

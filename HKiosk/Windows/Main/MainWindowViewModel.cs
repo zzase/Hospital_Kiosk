@@ -1,6 +1,9 @@
 ﻿using HKiosk.Base;
 using HKiosk.Controls.NavigationBar;
+using HKiosk.Controls.Popup;
+using HKiosk.Manager.Data;
 using HKiosk.Manager.Navigation;
+using HKiosk.Manager.Popup;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,8 +15,6 @@ namespace HKiosk.Windows.Main
         private WindowStyle curWindowStyle;
         private ResizeMode curResizeMode;
         private readonly CommandBindingCollection _CommandBindings = new CommandBindingCollection();
-        private NavigationBarViewModel navigationBarViewModel = new NavigationBarViewModel();
-
 
         public bool IsMaximizedWindow
         {
@@ -46,11 +47,13 @@ namespace HKiosk.Windows.Main
             }
         }
 
-        public NavigationBarViewModel NavigationBarViewModel
-        {
-            get => navigationBarViewModel;
-            set => SetProperty(ref navigationBarViewModel, value);
-        }
+        public NavigationBarViewModel NavigationBarViewModel { get; }
+
+        public PopupViewModel AlertViewModel { get; }
+
+        public PopupViewModel ConfirmViewModel { get; }
+
+        public PopupViewModel LodingViewModel { get; }
 
         public ICommand CreateClickEffectCommand { get; }
 
@@ -65,6 +68,15 @@ namespace HKiosk.Windows.Main
             CurResizeMode = ResizeMode.NoResize;
 
             BindWindowModeTogleCommand();
+
+            AlertViewModel = new PopupViewModel();
+            ConfirmViewModel = new PopupViewModel();
+            LodingViewModel = new PopupViewModel();
+
+            PopupManager.Popup.Add(PopupElement.Alert, AlertViewModel);
+            PopupManager.Popup.Add(PopupElement.Confirm, ConfirmViewModel);
+            PopupManager.Popup.Add(PopupElement.Loding, LodingViewModel);
+            NavigationBarViewModel = new NavigationBarViewModel();
 
             NavigationManager.Navigation = navigation;
         }

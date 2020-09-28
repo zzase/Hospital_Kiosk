@@ -32,9 +32,6 @@ namespace HKiosk.Windows.Main
             Navigate(PageElement.Main);
         }
 
-        SelectCertPageViewModel svm = new SelectCertPageViewModel();
-
-
         public void Navigate(PageElement page)
         {
             var vm = this.DataContext as MainWindowViewModel;

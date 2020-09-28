@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using HKiosk.Controls.Popup;
 using HKiosk.Manager.Data;
+using HKiosk.Manager.Popup;
 
 namespace HKiosk.Pages.ConfirmUserInfo
 {
@@ -17,7 +18,6 @@ namespace HKiosk.Pages.ConfirmUserInfo
     {
         private string name;
         private string frontNationNo;
-        private PopupViewModel popupViewModel = new PopupViewModel();
 
         public ICommand MainPageCommand { get; }
         public ICommand CheckUserInfoCommand { get; }
@@ -36,12 +36,6 @@ namespace HKiosk.Pages.ConfirmUserInfo
 
         public SecureString BackNationNo { private get; set; }
 
-        public PopupViewModel PopupViewModel
-        {
-            get => popupViewModel;
-            set => SetProperty(ref popupViewModel, value);
-        }
-
         public ConfirmUserInfoPageViewModel()
         {
             MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
@@ -50,7 +44,7 @@ namespace HKiosk.Pages.ConfirmUserInfo
             {
                 if (!CheckValidation())
                 {
-                    PopupViewModel.Show("정보를 입력해주세요.");
+                    PopupManager.Popup[PopupElement.Alert]?.Show("정보를 입력해주세요.");
 
                     return;
                 }
@@ -68,8 +62,7 @@ namespace HKiosk.Pages.ConfirmUserInfo
 
             if (resultJson["resultCode"]?.ToString() != "200")
             {
-                if (resultJson["resultCode"]?.ToString() == "400")
-                    PopupViewModel.Show(resultJson["resultMessage"]?.ToString());
+                PopupManager.Popup[PopupElement.Alert]?.Show(resultJson["resultMessage"]?.ToString());
 
                 return false;
             }

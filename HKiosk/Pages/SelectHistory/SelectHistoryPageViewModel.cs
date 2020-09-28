@@ -5,6 +5,9 @@ using System.Windows.Input;
 using HKiosk.Pages.SelectCert;
 using System.Collections.Generic;
 using System;
+using HKiosk.Manager.Data;
+using System.Collections.ObjectModel;
+
 
 namespace HKiosk.Pages.SelectHistory 
 {
@@ -12,11 +15,11 @@ namespace HKiosk.Pages.SelectHistory
     {
         readonly HistroyProvider hp = new HistroyProvider();
 
-        private List<History> histories; 
-        public List<History> Histories
+        private ObservableCollection<SujinHistroy> sujinHistories;
+        public ObservableCollection<SujinHistroy> SujinHistories
         {
-            get { return histories; }
-            set => SetProperty(ref histories, value);
+            get { return sujinHistories; }
+            set => SetProperty(ref sujinHistories, value);
         }
         private Nullable<DateTime> selectFromDateTime = null;
         private Nullable<DateTime> selectToDateTime = null;
@@ -56,7 +59,19 @@ namespace HKiosk.Pages.SelectHistory
 
         public void ReadHistories()
         {
-            Histories = hp.AddHistory();
+            SujinHistories = hp.AddHistory();
+            
+        }
+
+        public void SelectHistories()
+        {
+            for(int i=0; i<SujinHistories.Count; i++)
+            {
+                if (SujinHistories[i].IsChecked)
+                {
+                    DataManager.Instance.CertRequestInfo.SujinHistroy = SujinHistories[i];
+                }
+            }
         }
 
         public SelectHistoryPageViewModel()
@@ -64,7 +79,11 @@ namespace HKiosk.Pages.SelectHistory
 
             MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
 
-            NextPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.ConfirmRequestInfo));
+            NextPageCommand = new Command((obj) => 
+            {
+                NavigationManager.Navigate(PageElement.ConfirmRequestInfo);
+                SelectHistories();
+            });
 
             PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.SelectCert));
         }

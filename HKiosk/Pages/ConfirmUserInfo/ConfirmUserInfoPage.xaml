@@ -80,8 +80,6 @@
                 </Grid>
             </Grid>
         </DockPanel>
-
-        <popup:Alert DataContext="{Binding PopupViewModel}"/>
     </Grid>
     
 </Page>

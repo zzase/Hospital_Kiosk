@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HKiosk.Windows.Main"
+        xmlns:popup="clr-namespace:HKiosk.Controls.Popup"
         xmlns:navigationBar="clr-namespace:HKiosk.Controls.NavigationBar"
         mc:Ignorable="d"
         Title="HKiosk"
@@ -24,6 +25,9 @@
 
                 <Grid DockPanel.Dock="Top">
                     <Frame x:Name="frame" NavigationUIVisibility="Hidden"/>
+                    <popup:Loding DataContext="{Binding LodingViewModel}"/>
+                    <popup:Alert DataContext="{Binding AlertViewModel}"/>
+                    <popup:Confirm DataContext="{Binding ConfirmViewModel}"/>
                 </Grid>
             </DockPanel>
         </Grid>

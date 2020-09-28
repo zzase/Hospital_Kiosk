@@ -84,7 +84,7 @@ namespace HKiosk.Util.Server
 
         internal static async Task<JObject> PatNoRequest_Test(string uName, string uJumin)
         {
-            JObject paramData = null;
+            JObject paramData;
 
             switch (uName)
             {
@@ -157,6 +157,138 @@ namespace HKiosk.Util.Server
             };
 
             return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);
+        }
+
+        internal static async Task<JObject> JobListRequest_Test(int testCase)
+        {
+            JObject paramData;
+
+            switch (testCase)
+            {
+                case 1:
+                {
+                    var json1 = new JObject
+                    {
+                        { "certCd", "10101" },
+                        { "certNe", "진단서 사본" },
+                        { "hostCertCd", "CA006" },
+                        { "price", "1,000원" },
+                        { "korYN", "Y" }
+                    };
+
+                    var json2 = new JObject
+                    {
+                        { "certCd", "10102" },
+                        { "certNe", "소견서 사본" },
+                        { "hostCertCd", "CA006" },
+                        { "price", "1,000원" },
+                        { "korYN", "Y" }
+                    };
+
+                    var json3 = new JObject
+                    {
+                        { "certCd", "10103" },
+                        { "certNe", "입퇴원확인서" },
+                        { "hostCertCd", "CA006" },
+                        { "price", "1,000원" },
+                        { "korYN", "Y" }
+                    };
+
+                    var json4 = new JObject
+                    {
+                        { "certCd", "10104" },
+                        { "certNe", "세부내역서(입원,외래,응급)" },
+                        { "hostCertCd", "CA006" },
+                        { "price", "1,000원" },
+                        { "korYN", "Y" }
+                    };
+
+                    var json5 = new JObject
+                    {
+                        { "certCd", "10105" },
+                        { "certNe", "진료비 영수증(입원,외래,응급)" },
+                        { "hostCertCd", "CA006" },
+                        { "price", "1,000원" },
+                        { "korYN", "Y" }
+                    };
+
+                    var json6 = new JObject
+                    {
+                        { "certCd", "10106" },
+                        { "certNe", "납입증명서(연말정산용)" },
+                        { "hostCertCd", "CA006" },
+                        { "price", "1,000원" },
+                        { "korYN", "Y" }
+                    };
+
+                    var json7 = new JObject
+                    {
+                        { "certCd", "10106" },
+                        { "certNe", "납입증명서(연말정산용)" },
+                        { "hostCertCd", "CA006" },
+                        { "price", "1,000원" },
+                        { "korYN", "Y" }
+                    };
+
+                    JArray jArray = new JArray
+                    {
+                        json1,
+                        json2,
+                        json3,
+                        json4,
+                        json5,
+                        json6
+                    };
+
+                    paramData = new JObject
+                    {
+                        { "resultCode", "200" },
+                        { "giwanNo", "K00001" },
+                        { "gubun", "환자" },
+                        { "uPatNo", "2020123456" },
+                        { "list", jArray }
+                    };
+                    break;
+                }
+                case 2:
+                    paramData = new JObject
+                    {
+                        { "resultCode", "3000" },
+                        { "resultMessage", "발급에 필요한 필수데이터가 누락되었습니다." }
+                    };
+                    break;
+                case 3:
+                    paramData = new JObject
+                    {
+                        { "resultCode", "3001" },
+                        { "resultMessage", "등록된 환자정보가 없습니다." }
+                    };
+                    break;
+                case 4:
+                    paramData = new JObject
+                    {
+                        { "resultCode", "3002" },
+                        { "resultMessage", "발급 가능한 증명서가 없습니다." }
+                    };
+                    break;
+                case 5:
+                    paramData = new JObject
+                    {
+                        { "resultCode", "400" },
+                        { "resultMessage", "서버가 다운되었거나 시스템오류가 발생하였습니다." }
+                    };
+                    break;
+                default:
+                    paramData = new JObject
+                    {
+                        { "resultCode", "" }
+                    };
+                    break;
+            }
+
+            await Task.Delay(1000);
+
+            return paramData;
         }
 
         /// <summary>
