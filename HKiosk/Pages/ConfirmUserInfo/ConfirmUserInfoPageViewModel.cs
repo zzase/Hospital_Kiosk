@@ -14,7 +14,7 @@ using HKiosk.Manager.Popup;
 
 namespace HKiosk.Pages.ConfirmUserInfo
 {
-    class ConfirmUserInfoPageViewModel : PropertyChange
+    public class ConfirmUserInfoPageViewModel : PropertyChange
     {
         private string name;
         private string frontNationNo;
@@ -44,7 +44,7 @@ namespace HKiosk.Pages.ConfirmUserInfo
             {
                 if (!CheckValidation())
                 {
-                    PopupManager.Popup[PopupElement.Alert]?.Show("정보를 입력해주세요.");
+                    PopupManager.Instance[PopupElement.Alert]?.Show("정보를 입력해주세요.");
 
                     return;
                 }
@@ -62,7 +62,7 @@ namespace HKiosk.Pages.ConfirmUserInfo
 
             if (resultJson["resultCode"]?.ToString() != "200")
             {
-                PopupManager.Popup[PopupElement.Alert]?.Show(resultJson["resultMessage"]?.ToString());
+                PopupManager.Instance[PopupElement.Alert]?.Show(resultJson["resultMessage"]?.ToString());
 
                 return false;
             }

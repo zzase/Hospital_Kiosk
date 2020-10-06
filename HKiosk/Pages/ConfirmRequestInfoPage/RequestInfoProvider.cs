@@ -11,10 +11,9 @@ using System.Globalization;
 
 namespace HKiosk.Pages.ConfirmRequestInfoPage
 {
-    class RequestInfoProvider
+    public class RequestInfoProvider
     {
         public ObservableCollection<RequestInfo> requestInfoList;
-
 
         public string CalcFinalPrice()
         {
@@ -25,7 +24,7 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
             {
                 string[] PriceArray = DataManager.Instance.CertRequestInfos[i].Job.Price.Split('원');
 
-                finalPrice += Int32.Parse(PriceArray[0], NumberStyles.AllowThousands) * Int32.Parse(DataManager.Instance.CertRequestInfo.Count);
+                finalPrice += Int32.Parse(PriceArray[0], NumberStyles.AllowThousands) * Int32.Parse(DataManager.Instance.CertRequestInfos[i].SujinHistroy.Count ?? "0");
 
             }
             finalPriceToString = String.Format("{0:#,0}", finalPrice) + "원";

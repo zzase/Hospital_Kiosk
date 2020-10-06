@@ -14,6 +14,7 @@ namespace HKiosk.Manager.Data
         public string CertDate { get; set; }    // 작성일자
         public string InDate { get; set; }    // 입원일자
         public string OutDate { get; set; }    // 퇴원일자
+        public string Count { get; set; }    // 매수
         public bool IsChecked { get; set; }  // 선택
     }
 }

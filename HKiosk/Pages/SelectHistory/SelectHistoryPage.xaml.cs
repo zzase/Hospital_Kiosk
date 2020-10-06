@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HKiosk.Manager.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,22 @@ namespace HKiosk.Pages.SelectHistory
 
             string value = comboBox.SelectedItem as string;
             this.Title = value;
+        }
+
+        private void CheckAll(object sender, RoutedEventArgs e)
+        {
+            foreach(SujinHistroy history in HistoryList.ItemsSource)
+            {
+                history.IsChecked = true;
+            }
+        }
+
+        private void UnCheckAll(object sender, RoutedEventArgs e)
+        {
+            foreach (SujinHistroy history in HistoryList.ItemsSource)
+            {
+                history.IsChecked = false;
+            }
         }
         public SelectHistoryPage()
         {

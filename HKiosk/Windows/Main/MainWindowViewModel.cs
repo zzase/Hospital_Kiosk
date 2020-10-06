@@ -73,9 +73,9 @@ namespace HKiosk.Windows.Main
             ConfirmViewModel = new PopupViewModel();
             LodingViewModel = new PopupViewModel();
 
-            PopupManager.Popup.Add(PopupElement.Alert, AlertViewModel);
-            PopupManager.Popup.Add(PopupElement.Confirm, ConfirmViewModel);
-            PopupManager.Popup.Add(PopupElement.Loding, LodingViewModel);
+            PopupManager.Instance.Add(PopupElement.Alert, AlertViewModel);
+            PopupManager.Instance.Add(PopupElement.Confirm, ConfirmViewModel);
+            PopupManager.Instance.Add(PopupElement.Loding, LodingViewModel);
             NavigationBarViewModel = new NavigationBarViewModel();
 
             NavigationManager.Navigation = navigation;

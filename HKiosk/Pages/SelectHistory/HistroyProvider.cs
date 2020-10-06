@@ -8,9 +8,8 @@ using System.Collections.ObjectModel;
 
 namespace HKiosk.Pages.SelectHistory
 {
-    class HistroyProvider
+    public class HistroyProvider
     {
-
         public ObservableCollection<SujinHistroy> sujinHistories;
        
         readonly DateTime dt = DateTime.Now;
@@ -37,6 +36,5 @@ namespace HKiosk.Pages.SelectHistory
         {
             sujinHistories = new ObservableCollection<SujinHistroy>();
         }
-       
     }
 }

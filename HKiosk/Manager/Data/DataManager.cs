@@ -13,6 +13,7 @@ namespace HKiosk.Manager.Data
         public SettingInfo SettingInfo { get; set; }
         public PatientInfo PatientInfo { get; set; }
         public List<Job> Jobs { get; set; }
+        public Job SelectedJob { get; set; }
         public ObservableCollection<CertRequestInfo> CertRequestInfos { get; set; }
         public CertRequestInfo CertRequestInfo { get; set; }
         public PaymentInfo PaymentInfo { get; set; }
@@ -28,6 +29,7 @@ namespace HKiosk.Manager.Data
             SettingInfo = new SettingInfo();
             PatientInfo = new PatientInfo();
             Jobs = null;
+            SelectedJob = null;
             CertRequestInfos = new ObservableCollection<CertRequestInfo>();
             CertRequestInfo = new CertRequestInfo();
             PaymentInfo = new PaymentInfo();

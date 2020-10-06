@@ -84,7 +84,7 @@
                             <GridViewColumn Header="매수" Width="63">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Count,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="25" TextAlignment="Center" Width="40"/>
+                                        <TextBlock Text="{Binding Path=SujinHistroy.Count,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="25" TextAlignment="Center" Width="40"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

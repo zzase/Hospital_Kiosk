@@ -7,7 +7,7 @@ using HKiosk.Base;
 
 namespace HKiosk.Pages.SelectHistory
 {
-    class History : PropertyChange
+    public class History : PropertyChange
     {
         DateTime date;
         string deptNe;

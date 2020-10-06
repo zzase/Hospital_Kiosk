@@ -22,12 +22,7 @@ namespace HKiosk.Manager.Data
         {
             SelectCommand = new Command((obj) =>
             {
-                DataManager.Instance.CertRequestInfo = new CertRequestInfo();
-                DataManager.Instance.CertRequestInfo.Job = this;
-                DataManager.Instance.CertRequestInfo.ReqSeq = "key";
-                DataManager.Instance.CertRequestInfo.CertNo = "No";
-                DataManager.Instance.CertRequestInfo.Count = "1";
-                DataManager.Instance.CertRequestInfo.IsCheckedForCancel = false;
+                DataManager.Instance.SelectedJob = this;
                 NavigationManager.Navigate(PageElement.SelectHistory);
             });
         }

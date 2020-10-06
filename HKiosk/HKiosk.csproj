@@ -148,6 +148,9 @@
     <Compile Include="Pages\Payment\TmoneyPaymentPage.xaml.cs">
       <DependentUpon>TmoneyPaymentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Print\PrintPage.xaml.cs">
+      <DependentUpon>PrintPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SelectCert\SelectCertPage.xaml.cs">
       <DependentUpon>SelectCertPage.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Main\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Print\PrintPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

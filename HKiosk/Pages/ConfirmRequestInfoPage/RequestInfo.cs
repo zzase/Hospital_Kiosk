@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace HKiosk.Pages.ConfirmRequestInfoPage
 {
-    class RequestInfo : PropertyChange
+    public class RequestInfo : PropertyChange
     {
         private string certNe;      // 증명서 종류
         private string fromDate;    // 입원(발급)일자

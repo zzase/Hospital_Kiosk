@@ -16,6 +16,8 @@ namespace HKiosk.Pages.Payment
         public ICommand NavigatePhonePaymentPageCommand { get; }
         public ICommand NavigateCashbeePaymentPageCommand { get; }
         public ICommand NavigateTmoneyPaymentPageCommand { get; }
+        public ICommand MainPageCommand { get; }
+        public ICommand PreviousPageCommand { get; }
 
         public SelectPaymentPageViewModel()
         {
@@ -23,6 +25,8 @@ namespace HKiosk.Pages.Payment
             NavigatePhonePaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.PhonePayment));
             NavigateCashbeePaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.CashbeePayment));
             NavigateTmoneyPaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.TmoneyPayment));
+            MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
+            PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.ConfirmRequestInfo));
         }
     }
 }

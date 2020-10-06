@@ -7,6 +7,7 @@ using HKiosk.Pages.ConfirmUserInfo;
 using HKiosk.Pages.SelectCert;
 using HKiosk.Pages.SelectHistory;
 using HKiosk.Pages.ConfirmRequestInfoPage;
+using HKiosk.Pages.Print;
 using HKiosk.Util;
 using System;
 using System.Windows;
@@ -101,6 +102,8 @@ namespace HKiosk.Windows.Main
                     break;
 
                 case PageElement.Print:
+                    pageToNavigate = new PrintPage();
+                    vm?.MoveNavigationBar(NaviElement.Print);
                     break;
 
                 case PageElement.Fax:

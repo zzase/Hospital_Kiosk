@@ -38,6 +38,4 @@ namespace HKiosk.Manager.Navigation
         Fax, // 팩스 전송 화면
         Mail // 메일 전송 화면 
     }
-
-    
 }
