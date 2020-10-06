@@ -334,5 +334,23 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Toggle_Cert_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Toggle_Cert_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Toggle_Terms_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Toggle_Terms_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\Payment\Icon_27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\Payment\Icon_26.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -71,7 +71,11 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
             DataManager.Instance.FinalPrice = requestInfoProvider.CalcFinalPrice();
             FinalPrice = DataManager.Instance.FinalPrice;
 
-            MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
+            MainPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.CertRequestInfos.Clear();
+                NavigationManager.Navigate(PageElement.Main);
+            });
 
             PlusCertCommand = new Command((obj) => NavigationManager.Navigate(PageElement.SelectCert));
 

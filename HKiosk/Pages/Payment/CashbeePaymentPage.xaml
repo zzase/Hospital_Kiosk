@@ -7,55 +7,64 @@
       mc:Ignorable="d" 
       d:DesignHeight="1145" d:DesignWidth="1080"
       Title="CashbeePaymentPage">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
+            <TextBlock Text="60초 이내에 결제단말기에 캐시비 교통카드를 태그해주세요." FontSize="35" FontWeight="Bold" Foreground="Black" />
+        </Grid>
+        <Grid DockPanel.Dock="Bottom" Background="Transparent" Height="100">
+            <TextBlock Text="☎ 결제 및 오류문의 070-8656-0551" FontSize="30" FontWeight="Bold" Foreground="Gray" />
+        </Grid>
+        <Grid DockPanel.Dock="Bottom" Background="Transparent" Height="100">
+            <TextBlock Text="결제 진행 중입니다." FontSize="40" FontWeight="Bold" Foreground="Black" />
+        </Grid>
+        <Grid Margin="50,150,0,0">
+            <Grid Width="450" Height="650">
+                <Canvas>
+                    <Image Width="450" Height="650" Source="pack://application:,,,/Resources/Pages/Payment/Icon_8.png" />
 
-    <Grid>
-        <Grid Width="500" Height="700">
+                    <Grid Canvas.Top="340" Canvas.Left="165">
+                        <Image Width="75" Height="75" Source="pack://application:,,,/Resources/Pages/Payment/Icon_24.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <RotateTransform x:Name="rotateTransform" Angle="0"/>
+                            </Image.RenderTransform>
 
-            <Canvas>
-                <Image Width="500" Height="700" Source="pack://application:,,,/Resources/Pages/Payment/Icon_8.png" />
-
-                <Grid Canvas.Top="370" Canvas.Left="190">
-                    <Image Width="80" Height="80" Source="pack://application:,,,/Resources/Pages/Payment/Icon_24.png" RenderTransformOrigin="0.5,0.5">
-                        <Image.RenderTransform>
-                            <RotateTransform x:Name="rotateTransform" Angle="0"/>
-                        </Image.RenderTransform>
-
-                        <Image.Triggers>
-                            <EventTrigger RoutedEvent="Loaded">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
+                            <Image.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
                                             AccelerationRatio="1"
                                             BeginTime="0:0:0"
                                             Storyboard.TargetName="rotateTransform"
                                             Storyboard.TargetProperty="(RotateTransform.Angle)"
                                             From="0" To="360" Duration="0:0:1" RepeatBehavior="Forever" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Image.Triggers>
+                        </Image>
+                        <Image Width="35" Height="35" Source="pack://application:,,,/Resources/Pages/Payment/Icon_25.png" />
+                    </Grid>
+                </Canvas>
+
+                <Canvas Width="450" Height="650">
+                    <Image Source="pack://application:,,,/Resources/Pages/Payment/Icon_6.png" Height="180" Canvas.Top="-150" Canvas.Left="70">
+                        <Image.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                        AccelerationRatio="1"
+                                        BeginTime="0:0:0"
+                                        Storyboard.TargetProperty="(Canvas.Top)"
+                                        From="-150" To="30" Duration="0:0:2" RepeatBehavior="Forever" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger>
                         </Image.Triggers>
                     </Image>
-                    <Image Width="40" Height="40" Source="pack://application:,,,/Resources/Pages/Payment/Icon_25.png" />
-                </Grid>
-            </Canvas>
-
-            <Canvas Width="500" Height="700">
-                <Image Source="pack://application:,,,/Resources/Pages/Payment/Icon_6.png" Height="200" Canvas.Top="-150" Canvas.Left="70">
-                    <Image.Triggers>
-                        <EventTrigger RoutedEvent="Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        AccelerationRatio="1"
-                                        BeginTime="0:0:0"
-                                        Storyboard.TargetProperty="(Canvas.Top)"
-                                        From="-150" To="30" Duration="0:0:2" RepeatBehavior="Forever" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Image.Triggers>
-                </Image>
-            </Canvas>
+                </Canvas>
+            </Grid>
         </Grid>
-    </Grid>
+    </DockPanel>
 </Page>
