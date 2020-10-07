@@ -30,7 +30,9 @@ namespace HKiosk.Manager.Navigation
         ConfirmRequestInfo, // 신청내용 확인
         SelectPayment, // 결제방법 선택
         CardPayment, // 카드 결제
-        PhonePayment, // 핸드폰 결제
+        Agreement, // 핸드폰 결제 약관동의
+        InfoInput, // 핸드폰 결제 정보입력
+        ApprovalNumber, //핸드폰 결제 승인번호 입력 
         CashbeePayment, // 캐시비 결제
         TmoneyPayment, // 티머니 결제
         SelectIssuanceMethod, // 출력 방법 선택

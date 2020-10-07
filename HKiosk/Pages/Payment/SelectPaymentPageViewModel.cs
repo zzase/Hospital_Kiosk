@@ -22,7 +22,7 @@ namespace HKiosk.Pages.Payment
         public SelectPaymentPageViewModel()
         {
             NavigateCardPaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.CardPayment));
-            NavigatePhonePaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.PhonePayment));
+            NavigatePhonePaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Agreement));
             NavigateCashbeePaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.CashbeePayment));
             NavigateTmoneyPaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.TmoneyPayment));
             MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));

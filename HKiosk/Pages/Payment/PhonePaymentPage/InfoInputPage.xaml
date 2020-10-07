@@ -1,0 +1,175 @@
+﻿<Page x:Class="HKiosk.Pages.Payment.PhonePaymentPage.InfoInputPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HKiosk.Pages.Payment.PhonePaymentPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="1145" d:DesignWidth="1080"
+      Title="InfoInputPage">
+
+    <Page.DataContext>
+        <local:InfoInputPageViewModel/>
+    </Page.DataContext>
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
+            <TextBlock Text="결제하실 휴대폰 정보를 입력하신 후 [다음]버튼을 누르세요." FontSize="35" FontWeight="Bold" Foreground="Black" />
+        </Grid>
+        <Grid DockPanel.Dock="Top" Width="1000" Height="106" Margin="40,0">
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="타이머" HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Right"  FontSize="30" FontWeight="Bold" Height="52" Width="1000" Margin="0,0,0,48" />
+        </Grid>
+        <Grid DockPanel.Dock="Bottom" Height="150">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Width="300" Height="105" Command="{Binding PreviousPageCommand}" Margin="15 10" Background="Transparent">
+                    <Grid>
+                        <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Btn_Bottom_11.png"/>
+
+                        <TextBlock Text="이전" Margin="70,0,0,0" FontSize="30" Foreground="Black"></TextBlock>
+                    </Grid>
+                </Button>
+                <Button Width="300" Height="105" Command="{Binding MainPageCommand}" Margin="15 10" Background="Transparent">
+                    <Grid>
+                        <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Btn_Bottom_12.png"/>
+
+                        <TextBlock Text="처음으로" Margin="70,0,0,0" FontSize="30" Foreground="Black"></TextBlock>
+                    </Grid>
+                </Button>
+                <Button Width="300" Height="105" Command="{Binding NextPageCommand}" Margin="15 10" Background="Transparent" x:Name="NextBtn">
+                    <Grid>
+                        <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Btn_Bottom_6.png"/>
+
+                        <TextBlock Text="다음" Margin="70,0,0,0" FontSize="30" Foreground="White"></TextBlock>
+                    </Grid>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid DockPanel.Dock="Left" Width="648">
+            <DockPanel>
+                <Grid DockPanel.Dock="Top" Margin="140,0,0,0">
+                    <TextBlock Text="이동통신사" FontSize="30" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Left"  TextAlignment="Center" VerticalAlignment="Center" Height="46" />
+                </Grid>
+                <Grid DockPanel.Dock="Top" Height="200" Margin="140,10,15,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Button  Margin="15 10" Background="Transparent">
+                            <Grid  Margin="-15,-5">
+                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
+                                <TextBlock Text="SKT"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Button  Margin="15 10" Background="Transparent">
+                            <Grid  Margin="-15,-5">
+                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
+                                <TextBlock Text="KT"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="2">
+                        <Button  Margin="15 10" Background="Transparent">
+                            <Grid  Margin="-15,-5">
+                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
+                                <TextBlock Text="LGT"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Button  Margin="15 10" Background="Transparent">
+                            <Grid  Margin="-15,-5">
+                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
+                                <TextBlock Text="  헬로&#10;모바일"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Button  Margin="15 10" Background="Transparent">
+                            <Grid  Margin="-15,-5">
+                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
+                                <TextBlock Text="  SK&#10;Telink"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="2">
+                        <Button  Margin="15 10" Background="Transparent">
+                            <Grid  Margin="-15,-5">
+                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
+                                <TextBlock Text="KCT"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+                </Grid>
+
+                <Grid DockPanel.Dock="Top" Margin="140,50,0,0">
+                    <TextBlock Text="휴대폰번호" FontSize="30" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Left"  TextAlignment="Center" VerticalAlignment="Center" Height="46" />
+                </Grid>
+
+
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="140,20,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0" x:Name="textBox1" Text="" FontSize="20" 
+                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="150" />
+                        <TextBlock Grid.Column="1" FontSize="50" Text="-"/>
+                        <TextBox Grid.Column="2" x:Name="textBox2" Text="" FontSize="20" 
+                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="150" />
+                        <TextBlock Grid.Column="3" FontSize="50" Text="-"/>
+                        <TextBox Grid.Column="4" x:Name="textBox3" Text="" FontSize="20" 
+                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="150" />
+
+                    </Grid>
+                </StackPanel>
+
+
+                <Grid DockPanel.Dock="Top" Margin="140,50,0,0">
+                    <TextBlock Text="주민등록번호" FontSize="30" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Left"  TextAlignment="Center" VerticalAlignment="Center" Height="46" />
+                </Grid>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="140,0,0,150">
+                    <Grid Width="488">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="270"/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="130"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0" x:Name="JuminFront" Text="주민등록번호 앞 6자리/뒤 1자리" FontSize="17" 
+                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="270" />
+                        <TextBlock Grid.Column="1" FontSize="50" Text="-"/>
+                        <TextBox Grid.Column="2" x:Name="JuminBack" Text="" FontSize="20" 
+                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False"  />
+                        <TextBlock Grid.Column="3" FontSize="50" Text="******" Margin="0,10,0,0" Width="127"/>
+
+                    </Grid>
+                </StackPanel>
+                
+
+            </DockPanel>
+        </Grid>
+        <Grid DockPanel.Dock="Right" Margin="60,70,60,180">
+            <Frame Name="NumbericKeyboard" Source="pack://application:,,,/Controls/Keyboard/NumbericKeyboard.xaml"/>
+        </Grid>
+    </DockPanel>
+</Page>

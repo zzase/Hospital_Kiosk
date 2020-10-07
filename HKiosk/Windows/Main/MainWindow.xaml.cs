@@ -8,6 +8,8 @@ using HKiosk.Pages.SelectCert;
 using HKiosk.Pages.SelectHistory;
 using HKiosk.Pages.ConfirmRequestInfoPage;
 using HKiosk.Pages.Print;
+using HKiosk.Pages.Payment;
+using HKiosk.Pages.Payment.PhonePaymentPage;
 using HKiosk.Util;
 using System;
 using System.Windows;
@@ -15,7 +17,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.ComponentModel;
-using HKiosk.Pages.Payment;
+
 
 namespace HKiosk.Windows.Main
 {
@@ -83,8 +85,18 @@ namespace HKiosk.Windows.Main
                     vm?.MoveNavigationBar(NaviElement.Payment);
                     break;
 
-                case PageElement.PhonePayment:
-                    pageToNavigate = new PhonePaymentPage();
+                case PageElement.Agreement:
+                    pageToNavigate = new AgreementPage();
+                    vm?.MoveNavigationBar(NaviElement.Payment);
+                    break;
+
+                case PageElement.InfoInput:
+                    pageToNavigate = new InfoInputPage();
+                    vm?.MoveNavigationBar(NaviElement.Payment);
+                    break;
+
+                case PageElement.ApprovalNumber:
+                    pageToNavigate = new ApprovalNumberPage();
                     vm?.MoveNavigationBar(NaviElement.Payment);
                     break;
 

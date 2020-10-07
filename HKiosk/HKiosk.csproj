@@ -138,9 +138,18 @@
     <Compile Include="Pages\Payment\CashbeePaymentPage.xaml.cs">
       <DependentUpon>CashbeePaymentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Payment\PhonePaymentPage.xaml.cs">
-      <DependentUpon>PhonePaymentPage.xaml</DependentUpon>
+    <Compile Include="Pages\Payment\PhonePaymentPage\AgreementPage.xaml.cs">
+      <DependentUpon>AgreementPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Payment\PhonePaymentPage\AgreementPageViewModel.cs" />
+    <Compile Include="Pages\Payment\PhonePaymentPage\ApprovalNumberPage.xaml.cs">
+      <DependentUpon>ApprovalNumberPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Payment\PhonePaymentPage\ApprovalNumberPageViewModel.cs" />
+    <Compile Include="Pages\Payment\PhonePaymentPage\InfoInputPage.xaml.cs">
+      <DependentUpon>InfoInputPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Payment\PhonePaymentPage\InfoInputPageViewModel.cs" />
     <Compile Include="Pages\Payment\SelectPaymentPage.xaml.cs">
       <DependentUpon>SelectPaymentPage.xaml</DependentUpon>
     </Compile>
@@ -207,6 +216,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Payment\PhonePaymentPage\ApprovalNumberPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Payment\PhonePaymentPage\InfoInputPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Print\PrintPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -220,7 +237,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Payment\PhonePaymentPage.xaml">
+    <Page Include="Pages\Payment\PhonePaymentPage\AgreementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -351,6 +368,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Pages\Payment\Icon_26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Btn_Bottom_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\Payment\Toggle_Lang_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
