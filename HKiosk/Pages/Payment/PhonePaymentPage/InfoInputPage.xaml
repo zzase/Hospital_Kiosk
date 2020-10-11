@@ -44,7 +44,7 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Left" Width="648">
+        <Grid DockPanel.Dock="Left" Width="648" Margin="-50,0,0,0">
             <DockPanel>
                 <Grid DockPanel.Dock="Top" Margin="140,0,0,0">
                     <TextBlock Text="이동통신사" FontSize="30" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Left"  TextAlignment="Center" VerticalAlignment="Center" Height="46" />
@@ -60,55 +60,55 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Grid.Column="0">
-                        <Button  Margin="15 10" Background="Transparent">
+                        <Button  Margin="15 10" Background="Transparent" Command="{Binding SKTCommand}">
                             <Grid  Margin="-15,-5">
                                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="SKT"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="SKT"  FontSize="25" Foreground="{Binding BrushSKT}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
 
                     <Grid Grid.Row="0" Grid.Column="1">
-                        <Button  Margin="15 10" Background="Transparent">
+                        <Button  Margin="15 10" Background="Transparent" Command="{Binding KTCommand}">
                             <Grid  Margin="-15,-5">
                                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="KT"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="KT"  FontSize="25" Foreground="{Binding BrushKT}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
 
                     <Grid Grid.Row="0" Grid.Column="2">
-                        <Button  Margin="15 10" Background="Transparent">
+                        <Button  Margin="15 10" Background="Transparent" Command="{Binding LGTCommand}">
                             <Grid  Margin="-15,-5">
                                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="LGT"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="LGT"  FontSize="25" Foreground="{Binding BrushLGT}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="0">
-                        <Button  Margin="15 10" Background="Transparent">
+                        <Button  Margin="15 10" Background="Transparent" Command="{Binding HMCommand}">
                             <Grid  Margin="-15,-5">
                                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="  헬로&#10;모바일"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="  헬로&#10;모바일"  FontSize="25" Foreground="{Binding BrushHM}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="1">
-                        <Button  Margin="15 10" Background="Transparent">
+                        <Button  Margin="15 10" Background="Transparent" Command="{Binding TelinkCommand}">
                             <Grid  Margin="-15,-5">
                                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="  SK&#10;Telink"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="  SK&#10;Telink"  FontSize="25" Foreground="{Binding BrushTelink}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="2">
-                        <Button  Margin="15 10" Background="Transparent">
+                        <Button  Margin="15 10" Background="Transparent" Command="{Binding KCTCommand}">
                             <Grid  Margin="-15,-5">
                                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="KCT"  FontSize="25" Foreground="DarkGray" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="KCT"  FontSize="25" Foreground="{Binding BrushKCT}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
@@ -130,14 +130,14 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" x:Name="textBox1" Text="" FontSize="20" 
-                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="150" />
+                        <TextBox Grid.Column="0" x:Name="textBox1" Text="{Binding FrontPhoneNum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" 
+                                 VerticalContentAlignment="Center" MaxLength="3" AllowDrop="False" Width="150"/>
                         <TextBlock Grid.Column="1" FontSize="50" Text="-"/>
-                        <TextBox Grid.Column="2" x:Name="textBox2" Text="" FontSize="20" 
-                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="150" />
+                        <TextBox Grid.Column="2" x:Name="textBox2" Text="{Binding CenterPhoneNum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" 
+                                 VerticalContentAlignment="Center" MaxLength="4" AllowDrop="False" Width="150" />
                         <TextBlock Grid.Column="3" FontSize="50" Text="-"/>
-                        <TextBox Grid.Column="4" x:Name="textBox3" Text="" FontSize="20" 
-                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="150" />
+                        <TextBox Grid.Column="4" x:Name="textBox3" Text="{Binding BackPhoneNum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" 
+                                 VerticalContentAlignment="Center" MaxLength="4" AllowDrop="False" Width="150" />
 
                     </Grid>
                 </StackPanel>
@@ -155,11 +155,11 @@
                             <ColumnDefinition Width="130"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" x:Name="JuminFront" Text="주민등록번호 앞 6자리/뒤 1자리" FontSize="17" 
-                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="270" />
+                        <TextBox Grid.Column="0" x:Name="JuminFront" Text="{Binding FrontJumin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" FontSize="17" 
+                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False" Width="270" GotFocus="JuminFront_GotFocus"/>
                         <TextBlock Grid.Column="1" FontSize="50" Text="-"/>
-                        <TextBox Grid.Column="2" x:Name="JuminBack" Text="" FontSize="20" 
-                                 VerticalContentAlignment="Center" MaxLength="6" AllowDrop="False"  />
+                        <TextBox Grid.Column="2" x:Name="JuminBack" Text="{Binding BackOne, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" 
+                                 VerticalContentAlignment="Center" MaxLength="1" AllowDrop="False"  />
                         <TextBlock Grid.Column="3" FontSize="50" Text="******" Margin="0,10,0,0" Width="127"/>
 
                     </Grid>
@@ -168,7 +168,7 @@
 
             </DockPanel>
         </Grid>
-        <Grid DockPanel.Dock="Right" Margin="60,70,60,180">
+        <Grid DockPanel.Dock="Right" Width="350" Height="550" Margin="0,0,50,100">
             <Frame Name="NumbericKeyboard" Source="pack://application:,,,/Controls/Keyboard/NumbericKeyboard.xaml"/>
         </Grid>
     </DockPanel>

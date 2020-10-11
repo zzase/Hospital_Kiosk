@@ -24,5 +24,11 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
         {
             InitializeComponent();
         }
+
+        private void JuminFront_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if(JuminFront.Text.Equals("주민등록번호 앞 6자리/뒤 1자리"))
+                JuminFront.Text = "";
+        }
     }
 }
