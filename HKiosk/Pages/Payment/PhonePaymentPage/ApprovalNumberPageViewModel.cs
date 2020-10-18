@@ -51,8 +51,13 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
 
             FinalPrice = "승인번호를 입력하시면,\n" + DataManager.Instance.FinalPrice + "이 결제됩니다.";
 
-            MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
+            MainPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.InitData();
+                NavigationManager.Navigate(PageElement.Main);
+            });
             PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.InfoInput));
+            NextPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Print));
         }
     }
 }

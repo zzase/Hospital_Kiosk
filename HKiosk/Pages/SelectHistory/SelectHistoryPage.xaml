@@ -120,17 +120,15 @@
             </Button>
         </Grid>
         <Grid DockPanel.Dock="Top" Width="1000" Height="500">
-            <ListView x:Name="HistoryList" ItemsSource="{Binding SujinHistories}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="2"
+            <ListView x:Name="HistoryList" ItemsSource="{Binding SujinHistories,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="2"
                       HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" FontSize="20" Grid.IsSharedSizeScope="True">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
                             <GridViewColumn  Width="100">
-                                <GridViewColumn.HeaderTemplate>
-                                    <DataTemplate>
-                                        <CheckBox  Name="HeadCheck" Checked="CheckAll" Unchecked="UnCheckAll" />
-                                    </DataTemplate>
-                                </GridViewColumn.HeaderTemplate>
+                                <GridViewColumn.Header>
+                                    <CheckBox  Name="HeadCheck" Command="{Binding AllCheckCommand}" IsChecked="{Binding AllChecked}" />
+                                </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate >
                                     <DataTemplate >
                                         <Grid Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">

@@ -1,4 +1,5 @@
 ﻿using HKiosk.Base;
+using HKiosk.Manager.Data;
 using HKiosk.Manager.Navigation;
 using HKiosk.Util;
 using System;
@@ -25,7 +26,11 @@ namespace HKiosk.Pages.Payment
             NavigatePhonePaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Agreement));
             NavigateCashbeePaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.CashbeePayment));
             NavigateTmoneyPaymentPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.TmoneyPayment));
-            MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
+            MainPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.InitData();
+                NavigationManager.Navigate(PageElement.Main);
+            });
             PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.ConfirmRequestInfo));
         }
     }

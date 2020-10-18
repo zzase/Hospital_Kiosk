@@ -118,6 +118,11 @@ namespace HKiosk.Windows.Main
                     vm?.MoveNavigationBar(NaviElement.Print);
                     break;
 
+                case PageElement.PrintSuccess:
+                    pageToNavigate = new PrintSuccessPage();
+                    vm?.MoveNavigationBar(NaviElement.Print);
+                    break;
+
                 case PageElement.Fax:
                     break;
 

@@ -17,6 +17,7 @@ namespace HKiosk.Manager.Data
         public ObservableCollection<CertRequestInfo> CertRequestInfos { get; set; }
         public CertRequestInfo CertRequestInfo { get; set; }
         public PaymentInfo PaymentInfo { get; set; }
+        public ObservableCollection<SujinHistroy> SujinHistroy { get; set; }
         public string FinalPrice { get; set; }
 
         public DataManager()
@@ -33,6 +34,7 @@ namespace HKiosk.Manager.Data
             CertRequestInfos = new ObservableCollection<CertRequestInfo>();
             CertRequestInfo = new CertRequestInfo();
             PaymentInfo = new PaymentInfo();
+            SujinHistroy = new ObservableCollection<SujinHistroy>();
             FinalPrice = null;
         }
     }

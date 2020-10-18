@@ -34,8 +34,12 @@
                 </StackPanel>
             </Grid>
 
+            <Grid DockPanel.Dock="Bottom" Margin="0,0,0,0">
+                <Frame Name="NumbericKeyboard" Source="pack://application:,,,/Controls/Keyboard/GeneralKeyboard.xaml" Margin="2,-186,-2,186"/>
+            </Grid>
 
-            <Grid DockPanel.Dock="Top" Width="700">
+
+            <Grid DockPanel.Dock="Top" Width="700" Height="485" Margin="190,0">
                 <Grid Height="450">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -72,11 +76,8 @@
                                     <TextBlock Text="확인"  VerticalAlignment="Center" FontSize="25" Foreground="White"></TextBlock>
                                 </Grid>
                             </Button>
-
                         </Grid>
                     </StackPanel>
-
-
                 </Grid>
             </Grid>
         </DockPanel>

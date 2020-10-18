@@ -8,7 +8,32 @@
       d:DesignHeight="1145" d:DesignWidth="1080"
       Title="PintPage">
 
-    <Grid>
-        <TextBlock Text="Print Test" FontSize="200" />
-    </Grid>
+    <Page.DataContext>
+        <local:PrintPageViewModel/>
+    </Page.DataContext>
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
+            <TextBlock Text="결제가 완료되었습니다." FontSize="35" FontWeight="Bold" Foreground="Black" />
+        </Grid>
+        <Grid DockPanel.Dock="Bottom" Background="Transparent" Height="100">
+            <TextBlock Text="☎ 결제 및 오류문의 070-8656-0551" FontSize="30" FontWeight="Bold" Foreground="Gray" />
+        </Grid>
+        
+        <Grid DockPanel.Dock="Top" Height="567">
+            <Canvas>
+                <Ellipse Fill="Gainsboro" Canvas.Left="310" Canvas.Top="50" Width="450" Height="450"/>
+            </Canvas>
+            <Image Width="400" Source="pack://application:,,,/Resources/Pages/Payment/Icon_10.png" />
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Height="189">
+            <ProgressBar x:Name="progressBar" Width="800" Height="100" Minimum="0" Maximum="300" Background="DarkGray" Foreground="White" Value="{Binding PrintProgress}">
+       
+            </ProgressBar>
+        </Grid>
+        <Grid DockPanel.Dock="Top" Height="189">
+            <TextBlock Text="{Binding PrintText}" TextAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="DimGray"/>
+        </Grid>
+    </DockPanel>
 </Page>

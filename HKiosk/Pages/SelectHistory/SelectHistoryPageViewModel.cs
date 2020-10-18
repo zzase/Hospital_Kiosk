@@ -14,18 +14,26 @@ namespace HKiosk.Pages.SelectHistory
     public class SelectHistoryPageViewModel : PropertyChange
     {
         readonly HistroyProvider hp = new HistroyProvider();
+        private ObservableCollection<SujinHistroy> sujinHistories;
 
         private string count;
+        private bool allChecked;
 
-        private ObservableCollection<SujinHistroy> sujinHistories;
-        public ObservableCollection<SujinHistroy> SujinHistories
-        {
-            get { return sujinHistories; }
-            set => SetProperty(ref sujinHistories, value);
-        }
         private Nullable<DateTime> selectFromDateTime = null;
         private Nullable<DateTime> selectToDateTime = null;
 
+        private ICommand readHistoriesCommand;
+        private ICommand allCheckCommand;
+
+        public ObservableCollection<SujinHistroy> SujinHistories
+        {
+            get
+            {
+                sujinHistories = DataManager.Instance.SujinHistroy;
+                return sujinHistories;
+            }
+            set => SetProperty(ref sujinHistories, value);
+        }
         public Nullable<DateTime> SelectFromDateTime
         {
             get
@@ -63,11 +71,19 @@ namespace HKiosk.Pages.SelectHistory
             set => SetProperty(ref count, value);
         }
 
+        public bool AllChecked
+        {
+            get => allChecked;
+            set => SetProperty(ref allChecked, value);
+        }
+
         public ICommand MainPageCommand { get; }
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
-
-        private ICommand readHistoriesCommand;
+        public ICommand AllCheckCommand
+        {
+            get { return (this.allCheckCommand)??(this.allCheckCommand = new Command((obj)=>{ AllCheckedProcess(); })); }
+        }
         public ICommand ReadHistoriesCommand
         {
             get { return (this.readHistoriesCommand) ?? (this.readHistoriesCommand = new Command((obj) => { ReadHistories(); })); }
@@ -75,8 +91,8 @@ namespace HKiosk.Pages.SelectHistory
 
         public void ReadHistories()
         {
-            SujinHistories = hp.AddHistory();
-
+            DataManager.Instance.SujinHistroy = hp.AddHistory();
+            SujinHistories = DataManager.Instance.SujinHistroy;
         }
 
         public void SelectHistories()
@@ -96,10 +112,29 @@ namespace HKiosk.Pages.SelectHistory
             }
         }
 
+        public void AllCheckedProcess()
+        {
+            for (int i = 0; i < DataManager.Instance.SujinHistroy.Count; i++)
+            {
+                if (AllChecked)
+                {
+                    DataManager.Instance.SujinHistroy[i].IsChecked = true;
+                }
+                else
+                    DataManager.Instance.SujinHistroy[i].IsChecked = false;   
+            }
+            SujinHistories = DataManager.Instance.SujinHistroy;
+        }
+
         public SelectHistoryPageViewModel()
         {
+            SujinHistories = DataManager.Instance.SujinHistroy;
 
-            MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
+            MainPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.InitData();
+                NavigationManager.Navigate(PageElement.Main);
+            });
 
             NextPageCommand = new Command((obj) =>
             {
@@ -115,7 +150,6 @@ namespace HKiosk.Pages.SelectHistory
                     NavigationManager.Navigate(PageElement.ConfirmRequestInfo);
                 }
             });
-
             PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.SelectCert));
         }
     }

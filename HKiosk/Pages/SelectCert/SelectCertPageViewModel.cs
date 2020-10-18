@@ -13,19 +13,11 @@ namespace HKiosk.Pages.SelectCert
 {
     public class SelectCertPageViewModel : PropertyChange
     {
-        public List<Job> Jobs
-        {
-            get => DataManager.Instance.Jobs; 
-        }
-
         public ICommand MainPageCommand { get; }
 
-        public SelectCertPageViewModel()
+        public List<Job> Jobs
         {
-            MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
-
-            if (DataManager.Instance.Jobs == null)
-                InitJobs();
+            get => DataManager.Instance.Jobs;
         }
 
         private async void InitJobs()
@@ -45,6 +37,18 @@ namespace HKiosk.Pages.SelectCert
             {
                 PopupManager.Instance[PopupElement.Alert].Show(data["resultMessage"]?.ToString());
             }
+        }
+
+        public SelectCertPageViewModel()
+        {
+            MainPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.InitData();
+                NavigationManager.Navigate(PageElement.Main);
+            });
+
+            if (DataManager.Instance.Jobs == null)
+                InitJobs();
         }
     }
 }

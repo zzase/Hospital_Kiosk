@@ -1,4 +1,5 @@
 ﻿using HKiosk.Base;
+using HKiosk.Manager.Data;
 using HKiosk.Manager.Navigation;
 using HKiosk.Manager.Popup;
 using HKiosk.Util;
@@ -13,17 +14,6 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
 {
     class InfoInputPageViewModel : PropertyChange
     {
-        public ICommand MainPageCommand { get; }
-        public ICommand PreviousPageCommand { get; }
-        public ICommand NextPageCommand { get; }
-        public ICommand SKTCommand { get; }
-        public ICommand KTCommand { get; }
-        public ICommand LGTCommand { get; }
-        public ICommand HMCommand { get; }
-        public ICommand TelinkCommand { get; }
-        public ICommand KCTCommand { get; }
-
-
         private System.Windows.Media.Brush brushKT;
         private System.Windows.Media.Brush brushSKT;
         private System.Windows.Media.Brush brushLGT;
@@ -44,6 +34,16 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
 
         private string frontJumin;
         private string backOne;
+
+        public ICommand MainPageCommand { get; }
+        public ICommand PreviousPageCommand { get; }
+        public ICommand NextPageCommand { get; }
+        public ICommand SKTCommand { get; }
+        public ICommand KTCommand { get; }
+        public ICommand LGTCommand { get; }
+        public ICommand HMCommand { get; }
+        public ICommand TelinkCommand { get; }
+        public ICommand KCTCommand { get; }
 
         public System.Windows.Media.Brush BrushSKT
         {
@@ -163,7 +163,11 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
             FrontJumin = "주민등록번호 앞 6자리/뒤 1자리";
             BackOne = null;
 
-            MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
+            MainPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.InitData();
+                NavigationManager.Navigate(PageElement.Main);
+            });
             PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Agreement));
             NextPageCommand = new Command((obj) =>
             {

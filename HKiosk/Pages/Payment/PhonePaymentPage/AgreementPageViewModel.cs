@@ -1,4 +1,5 @@
 ﻿using HKiosk.Base;
+using HKiosk.Manager.Data;
 using HKiosk.Manager.Navigation;
 using HKiosk.Manager.Popup;
 using HKiosk.Util;
@@ -13,16 +14,16 @@ namespace HKiosk.Pages.Payment
 {
     class AgreementPageViewModel : PropertyChange
     {
+        private bool isChacked1;
+        private bool isChacked2;
+        private bool isChacked3;
+
         public ICommand MainPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
         public ICommand NextPageCommand { get; }
         public ICommand AgreeBtn1Command { get; }
         public ICommand AgreeBtn2Command { get; }
         public ICommand AgreeBtn3Command { get; }
-
-        private bool isChacked1;
-        private bool isChacked2;
-        private bool isChacked3;
         public bool IsChacked1
         {
             get => isChacked1;
@@ -44,7 +45,12 @@ namespace HKiosk.Pages.Payment
             IsChacked1 = false;
             IsChacked2 = false;
             IsChacked3 = false;
-            MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
+
+            MainPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.InitData();
+                NavigationManager.Navigate(PageElement.Main);
+            });
             PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.SelectPayment));
             NextPageCommand = new Command((obj) =>
             {

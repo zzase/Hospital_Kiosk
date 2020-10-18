@@ -38,7 +38,11 @@ namespace HKiosk.Pages.ConfirmUserInfo
 
         public ConfirmUserInfoPageViewModel()
         {
-            MainPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Main));
+            MainPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.InitData();
+                NavigationManager.Navigate(PageElement.Main);
+            });
 
             CheckUserInfoCommand = new Command(async (obj) =>
             {

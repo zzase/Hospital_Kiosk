@@ -160,6 +160,7 @@
     <Compile Include="Pages\Print\PrintPage.xaml.cs">
       <DependentUpon>PrintPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Print\PrintPageViewModel.cs" />
     <Compile Include="Pages\SelectCert\SelectCertPage.xaml.cs">
       <DependentUpon>SelectCertPage.xaml</DependentUpon>
     </Compile>
@@ -377,6 +378,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Pages\Payment\Panel_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\Payment\Icon_10.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

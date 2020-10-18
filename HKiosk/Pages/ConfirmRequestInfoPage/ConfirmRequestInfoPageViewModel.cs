@@ -16,7 +16,18 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
     public class ConfirmRequestInfoPageViewModel : PropertyChange
     {
         private readonly RequestInfoProvider requestInfoProvider;
+        private string finalPrice;
         private ObservableCollection<CertRequestInfo> certRequestInfos;
+        private ICommand isCancelCommand;
+
+        public ICommand MainPageCommand { get; }
+        public ICommand PlusCertCommand { get; }
+        public ICommand PaymentCommand { get; }
+        public ICommand IsCancelCommand
+        {
+            get { return (this.isCancelCommand) ?? (this.isCancelCommand = new Command((obj) => { CheckProcess(); })); }
+        }
+
         public ObservableCollection<CertRequestInfo> CertRequestInfos
         {
             get
@@ -27,8 +38,6 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
             set => SetProperty(ref certRequestInfos, value);
         }
 
-        private string finalPrice;
-
         public string FinalPrice
         {
             get
@@ -38,16 +47,6 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
             }
             set => SetProperty(ref finalPrice, value);
         }
-        public ICommand MainPageCommand { get; }
-        public ICommand PlusCertCommand { get; }
-        public ICommand PaymentCommand { get; }
-
-        private ICommand isCancelCommand;
-        public ICommand IsCancelCommand
-        {
-            get { return (this.isCancelCommand) ?? (this.isCancelCommand = new Command((obj) => { CheckProcess(); })); }
-        }
-
 
         private void CheckProcess()
         {
@@ -73,7 +72,7 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
 
             MainPageCommand = new Command((obj) =>
             {
-                DataManager.Instance.CertRequestInfos.Clear();
+                DataManager.Instance.InitData();
                 NavigationManager.Navigate(PageElement.Main);
             });
 

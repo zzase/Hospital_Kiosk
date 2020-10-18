@@ -11,6 +11,14 @@
             <Setter Property="FontFamily" Value="/RTKiosk;component/Resources/Fonts/#나눔스퀘어_ac"/>
         </Style>
 
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="3" ScaleY="3" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="AllowDrop" Value="False"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
