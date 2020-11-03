@@ -155,8 +155,7 @@
                             <GridViewColumn Header="매수" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <ComboBox x:Name="CountCert" Loaded="ComboBoxLoad" SelectedValue="{Binding Count}"
-                                                  SelectionChanged="ComboBoxSelectionChanged" FontSize="25"/>
+                                        <ComboBox x:Name="CountCert" ItemsSource="{Binding BoxItems}"  SelectedItem="{Binding BoxItems[0]}" SelectedValue="{Binding Count,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

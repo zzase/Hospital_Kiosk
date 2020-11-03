@@ -62,19 +62,21 @@ namespace HKiosk.Pages.ConfirmUserInfo
         {
             var resultJson = await PatNoRequest(Name, BackNationNo);
 
-            if (resultJson == null) return false;
+            if (resultJson == null)
+            {
+                PopupManager.Instance[PopupElement.Alert]?.Show("서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.");
+                return false;
+            }
 
             if (resultJson["resultCode"]?.ToString() != "200")
             {
                 PopupManager.Instance[PopupElement.Alert]?.Show(resultJson["resultMessage"]?.ToString());
-
                 return false;
             }
 
             DataManager.Instance.PatientInfo.Name = Name;
             DataManager.Instance.PatientInfo.Birth = FrontNationNo;
-            DataManager.Instance.PatientInfo.PatientNo = resultJson["uPatNo"]?.ToString();
-
+            DataManager.Instance.PatientInfo.PatientNo = resultJson["list"]?.Value<JArray>()[0]["uPatNo"]?.ToString();
             return true;
         }
 
@@ -119,7 +121,7 @@ namespace HKiosk.Pages.ConfirmUserInfo
             try
             {
                 unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(secureString);
-                return await RequestAPI.PatNoRequest_Test(Name, $"{FrontNationNo}{Marshal.PtrToStringUni(unmanagedString)}");
+                return await RequestAPI.PatNoRequest(Name, $"{FrontNationNo}{Marshal.PtrToStringUni(unmanagedString)}");
             }
             catch (Exception ex)
             {

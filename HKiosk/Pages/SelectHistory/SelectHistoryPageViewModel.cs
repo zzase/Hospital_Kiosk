@@ -8,12 +8,13 @@ using System;
 using HKiosk.Manager.Data;
 using System.Collections.ObjectModel;
 using HKiosk.Manager.Popup;
+using HKiosk.Util.Server;
+using Newtonsoft.Json.Linq;
 
 namespace HKiosk.Pages.SelectHistory
 {
     public class SelectHistoryPageViewModel : PropertyChange
     {
-        readonly HistroyProvider hp = new HistroyProvider();
         private ObservableCollection<SujinHistroy> sujinHistories;
 
         private string count;
@@ -89,9 +90,20 @@ namespace HKiosk.Pages.SelectHistory
             get { return (this.readHistoriesCommand) ?? (this.readHistoriesCommand = new Command((obj) => { ReadHistories(); })); }
         }
 
-        public void ReadHistories()
+        public async void ReadHistories()
         {
-            DataManager.Instance.SujinHistroy = hp.AddHistory();
+            var data = await RequestAPI.CertSujinRequest(selectFromDateTime?.ToString("yyyyMMdd"), selectToDateTime?.ToString("yyyyMMdd"));
+
+            if (data["resultCode"]?.ToString() == "200")
+            {
+                DataManager.Instance.SujinHistroy = new ObservableCollection<SujinHistroy>(RequestAPI.JArrayToList<SujinHistroy>(data["list"]?.Value<JArray>()));
+                OnPropertyChanged("Jobs");
+            }
+            else
+            {
+                PopupManager.Instance[PopupElement.Alert].Show(data["resultMessage"]?.ToString());
+            }
+
             SujinHistories = DataManager.Instance.SujinHistroy;
         }
 
@@ -104,6 +116,7 @@ namespace HKiosk.Pages.SelectHistory
                     CertRequestInfo certRequestInfo = new CertRequestInfo
                     {
                         Job = DataManager.Instance.SelectedJob,
+                        Count = SujinHistories[i].Count,
                         SujinHistroy = SujinHistories[i],
                         IsCheckedForCancel = false
                     };
@@ -147,10 +160,17 @@ namespace HKiosk.Pages.SelectHistory
                 else
                 {
                     SelectHistories();
+                    DataManager.Instance.SujinHistroy.Clear();
+                    SujinHistories = DataManager.Instance.SujinHistroy;
                     NavigationManager.Navigate(PageElement.ConfirmRequestInfo);
                 }
             });
-            PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.SelectCert));
+            PreviousPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.SujinHistroy.Clear();
+                SujinHistories = DataManager.Instance.SujinHistroy;
+                NavigationManager.Navigate(PageElement.SelectCert);
+            });
         }
     }
 }

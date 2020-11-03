@@ -30,7 +30,7 @@ namespace HKiosk.Pages.Print
             set => SetProperty(ref printText, value);
         }
 
-        private void dtTicker(object sender, EventArgs e)
+        private void DtTicker(object sender, EventArgs e)
         {
 
             PrintProgress += 1.0;
@@ -59,19 +59,13 @@ namespace HKiosk.Pages.Print
                 }
             }
 
-            //if (i >= DataManager.Instance.CertRequestInfos.Count - 1)
-            //{
-            //    NavigationManager.Navigate(PageElement.Main);
-            //}
-
-
         }
 
         private void ProgressProcess()
         {
             PrintProgress = 0.0;
             timer = new DispatcherTimer();
-            timer.Tick += new EventHandler(this.dtTicker);
+            timer.Tick += new EventHandler(this.DtTicker);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
             timer.Start();
         }

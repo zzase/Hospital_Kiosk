@@ -40,6 +40,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +50,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -132,6 +134,10 @@
       <DependentUpon>ConfirmUserInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ConfirmUserInfo\ConfirmUserInfoPageViewModel.cs" />
+    <Compile Include="Pages\Fail\FailPage.xaml.cs">
+      <DependentUpon>FailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Fail\FailPageViewModel.cs" />
     <Compile Include="Pages\Payment\CardPaymentPage.xaml.cs">
       <DependentUpon>CardPaymentPage.xaml</DependentUpon>
     </Compile>
@@ -161,18 +167,21 @@
       <DependentUpon>PrintPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Print\PrintPageViewModel.cs" />
+    <Compile Include="Pages\Print\PrintSuccessPage.xaml.cs">
+      <DependentUpon>PrintSuccessPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Print\PrintSuccessPageViewModel.cs" />
     <Compile Include="Pages\SelectCert\SelectCertPage.xaml.cs">
       <DependentUpon>SelectCertPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SelectCert\SelectCertPageViewModel.cs" />
-    <Compile Include="Pages\SelectHistory\History.cs" />
-    <Compile Include="Pages\SelectHistory\HistroyProvider.cs" />
     <Compile Include="Pages\SelectHistory\SelectHistoryPage.xaml.cs">
       <DependentUpon>SelectHistoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SelectHistory\SelectHistoryPageViewModel.cs" />
     <Compile Include="Util\ClickEffect.cs" />
     <Compile Include="Util\KioskAgent.cs" />
+    <Compile Include="Util\KISA_SEED_CBC_DLL_Importer.cs" />
     <Compile Include="Util\Log.cs" />
     <Compile Include="Util\Server\RequestAPI.cs" />
     <Compile Include="Util\Server\WebServer.cs" />
@@ -209,6 +218,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Fail\FailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\IdentityVerification\IdentityVerificationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,6 +239,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Print\PrintPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Print\PrintSuccessPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -380,7 +397,22 @@
     <Resource Include="Resources\Pages\Payment\Panel_2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Pages\Payment\Icon_10.png" />
+    <Resource Include="Resources\Pages\Print\Icon_10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\Print\Icon_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\Fail\Icon_33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Btn_Bottom_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\Payment\Toggle_Phone_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\Payment\Toggle_Phone_2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

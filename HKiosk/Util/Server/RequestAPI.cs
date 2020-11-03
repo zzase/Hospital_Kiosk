@@ -11,7 +11,7 @@ namespace HKiosk.Util.Server
 {
     public static class RequestAPI
     {
-        internal static string operationURL = string.Empty;
+        internal static string operationURL = @"http://172.16.0.154:81";
 
         internal static List<T> JArrayToList<T>(JArray jArray)
         {
@@ -23,6 +23,19 @@ namespace HKiosk.Util.Server
             {
                 Log.Write($"JArrayToList Error {ex}");
                 return null;
+            }
+        }
+
+        internal static T ConvertJson<T>(JObject jObject) where T : new()
+        {
+            try
+            {
+                return (T)Convert.ChangeType(JsonConvert.DeserializeObject<T>(jObject.ToString()), typeof(T));
+            }
+            catch (Exception ex)
+            {
+                Log.Write($"ConvertJson Error {ex}");
+                return default;
             }
         }
 
@@ -73,13 +86,44 @@ namespace HKiosk.Util.Server
                 { "uName", uName },
                 { "uJumin", uJumin }
             };
-
+            
             var postdata = new JObject
             {
-                {"reqData", await KioskAgent.UseEncAria("10001", paramData.ToString())}
+                {"reqData", KISA_SEED_CBC_DLL_Importer.Encrypt(paramData.ToString())},
+                {"requester", "BBMC"}
             };
 
-            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);
+            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleT.do", "post");
+        }
+        static readonly byte[] key = Encoding.UTF8.GetBytes("BBMC!!@*5218998h");
+        static readonly byte[] iv = Encoding.UTF8.GetBytes("4421673257160032");
+
+        internal static string ByteEncryptTest(string _data)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(_data);
+
+            int size = (int)Math.Ceiling((data.Length + 1) / 16f) * 16;
+
+            byte[] result = new byte[size];
+
+            int v = KISA_SEED_CBC_DLL_Importer.SEED_CBC_Encrypt(key, iv, data, data.Length, result);
+
+            return Convert.ToBase64String(result);
+        }
+
+        internal static string ByteDecryptTest(string _data)
+        {
+            byte[] data;
+
+            data = Convert.FromBase64String(_data);
+
+            int size = data.Length;
+
+            byte[] result = new byte[size];
+
+            KISA_SEED_CBC_DLL_Importer.SEED_CBC_Decrypt(key, iv, data, data.Length, result);
+
+            return Encoding.UTF8.GetString(result);
         }
 
         internal static async Task<JObject> PatNoRequest_Test(string uName, string uJumin)
@@ -153,10 +197,11 @@ namespace HKiosk.Util.Server
 
             var postdata = new JObject
             {
-                {"reqData", await KioskAgent.UseEncAria("10001", paramData.ToString())}
+                {"reqData", KISA_SEED_CBC_DLL_Importer.Encrypt(paramData.ToString())},
+                {"requester", "BBMC"}
             };
 
-            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);
+            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
         }
 
         internal static async Task<JObject> JobListRequest_Test(int testCase)
@@ -286,7 +331,7 @@ namespace HKiosk.Util.Server
                     break;
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(3000);
 
             return paramData;
         }
@@ -294,18 +339,18 @@ namespace HKiosk.Util.Server
         /// <summary>
         /// 수진이력 조회
         /// </summary>
-        /// <param name="certCd">증명서 코드</param>
-        /// <param name="certNe">증명서 명칭</param>
-        /// <param name="hosCertCd">병원연계 코드</param>
-        /// <param name="fromDate">조회 일자(시작일)</param>
-        /// <param name="toDate">조회 일자(종료일)</param>
+        /// <param name="fromDate">조회 일자(시작일 yyyyMMdd)</param>
+        /// <param name="toDate">조회 일자(종료일 yyyyMMdd)</param>
         /// <returns></returns>
-        internal static async Task<JObject> CertSujinRequest(string certCd, string certNe, string hosCertCd, string fromDate, string toDate)
+        internal static async Task<JObject> CertSujinRequest(string fromDate, string toDate)
         {
             var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
             var uPatNo = DataManager.Instance.PatientInfo.PatientNo;
             var uName = DataManager.Instance.PatientInfo.Name;
             var uBirth = DataManager.Instance.PatientInfo.Birth;
+            var certCd = DataManager.Instance.SelectedJob.CertCd;
+            var certNe = DataManager.Instance.SelectedJob.CertNe;
+            var hosCertCd = DataManager.Instance.SelectedJob.HosCertCd;
 
             var paramData = new JObject
             {
@@ -323,11 +368,101 @@ namespace HKiosk.Util.Server
 
             var postdata = new JObject
             {
-                {"reqData", await KioskAgent.UseEncAria("10001", paramData.ToString())}
+                {"reqData", KISA_SEED_CBC_DLL_Importer.Encrypt(paramData.ToString())},
+                {"requester", "BBMC"}
             };
 
-            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleM.do", "post", true);
+            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
         }
+
+        /// <summary>
+        /// 증명서 신청
+        /// </summary>
+        internal static async Task<JObject> CertRequest()
+        {
+            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+            var uPatNo = DataManager.Instance.PatientInfo.PatientNo;
+            var uName = DataManager.Instance.PatientInfo.Name;
+            var uBirth = DataManager.Instance.PatientInfo.Birth;
+            var orderNo = DataManager.Instance.PaymentInfo.OrderNo;
+
+
+            JArray certRequests = new JArray();
+
+            for ( int i = 0; i < DataManager.Instance.CertRequestInfos.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(DataManager.Instance.CertRequestInfos[i].StateCode))
+                    continue;
+
+                var certCd = DataManager.Instance.CertRequestInfos[i].Job.CertCd;
+                var certNe = DataManager.Instance.CertRequestInfos[i].Job.CertNe;
+                var hosCertCd = DataManager.Instance.CertRequestInfos[i].Job.HosCertCd;
+                var certCnt = DataManager.Instance.CertRequestInfos[i].SujinHistroy.Count;
+                var sujinKey = DataManager.Instance.CertRequestInfos[i].SujinHistroy.SujinKey;
+                var deptNo = DataManager.Instance.CertRequestInfos[i].SujinHistroy.DeptNo;
+                var deptNe = DataManager.Instance.CertRequestInfos[i].SujinHistroy.DeptNe;
+                var certDate = DataManager.Instance.CertRequestInfos[i].SujinHistroy.CertDate;
+                var inDate = DataManager.Instance.CertRequestInfos[i].SujinHistroy.InDate;
+                var outDate = DataManager.Instance.CertRequestInfos[i].SujinHistroy.OutDate;
+
+                var certRequestJson = new JObject
+                {
+                    { "reqSeq", i.ToString() },
+                    { "certCd", certCd },
+                    { "certNe", certNe },
+                    { "hostCertCd", hosCertCd },
+                    { "certCnt", certCnt },
+                    { "sujinKey", sujinKey },
+                    { "deptNo", deptNo },
+                    { "deptNe", deptNe },
+                    { "certDate", certDate },
+                    { "inDate", inDate },
+                    { "outDate", outDate }
+                };
+
+                certRequests.Add(certRequestJson);
+            }
+
+            var paramData = new JObject
+            {
+                { "command", "certReq" },
+                { "giwanNo", giwanNo },
+                { "uName", uName },
+                { "uBirth", uBirth },
+                { "uPatNo", uPatNo },
+                { "orderNo", orderNo },
+                { "list", certRequests},
+            };
+
+            var postdata = new JObject
+            {
+                {"reqData", KISA_SEED_CBC_DLL_Importer.Encrypt(paramData.ToString())},
+                {"requester", "BBMC"}
+            };
+
+            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
+        }
+
+        internal static async Task<JObject> CertStateRequest(string certNo)
+        {
+            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+
+            var paramData = new JObject
+            {
+                { "command", "certState" },
+                { "giwanNo", giwanNo },
+                { "certNo", certNo }
+            };
+
+            var postdata = new JObject
+            {
+                {"reqData", KISA_SEED_CBC_DLL_Importer.Encrypt(paramData.ToString())},
+                {"requester", "BBMC"}
+            };
+
+            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
+        }
+
         #endregion
     }
 }

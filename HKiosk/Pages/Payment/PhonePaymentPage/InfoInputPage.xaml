@@ -60,19 +60,19 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Grid.Column="0">
+
                         <Button  Margin="15 10" Background="Transparent" Command="{Binding SKTCommand}">
                             <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="SKT"  FontSize="25" Foreground="{Binding BrushSKT}" FontWeight="Bold"></TextBlock>
+                                <Image Stretch="Fill" Source="{Binding ImageSources[0]}"/>
+                                <TextBlock Text="SKT"  FontSize="25" Foreground="{Binding Brushes[0]}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
-
                     <Grid Grid.Row="0" Grid.Column="1">
                         <Button  Margin="15 10" Background="Transparent" Command="{Binding KTCommand}">
                             <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="KT"  FontSize="25" Foreground="{Binding BrushKT}" FontWeight="Bold"></TextBlock>
+                                <Image Stretch="Fill" Source="{Binding ImageSources[1]}"/>
+                                <TextBlock Text="KT"  FontSize="25" Foreground="{Binding Brushes[1]}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
@@ -80,8 +80,8 @@
                     <Grid Grid.Row="0" Grid.Column="2">
                         <Button  Margin="15 10" Background="Transparent" Command="{Binding LGTCommand}">
                             <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="LGT"  FontSize="25" Foreground="{Binding BrushLGT}" FontWeight="Bold"></TextBlock>
+                                <Image Stretch="Fill" Source="{Binding ImageSources[2]}"/>
+                                <TextBlock Text="LGT"  FontSize="25" Foreground="{Binding Brushes[2]}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
@@ -89,8 +89,8 @@
                     <Grid Grid.Row="1" Grid.Column="0">
                         <Button  Margin="15 10" Background="Transparent" Command="{Binding HMCommand}">
                             <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="  헬로&#10;모바일"  FontSize="25" Foreground="{Binding BrushHM}" FontWeight="Bold"></TextBlock>
+                                <Image Stretch="Fill" Source="{Binding ImageSources[3]}"/>
+                                <TextBlock Text="  헬로&#10;모바일"  FontSize="25" Foreground="{Binding Brushes[3]}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
@@ -98,8 +98,8 @@
                     <Grid Grid.Row="1" Grid.Column="1">
                         <Button  Margin="15 10" Background="Transparent" Command="{Binding TelinkCommand}">
                             <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="  SK&#10;Telink"  FontSize="25" Foreground="{Binding BrushTelink}" FontWeight="Bold"></TextBlock>
+                                <Image Stretch="Fill" Source="{Binding ImageSources[4]}"/>
+                                <TextBlock Text="  SK&#10;Telink"  FontSize="25" Foreground="{Binding Brushes[4]}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
@@ -107,8 +107,8 @@
                     <Grid Grid.Row="1" Grid.Column="2">
                         <Button  Margin="15 10" Background="Transparent" Command="{Binding KCTCommand}">
                             <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Toggle_Lang_1.png"/>
-                                <TextBlock Text="KCT"  FontSize="25" Foreground="{Binding BrushKCT}" FontWeight="Bold"></TextBlock>
+                                <Image Stretch="Fill" Source="{Binding ImageSources[5]}"/>
+                                <TextBlock Text="KCT"  FontSize="25" Foreground="{Binding Brushes[5]}" FontWeight="Bold"></TextBlock>
                             </Grid>
                         </Button>
                     </Grid>
@@ -131,7 +131,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBox Grid.Column="0" x:Name="textBox1" Text="{Binding FrontPhoneNum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" 
-                                 VerticalContentAlignment="Center" MaxLength="3" AllowDrop="False" Width="150"/>
+                                 VerticalContentAlignment="Center" MaxLength="3"  AllowDrop="False" Width="150"/>
                         <TextBlock Grid.Column="1" FontSize="50" Text="-"/>
                         <TextBox Grid.Column="2" x:Name="textBox2" Text="{Binding CenterPhoneNum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" 
                                  VerticalContentAlignment="Center" MaxLength="4" AllowDrop="False" Width="150" />

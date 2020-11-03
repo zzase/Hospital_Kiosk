@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HKiosk.Base;
 
 namespace HKiosk.Manager.Data
 {
-    public class CertRequestInfo
+    public class CertRequestInfo : PropertyChange
     {
-        public string ReqSeq { get; set; }    // 요청 키값
+        private string state;
+
         public string CertNo { get; set; }    // 증명서 일련번호
         public string Count { get; set; }    // 매수
         public bool IsCheckedForCancel { get; set; }    // 취소 체크박스 선택여부
         public Job Job { get; set; }    // 증명서 정보
         public SujinHistroy SujinHistroy { get; set; }    // 수진 이력
+        public string StateCode { get; set; }    // 상태 코드
+        public string State    // 상태
+        { 
+            get => state; 
+            set => SetProperty(ref state, value); 
+        }
     }
 }

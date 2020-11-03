@@ -24,7 +24,7 @@ namespace HKiosk.Pages.SelectCert
         {
             PopupManager.Instance[PopupElement.Loding].Show("발급 가능한 증명서를 가져오는 중입니다.\n잠시만 기다려주세요.");
 
-            var data = await RequestAPI.JobListRequest_Test(1);
+            var data = await RequestAPI.JobListRequest();
 
             PopupManager.Instance[PopupElement.Loding].Hide();
 

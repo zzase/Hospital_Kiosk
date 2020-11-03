@@ -51,7 +51,7 @@ namespace HKiosk.Util.Server
             }
             catch (Exception e)
             {
-                Log.Write($"Http 동기요청 예외발생 : {e.ToString()} URL:{url} DATA:{data}");
+                Log.Write($"Http 동기요청 예외발생 : {e} URL:{url} DATA:{data}");
             }
 
             return result;
@@ -65,7 +65,7 @@ namespace HKiosk.Util.Server
         /// <param name="method">HTTP 요청 방법</param>
         /// <param name="usearia">암호화 모듈 사용</param>
         /// <returns></returns>
-        public async static Task<JObject> RequestAsync(string data, string url, string method, bool usearia)
+        public async static Task<JObject> RequestAsync(string data, string url, string method)
         {
             byte[] bytes = Encoding.Default.GetBytes(data);
             string response = string.Empty;
@@ -94,28 +94,21 @@ namespace HKiosk.Util.Server
                         }
                     }
                 }
-
+                Console.WriteLine(response);
+                
                 response = string.IsNullOrEmpty(response) ? "" : response.Trim();
 
-                //암호화 모듈
-                if (!string.IsNullOrEmpty(response))
-                {
-                    if (!response.Contains("{"))
-                    {
-                        if (usearia)
-                        {
-                            string dec = await KioskAgent.UseDecAria("10001", response);
-                            response = dec.Replace("˝", "\"");
-                        }
-                    }
-                }
+                var resData = JObject.Parse(response)["resData"].ToString();
 
-                result = JObject.Parse(response);
+                StringBuilder resData2 = new StringBuilder(resData.Length);
+
+                var pbszPlainText = KISA_SEED_CBC_DLL_Importer.Decrypt(resData);
+                result = JObject.Parse(pbszPlainText);
             }
             catch (Exception e)
             {
-                Log.Write($"#### RequestAsync : [{data}], [{url}], [{method}], [{usearia}], [{response}]");
-                Log.Write($"Http 비동기요청 예외발생 : {e.ToString()} URL:{url} DATA:{data}");
+                Log.Write($"#### RequestAsync : [{data}], [{url}], [{method}], [{response}]");
+                Log.Write($"Http 비동기요청 예외발생 : {e} URL:{url} DATA:{data}");
             }
 
             return result;
@@ -143,7 +136,7 @@ namespace HKiosk.Util.Server
             }
             catch (Exception e)
             {
-                Log.Write($"WebServer Get 예외발생 : {e.ToString()} URL:{url}");
+                Log.Write($"WebServer Get 예외발생 : {e} URL:{url}");
             }
 
             return response;

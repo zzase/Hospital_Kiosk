@@ -100,7 +100,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
                 <Grid Width="450" Height="105" Margin="50,0,0,0" Background="White">
-                    <TextBlock Text="개인정보 수집 및 이용동의" Margin="50,0,0,0" FontSize="25" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Left" ></TextBlock>
+                    <TextBlock Text="개인정보제공 및 위탁동의" Margin="50,0,0,0" FontSize="25" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Left" ></TextBlock>
                 </Grid>
                 <Button Width="120" Height="110"  Margin="15 10" Background="Transparent">
                     <Grid Background="White" Width="120" Height="110">

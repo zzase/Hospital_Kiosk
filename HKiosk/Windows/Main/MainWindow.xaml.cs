@@ -10,6 +10,7 @@ using HKiosk.Pages.ConfirmRequestInfoPage;
 using HKiosk.Pages.Print;
 using HKiosk.Pages.Payment;
 using HKiosk.Pages.Payment.PhonePaymentPage;
+using HKiosk.Pages.Fail;
 using HKiosk.Util;
 using System;
 using System.Windows;
@@ -17,7 +18,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.ComponentModel;
-
+using HKiosk.Manager.Data;
 
 namespace HKiosk.Windows.Main
 {
@@ -31,6 +32,8 @@ namespace HKiosk.Windows.Main
             InitializeComponent();
 
             this.DataContext = new MainWindowViewModel(this);
+
+            DataManager.Instance.SettingInfo.GiwanNo = "HG0002";
 
             Navigate(PageElement.Main);
         }
@@ -121,6 +124,11 @@ namespace HKiosk.Windows.Main
                 case PageElement.PrintSuccess:
                     pageToNavigate = new PrintSuccessPage();
                     vm?.MoveNavigationBar(NaviElement.Print);
+                    break;
+
+                case PageElement.Fail:
+                    pageToNavigate = new FailPage();
+                    vm?.MoveNavigationBar(NaviElement.Payment);
                     break;
 
                 case PageElement.Fax:

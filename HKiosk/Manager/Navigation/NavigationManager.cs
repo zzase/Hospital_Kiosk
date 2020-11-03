@@ -38,6 +38,7 @@ namespace HKiosk.Manager.Navigation
         SelectIssuanceMethod, // 출력 방법 선택
         Print,// 증명서 출력 화면
         PrintSuccess,//출력 성공 화면
+        Fail,
         Fax, // 팩스 전송 화면
         Mail // 메일 전송 화면 
     }

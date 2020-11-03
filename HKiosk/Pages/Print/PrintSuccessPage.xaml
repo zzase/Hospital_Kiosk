@@ -5,10 +5,44 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HKiosk.Pages.Print"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1145" d:DesignWidth="1080"
       Title="PrintSuccessPage">
 
-    <Grid>
-        
-    </Grid>
+    <Page.DataContext>
+        <local:PrintSuccessPageViewModel/>
+    </Page.DataContext>
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Height="100">
+         
+        </Grid>
+        <Grid DockPanel.Dock="Bottom" Background="Transparent" Height="150">
+            <Button Width="300" Height="105" Command="{Binding LogOutCommand}" Margin="15 10" Background="Transparent" x:Name="NextBtn">
+                <Grid>
+                    <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Btn_Bottom_10.png"/>
+
+                    <TextBlock Text="로그아웃" Margin="70,0,0,0" FontSize="30" ></TextBlock>
+                </Grid>
+            </Button>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Height="567">
+            <Canvas  Width="700" Height="450">
+                <Rectangle Fill="White" Width="700" Height="450"/>
+                <DockPanel Width="700">
+                    <Grid DockPanel.Dock="Top" Height="300">
+                        <Image Width="250" Source="pack://application:,,,/Resources/Pages/Print/Icon_32.png" />
+
+                    </Grid>
+                    <Grid DockPanel.Dock="Bottom" Height="150">
+                        <TextBlock Text="출력이 완료되면 증명서를 받아가세요!" FontSize="35" FontWeight="Bold" />
+                    </Grid>
+                </DockPanel>
+            </Canvas>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Height="189">
+            <TextBlock Text="{Binding LimitLogOut}" FontSize="40" FontWeight="Bold" Foreground="IndianRed"/>
+        </Grid>
+    </DockPanel>
 </Page>

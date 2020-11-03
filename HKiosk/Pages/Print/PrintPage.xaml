@@ -24,7 +24,7 @@
             <Canvas>
                 <Ellipse Fill="Gainsboro" Canvas.Left="310" Canvas.Top="50" Width="450" Height="450"/>
             </Canvas>
-            <Image Width="400" Source="pack://application:,,,/Resources/Pages/Payment/Icon_10.png" />
+            <Image Width="400" Source="pack://application:,,,/Resources/Pages/Print/Icon_10.png" />
         </Grid>
 
         <Grid DockPanel.Dock="Top" Height="189">

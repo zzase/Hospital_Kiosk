@@ -1,5 +1,4 @@
-﻿using HKiosk.Manager.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HKiosk.Pages.SelectHistory
+namespace HKiosk.Pages.Fail
 {
     /// <summary>
-    /// SelectHistoryPage.xaml에 대한 상호 작용 논리
+    /// FailPage.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class SelectHistoryPage : Page
+    public partial class FailPage : Page
     {
-        public SelectHistoryPage()
+        public FailPage()
         {
-            
             InitializeComponent();
         }
-
     }
 }

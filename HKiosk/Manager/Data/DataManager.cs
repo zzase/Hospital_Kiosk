@@ -1,9 +1,5 @@
 ﻿using HKiosk.Util;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
 namespace HKiosk.Manager.Data
@@ -19,11 +15,8 @@ namespace HKiosk.Manager.Data
         public PaymentInfo PaymentInfo { get; set; }
         public ObservableCollection<SujinHistroy> SujinHistroy { get; set; }
         public string FinalPrice { get; set; }
-
-        public DataManager()
-        {
-            InitData();
-        }
+        public string FailText { get; set; }
+        public string FailReason { get; set; }
 
         public void InitData()
         {
@@ -35,7 +28,15 @@ namespace HKiosk.Manager.Data
             CertRequestInfo = new CertRequestInfo();
             PaymentInfo = new PaymentInfo();
             SujinHistroy = new ObservableCollection<SujinHistroy>();
-            FinalPrice = null;
+            FinalPrice = "";
+
+            PaymentInfo.OrderNo = "";
+            SettingInfo.GiwanNo = "HG0002";
+        }
+
+        public DataManager()
+        {
+            InitData();
         }
     }
 }
