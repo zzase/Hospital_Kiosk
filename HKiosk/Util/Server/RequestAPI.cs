@@ -17,7 +17,7 @@ namespace HKiosk.Util.Server
         {
             try
             {
-                return (List<T>)Convert.ChangeType(JsonConvert.DeserializeObject<List<T>>(jArray.ToString()), typeof(List<T>));
+                return (List<T>)Convert.ChangeType(JsonConvert.DeserializeObject<List<T>>(jArray?.ToString()), typeof(List<T>));
             }
             catch (Exception ex)
             {

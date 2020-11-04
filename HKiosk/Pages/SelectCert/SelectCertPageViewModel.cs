@@ -28,27 +28,58 @@ namespace HKiosk.Pages.SelectCert
 
             PopupManager.Instance[PopupElement.Loding].Hide();
 
+            if (data == null)
+            {
+                PopupManager.Instance[PopupElement.Alert]?.Show("서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.", NavigateMainPage);
+                return;
+            }
+
             if (data["resultCode"]?.ToString() == "200")
             {
-                DataManager.Instance.Jobs = RequestAPI.JArrayToList<Job>(data["list"]?.Value<JArray>());
+                try
+                {
+                    DataManager.Instance.Jobs = RequestAPI.JArrayToList<Job>(data["list"]?.Value<JArray>());
+                }
+                catch (Exception ex)
+                {
+                    PopupManager.Instance[PopupElement.Alert]?.Show("서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.", NavigateMainPage);
+                    Log.Write($"[SelectCertPageViewModel] InitJobs exception : {ex}");
+                    return;
+                }
+
+                if ((DataManager.Instance.Jobs?.Count ?? 0) < 1)
+                {
+                    PopupManager.Instance[PopupElement.Alert].Show("발급 가능한 증명서가 없습니다.", NavigateMainPage);
+                    return;
+                }
+
                 OnPropertyChanged("Jobs");
             }
             else
             {
-                PopupManager.Instance[PopupElement.Alert].Show(data["resultMessage"]?.ToString());
+                var resultMessage = data["resultMessage"]?.ToString();
+
+                if (string.IsNullOrWhiteSpace(resultMessage))
+                {
+                    resultMessage = "서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.";
+                }
+
+                PopupManager.Instance[PopupElement.Alert].Show(resultMessage, NavigateMainPage);
             }
         }
 
         public SelectCertPageViewModel()
         {
-            MainPageCommand = new Command((obj) =>
-            {
-                DataManager.Instance.InitData();
-                NavigationManager.Navigate(PageElement.Main);
-            });
+            MainPageCommand = new Command((obj) => NavigateMainPage());
 
             if (DataManager.Instance.Jobs == null)
                 InitJobs();
+        }
+
+        private void NavigateMainPage()
+        {
+            DataManager.Instance.InitData();
+            NavigationManager.Navigate(PageElement.Main);
         }
     }
 }

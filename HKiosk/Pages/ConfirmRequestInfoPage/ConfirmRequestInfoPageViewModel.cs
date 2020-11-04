@@ -82,7 +82,7 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
 
             CertRequesetCommnad = new Command(async (obj) =>
             {
-                //TODO 요청 처리하는 동안 CertRequestInfos 삭제, 추가 불가
+                PopupManager.Instance[PopupElement.Loding]?.Show("증명서 신청중입니다. \n 잠시만 기다려주세요.");
 
                 if (DataManager.Instance.CertRequestInfos.Count == 0)
                     PopupManager.Instance[PopupElement.Alert]?.Show("발급 가능한 증명서 목록이 없습니다.\n증명서를 선택해주세요");
@@ -129,6 +129,8 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
 
                     SetButtonVisibility();
                 }
+
+                PopupManager.Instance[PopupElement.Loding]?.Hide();
             });
 
             PaymentCommand = new Command((obj) =>

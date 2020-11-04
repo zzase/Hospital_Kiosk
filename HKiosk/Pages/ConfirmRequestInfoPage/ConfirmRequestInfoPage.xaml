@@ -57,7 +57,7 @@
         <Grid DockPanel.Dock="Top" Width="1080" Height="50">
             <TextBlock Grid.Column="0" Grid.Row="0" Text="타이머" HorizontalAlignment="Right"  VerticalAlignment="Center" TextAlignment="Right"  FontSize="30" FontWeight="Bold"  />
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1000" Height="50">
+        <Grid DockPanel.Dock="Top" Width="950" Height="50">
             <TextBlock Text="다른 증명서를 추가 발급하실 경우 [증명서 추가]버튼을 선택하세요" FontSize="15" Foreground="DarkGray"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
         <Grid DockPanel.Dock="Top" Width="1000" Height="210">
@@ -111,7 +111,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="수수료" Width="150">
+                            <GridViewColumn Header="수수료" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Path=Job.Price}"/>

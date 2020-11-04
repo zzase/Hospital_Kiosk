@@ -70,7 +70,14 @@ namespace HKiosk.Pages.ConfirmUserInfo
 
             if (resultJson["resultCode"]?.ToString() != "200")
             {
-                PopupManager.Instance[PopupElement.Alert]?.Show(resultJson["resultMessage"]?.ToString());
+                var resultMessage = resultJson["resultMessage"]?.ToString();
+
+                if (string.IsNullOrWhiteSpace(resultMessage))
+                {
+                    resultMessage = "서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.";
+                }
+
+                PopupManager.Instance[PopupElement.Alert]?.Show(resultMessage);
                 return false;
             }
 

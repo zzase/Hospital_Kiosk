@@ -15,7 +15,7 @@ namespace HKiosk.Pages.SelectHistory
 {
     public class SelectHistoryPageViewModel : PropertyChange
     {
-        private ObservableCollection<SujinHistroy> sujinHistories;
+        private ObservableCollection<SujinHistroy> sujinHistories = new ObservableCollection<SujinHistroy>();
 
         private string count;
         private bool allChecked;
@@ -28,13 +28,10 @@ namespace HKiosk.Pages.SelectHistory
 
         public ObservableCollection<SujinHistroy> SujinHistories
         {
-            get
-            {
-                sujinHistories = DataManager.Instance.SujinHistroy;
-                return sujinHistories;
-            }
+            get => sujinHistories;
             set => SetProperty(ref sujinHistories, value);
         }
+
         public Nullable<DateTime> SelectFromDateTime
         {
             get
@@ -90,21 +87,76 @@ namespace HKiosk.Pages.SelectHistory
             get { return (this.readHistoriesCommand) ?? (this.readHistoriesCommand = new Command((obj) => { ReadHistories(); })); }
         }
 
+        public SelectHistoryPageViewModel()
+        {
+            SujinHistories.Clear();
+
+            MainPageCommand = new Command((obj) => NavigateMainPage());
+
+            NextPageCommand = new Command((obj) =>
+            {
+                if (SujinHistories == null)
+                {
+                    PopupManager.Instance[PopupElement.Alert]?.Show("수진이력을 검색해주세요.");
+                    return;
+                }
+                else
+                {
+                    SelectHistories();
+                    NavigationManager.Navigate(PageElement.ConfirmRequestInfo);
+                }
+            });
+            PreviousPageCommand = new Command((obj) =>
+            {
+                NavigationManager.Navigate(PageElement.SelectCert);
+            });
+        }
+
         public async void ReadHistories()
         {
+            PopupManager.Instance[PopupElement.Loding].Show("수진이력을 가져오는 중입니다.\n잠시만 기다려주세요.");
+
             var data = await RequestAPI.CertSujinRequest(selectFromDateTime?.ToString("yyyyMMdd"), selectToDateTime?.ToString("yyyyMMdd"));
+
+            PopupManager.Instance[PopupElement.Loding].Hide();
+
+            if (data == null)
+            {
+                PopupManager.Instance[PopupElement.Alert]?.Show("서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.");
+                return;
+            }
 
             if (data["resultCode"]?.ToString() == "200")
             {
-                DataManager.Instance.SujinHistroy = new ObservableCollection<SujinHistroy>(RequestAPI.JArrayToList<SujinHistroy>(data["list"]?.Value<JArray>()));
-                OnPropertyChanged("Jobs");
+                try
+                {
+                    SujinHistories = new ObservableCollection<SujinHistroy>(RequestAPI.JArrayToList<SujinHistroy>(data["list"]?.Value<JArray>()));
+                }
+                catch (Exception ex)
+                {
+                    PopupManager.Instance[PopupElement.Alert]?.Show("서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.");
+                    Log.Write($"[SelectHistoryPageViewModel] ReadHistories exception : {ex}");
+                    return;
+                }
+
+                if ((SujinHistories?.Count ?? 0) < 1)
+                {
+                    PopupManager.Instance[PopupElement.Alert].Show("수진이력이 없습니다.");
+                    return;
+                }
             }
             else
             {
-                PopupManager.Instance[PopupElement.Alert].Show(data["resultMessage"]?.ToString());
+                var resultMessage = data["resultMessage"]?.ToString();
+
+                if (string.IsNullOrWhiteSpace(resultMessage))
+                {
+                    resultMessage = "서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.";
+                }
+
+                PopupManager.Instance[PopupElement.Alert].Show(resultMessage);
             }
 
-            SujinHistories = DataManager.Instance.SujinHistroy;
         }
 
         public void SelectHistories()
@@ -127,50 +179,21 @@ namespace HKiosk.Pages.SelectHistory
 
         public void AllCheckedProcess()
         {
-            for (int i = 0; i < DataManager.Instance.SujinHistroy.Count; i++)
+            for (int i = 0; i < SujinHistories.Count; i++)
             {
                 if (AllChecked)
                 {
-                    DataManager.Instance.SujinHistroy[i].IsChecked = true;
+                    SujinHistories[i].IsChecked = true;
                 }
                 else
-                    DataManager.Instance.SujinHistroy[i].IsChecked = false;   
+                    SujinHistories[i].IsChecked = false;
             }
-            SujinHistories = DataManager.Instance.SujinHistroy;
         }
 
-        public SelectHistoryPageViewModel()
+        private void NavigateMainPage()
         {
-            SujinHistories = DataManager.Instance.SujinHistroy;
-
-            MainPageCommand = new Command((obj) =>
-            {
-                DataManager.Instance.InitData();
-                NavigationManager.Navigate(PageElement.Main);
-            });
-
-            NextPageCommand = new Command((obj) =>
-            {
-                if (SujinHistories == null)
-                {
-                    PopupManager.Instance[PopupElement.Alert]?.Show("수진이력을 검색해주세요.");
-
-                    return;
-                }
-                else
-                {
-                    SelectHistories();
-                    DataManager.Instance.SujinHistroy.Clear();
-                    SujinHistories = DataManager.Instance.SujinHistroy;
-                    NavigationManager.Navigate(PageElement.ConfirmRequestInfo);
-                }
-            });
-            PreviousPageCommand = new Command((obj) =>
-            {
-                DataManager.Instance.SujinHistroy.Clear();
-                SujinHistories = DataManager.Instance.SujinHistroy;
-                NavigationManager.Navigate(PageElement.SelectCert);
-            });
+            DataManager.Instance.InitData();
+            NavigationManager.Navigate(PageElement.Main);
         }
     }
 }
