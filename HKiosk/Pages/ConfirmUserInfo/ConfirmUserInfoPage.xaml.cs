@@ -23,6 +23,8 @@ namespace HKiosk.Pages.ConfirmUserInfo
         public ConfirmUserInfoPage()
         {
             InitializeComponent();
+
+            nameTextBox.Focus();
         }
 
         private void PasswordChanged(object sender, RoutedEventArgs e)

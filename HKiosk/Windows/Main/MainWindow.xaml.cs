@@ -33,8 +33,6 @@ namespace HKiosk.Windows.Main
 
             this.DataContext = new MainWindowViewModel(this);
 
-            DataManager.Instance.SettingInfo.GiwanNo = "HG0002";
-
             Navigate(PageElement.Main);
         }
 

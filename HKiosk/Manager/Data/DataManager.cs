@@ -1,6 +1,7 @@
 ﻿using HKiosk.Util;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace HKiosk.Manager.Data
 {
@@ -13,12 +14,15 @@ namespace HKiosk.Manager.Data
         public ObservableCollection<CertRequestInfo> CertRequestInfos { get; set; }
         public CertRequestInfo CertRequestInfo { get; set; }
         public PaymentInfo PaymentInfo { get; set; }
+        public CancellationTokenSource CancellationTokenSource { get; private set; }
         public string FinalPrice { get; set; }
         public string FailText { get; set; }
         public string FailReason { get; set; }
 
         public void InitData()
         {
+            CancellationTokenSource?.Cancel();
+
             SettingInfo = new SettingInfo();
             PatientInfo = new PatientInfo();
             Jobs = null;
@@ -26,8 +30,8 @@ namespace HKiosk.Manager.Data
             CertRequestInfos = new ObservableCollection<CertRequestInfo>();
             CertRequestInfo = new CertRequestInfo();
             PaymentInfo = new PaymentInfo();
+            CancellationTokenSource = new CancellationTokenSource();
             FinalPrice = "";
-
             PaymentInfo.OrderNo = "";
             SettingInfo.GiwanNo = "HG0002";
         }

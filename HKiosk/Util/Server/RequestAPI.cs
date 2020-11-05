@@ -77,7 +77,7 @@ namespace HKiosk.Util.Server
         /// <returns></returns>
         internal static async Task<JObject> PatNoRequest(string uName, string uJumin)
         {
-            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+            var giwanNo = Properties.Settings.Default.GiwanNo;
 
             var paramData = new JObject
             {
@@ -181,7 +181,7 @@ namespace HKiosk.Util.Server
         /// <returns></returns>
         internal static async Task<JObject> JobListRequest()
         {
-            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+            var giwanNo = Properties.Settings.Default.GiwanNo;
             var uName = DataManager.Instance.PatientInfo.Name;
             var uBirth = DataManager.Instance.PatientInfo.Birth;
             var uPatNo = DataManager.Instance.PatientInfo.PatientNo;
@@ -344,7 +344,7 @@ namespace HKiosk.Util.Server
         /// <returns></returns>
         internal static async Task<JObject> CertSujinRequest(string fromDate, string toDate)
         {
-            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+            var giwanNo = Properties.Settings.Default.GiwanNo;
             var uPatNo = DataManager.Instance.PatientInfo.PatientNo;
             var uName = DataManager.Instance.PatientInfo.Name;
             var uBirth = DataManager.Instance.PatientInfo.Birth;
@@ -445,7 +445,7 @@ namespace HKiosk.Util.Server
 
         internal static async Task<JObject> CertStateRequest(string certNo)
         {
-            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+            var giwanNo = Properties.Settings.Default.GiwanNo;
 
             var paramData = new JObject
             {

@@ -50,7 +50,7 @@
 
                     <StackPanel Orientation="Horizontal" Grid.Row="0">
                         <TextBlock HorizontalAlignment="Left" Text="성명" FontSize="25" Margin="0,0,130,0" FontWeight="Bold"/>
-                        <TextBox HorizontalAlignment="Right" x:Name="textBox" Text="{Binding Name}" MaxLength="40" VerticalContentAlignment="Center" FontSize="20" Width="350" />
+                        <TextBox HorizontalAlignment="Right" x:Name="nameTextBox" Text="{Binding Name}" MaxLength="40" VerticalContentAlignment="Center" FontSize="20" Width="350" />
                     </StackPanel>
 
 
