@@ -20,6 +20,15 @@ namespace HKiosk.Pages.SelectCert
             get => DataManager.Instance.Jobs;
         }
 
+        public string Name
+        {
+            get => DataManager.Instance.PatientInfo.Name;
+        }
+        public string PatientNo
+        {
+            get => DataManager.Instance.PatientInfo.PatientNo;
+        }
+
         private async void InitJobs()
         {
             PopupManager.Instance[PopupElement.Loding].Show("발급 가능한 증명서를 가져오는 중입니다.\n잠시만 기다려주세요.");

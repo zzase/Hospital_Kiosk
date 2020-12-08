@@ -84,6 +84,7 @@ namespace HKiosk.Pages.ConfirmUserInfo
             DataManager.Instance.PatientInfo.Name = Name;
             DataManager.Instance.PatientInfo.Birth = FrontNationNo;
             DataManager.Instance.PatientInfo.PatientNo = resultJson["list"]?.Value<JArray>()[0]["uPatNo"]?.ToString();
+            DataManager.Instance.PatientInfo.TPID = resultJson["list"]?.Value<JArray>()[0]["tpid"]?.ToString();
             return true;
         }
 

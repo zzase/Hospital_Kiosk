@@ -1,5 +1,7 @@
 ﻿using HKiosk.Base;
 using HKiosk.Controls.NavigationBar;
+using HKiosk.Manager.Popup;
+using HKiosk.Manager.Timer;
 using HKiosk.Pages.IdentityVerification;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,16 @@ namespace HKiosk.Manager.Navigation
 
         public static void Navigate(PageElement page)
         {
+            Init();
             Navigation?.Navigate(page);
+        }
+
+        private static void Init()
+        {
+            TimerManager.Timer.Stop();
+            PopupManager.Instance[PopupElement.Alert]?.Hide();
+            PopupManager.Instance[PopupElement.Confirm]?.Hide();
+            PopupManager.Instance[PopupElement.Loding]?.Hide();
         }
     }
 

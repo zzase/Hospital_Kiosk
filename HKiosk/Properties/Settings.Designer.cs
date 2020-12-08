@@ -31,5 +31,56 @@ namespace HKiosk.Properties {
                 return ((string)(this["GiwanNo"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int VideoCount {
+            get {
+                return ((int)(this["VideoCount"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>영상1</string>\r\n  <string>영상2</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection VideoTitles {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["VideoTitles"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>Resources\Videos\동영상1.avi</string>
+  <string>Resources\Videos\동영상2.avi</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection VideoPaths {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["VideoPaths"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://172.16.0.154:81")]
+        public string APIURL {
+            get {
+                return ((string)(this["APIURL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int Mode {
+            get {
+                return ((int)(this["Mode"]));
+            }
+        }
     }
 }

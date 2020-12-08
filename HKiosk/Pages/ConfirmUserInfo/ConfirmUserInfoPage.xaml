@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HKiosk.Pages.ConfirmUserInfo"
-      xmlns:popup="clr-namespace:HKiosk.Controls.Popup"
+      xmlns:timer="clr-namespace:HKiosk.Controls.Timer"
       mc:Ignorable="d" 
       d:DesignHeight="1145" d:DesignWidth="1080"
       Title="ConfirmUserInfoPage">
@@ -15,10 +15,15 @@
 
     <Grid>
         <DockPanel>
+            
             <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
 
                 <TextBlock Text="사용자 정보를 확인해주세요" FontSize="35" FontWeight="Bold" Foreground="Black" />
 
+            </Grid>
+
+            <Grid DockPanel.Dock="Top" Height="80">
+                <timer:Timer />
             </Grid>
 
             <Grid DockPanel.Dock="Bottom">
@@ -34,17 +39,17 @@
                 </StackPanel>
             </Grid>
 
-            <Grid DockPanel.Dock="Bottom" Margin="0,0,0,0">
-                <Frame Name="NumbericKeyboard" Source="pack://application:,,,/Controls/Keyboard/GeneralKeyboard.xaml" Margin="2,-186,-2,186"/>
+            <Grid DockPanel.Dock="Bottom" Height="300" >
+                <Frame Name="NumbericKeyboard" Source="pack://application:,,,/Controls/Keyboard/GeneralKeyboard.xaml" />
             </Grid>
 
 
-            <Grid DockPanel.Dock="Top" Width="700" Height="485" Margin="190,0">
+            <Grid DockPanel.Dock="Top" Width="700" Height="300">
                 <Grid Height="450">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition />
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
 

@@ -1,9 +1,11 @@
 ﻿using HKiosk.Base;
 using HKiosk.Controls.NavigationBar;
 using HKiosk.Controls.Popup;
+using HKiosk.Controls.Timer;
 using HKiosk.Manager.Data;
 using HKiosk.Manager.Navigation;
 using HKiosk.Manager.Popup;
+using HKiosk.Manager.Timer;
 using System.Windows;
 using System.Windows.Input;
 
@@ -77,6 +79,7 @@ namespace HKiosk.Windows.Main
             PopupManager.Instance.Add(PopupElement.Confirm, ConfirmViewModel);
             PopupManager.Instance.Add(PopupElement.Loding, LodingViewModel);
             NavigationBarViewModel = new NavigationBarViewModel();
+            TimerManager.Timer = new TimerViewModel();
 
             NavigationManager.Navigation = navigation;
         }

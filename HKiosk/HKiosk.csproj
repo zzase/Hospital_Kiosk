@@ -116,6 +116,18 @@
     <Compile Include="Controls\Popup\Loding.xaml.cs">
       <DependentUpon>Loding.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Timer\ITimer.cs" />
+    <Compile Include="Controls\Timer\Timer.xaml.cs">
+      <DependentUpon>Timer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Timer\TimerViewModel.cs" />
+    <Compile Include="Controls\VideoPlayer\IMediaService.cs" />
+    <Compile Include="Controls\VideoPlayer\Video.cs" />
+    <Compile Include="Controls\VideoPlayer\VideoPlayer.xaml.cs">
+      <DependentUpon>VideoPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VideoPlayer\VideoPlayerViewModel.cs" />
+    <Compile Include="Controls\VideoPlayer\VideoProvider.cs" />
     <Compile Include="Manager\Data\CertRequestInfo.cs" />
     <Compile Include="Manager\Data\DataManager.cs" />
     <Compile Include="Manager\Data\Job.cs" />
@@ -124,6 +136,7 @@
     <Compile Include="Manager\Data\SettingInfo.cs" />
     <Compile Include="Manager\Data\SujinHistroy.cs" />
     <Compile Include="Manager\Popup\PopupManager.cs" />
+    <Compile Include="Manager\Timer\TimerManager.cs" />
     <Compile Include="Pages\ConfirmRequestInfoPage\ConfirmRequestInfoPageViewModel.cs" />
     <Compile Include="Pages\ConfirmRequestInfoPage\ConfirmRequestInfoPage.xaml.cs">
       <DependentUpon>ConfirmRequestInfoPage.xaml</DependentUpon>
@@ -144,6 +157,7 @@
     <Compile Include="Pages\Payment\CashbeePaymentPage.xaml.cs">
       <DependentUpon>CashbeePaymentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Payment\PhonePaymentPage\Agency.cs" />
     <Compile Include="Pages\Payment\PhonePaymentPage\AgreementPage.xaml.cs">
       <DependentUpon>AgreementPage.xaml</DependentUpon>
     </Compile>
@@ -175,6 +189,7 @@
       <DependentUpon>SelectCertPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SelectCert\SelectCertPageViewModel.cs" />
+    <Compile Include="Pages\SelectHistory\Interval.cs" />
     <Compile Include="Pages\SelectHistory\SelectHistoryPage.xaml.cs">
       <DependentUpon>SelectHistoryPage.xaml</DependentUpon>
     </Compile>
@@ -183,6 +198,7 @@
     <Compile Include="Util\KioskAgent.cs" />
     <Compile Include="Util\KISA_SEED_CBC_DLL_Importer.cs" />
     <Compile Include="Util\Log.cs" />
+    <Compile Include="Util\Mode.cs" />
     <Compile Include="Util\Server\RequestAPI.cs" />
     <Compile Include="Util\Server\WebServer.cs" />
     <Compile Include="Windows\Main\MainWindowViewModel.cs" />
@@ -207,6 +223,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Popup\Loding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Timer\Timer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VideoPlayer\VideoPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -414,5 +438,32 @@
   <ItemGroup>
     <Resource Include="Resources\Pages\Payment\Toggle_Phone_2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controls\Timer\Icon_31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controls\Timer\Panel_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controls\VideoPlayer\Navi_F.png" />
+    <Resource Include="Resources\Controls\VideoPlayer\Navi_T.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>IF NOT EXIST "$(TargetDir)Libs\" MD "$(TargetDir)Libs\"
+IF NOT EXIST "$(TargetDir)KioskAgent\" MD "$(TargetDir)KioskAgent\"
+C:\Windows\System32\xcopy "$(ProjectDir)..\Libs" "$(TargetDir)Libs" /y /s
+C:\Windows\System32\xcopy "$(ProjectDir)..\KioskAgent" "$(TargetDir)KioskAgent" /y /s</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Debug (
+    move "$(TargetDir)*.xml" "$(TargetDir)libs"
+    move "$(TargetDir)*.pdb" "$(TargetDir)libs"
+    move "$(TargetDir)*.dll" "$(TargetDir)libs" 
+) ELSE (
+    del "$(TargetDir)*.xml", "$(TargetDir)*.pdb"
+    RD /S /Q "$(TargetDir)Log\"
+    move "$(TargetDir)*.dll" "$(TargetDir)libs" 
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

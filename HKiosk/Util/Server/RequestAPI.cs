@@ -11,7 +11,7 @@ namespace HKiosk.Util.Server
 {
     public static class RequestAPI
     {
-        internal static string operationURL = @"http://172.16.0.154:81";
+        internal static string operationURL = Properties.Settings.Default.APIURL;
 
         internal static List<T> JArrayToList<T>(JArray jArray)
         {
@@ -93,7 +93,7 @@ namespace HKiosk.Util.Server
                 {"requester", "BBMC"}
             };
 
-            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleT.do", "post");
+            return await WebServer.RequestJsonAsync(postdata.ToString(), $"{operationURL}/ModuleT.do", "post");
         }
         static readonly byte[] key = Encoding.UTF8.GetBytes("BBMC!!@*5218998h");
         static readonly byte[] iv = Encoding.UTF8.GetBytes("4421673257160032");
@@ -201,7 +201,7 @@ namespace HKiosk.Util.Server
                 {"requester", "BBMC"}
             };
 
-            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
+            return await WebServer.RequestJsonAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
         }
 
         internal static async Task<JObject> JobListRequest_Test(int testCase)
@@ -372,7 +372,7 @@ namespace HKiosk.Util.Server
                 {"requester", "BBMC"}
             };
 
-            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
+            return await WebServer.RequestJsonAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
         }
 
         /// <summary>
@@ -440,7 +440,9 @@ namespace HKiosk.Util.Server
                 {"requester", "BBMC"}
             };
 
-            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
+            Console.WriteLine(postdata.ToString());
+
+            return await WebServer.RequestJsonAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
         }
 
         internal static async Task<JObject> CertStateRequest(string certNo)
@@ -460,9 +462,98 @@ namespace HKiosk.Util.Server
                 {"requester", "BBMC"}
             };
 
-            return await WebServer.RequestAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
+            return await WebServer.RequestJsonAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
         }
 
+        internal static async Task<JObject> PayRequest()
+        {
+            var giwanNo = Properties.Settings.Default.GiwanNo;
+            var buyerName = DataManager.Instance.PaymentInfo.BuyerName;
+            var buyerTel = DataManager.Instance.PaymentInfo.BuyerTel;
+            var buyerEmail = DataManager.Instance.PaymentInfo.BuyerEmail;
+            var orderNo = DataManager.Instance.PaymentInfo.OrderNo;
+            var payMethod = DataManager.Instance.PaymentInfo.PayMethod;
+            var resultCode = DataManager.Instance.PaymentInfo.ResultCode;
+            var goodsName = DataManager.Instance.PaymentInfo.GoodsName;
+            var amt = DataManager.Instance.PaymentInfo.Amt;
+
+            Console.WriteLine($"orderNo {orderNo}");
+
+            var paramData = new JObject
+            {
+                { "command", "certRes" },
+                { "giwanNo", giwanNo },
+                { "buyerName", buyerName },
+                { "buyerTel", buyerTel },
+                { "buyerEmail", buyerEmail },
+                { "orderNo", orderNo },
+                { "payMethod", payMethod },
+                { "resultCode", resultCode },
+                { "goodsName", goodsName },
+                { "amt", amt }
+            };
+
+            var postdata = new JObject
+            {
+                {"reqData", KISA_SEED_CBC_DLL_Importer.Encrypt(paramData.ToString())},
+                {"requester", "BBMC"}
+            };
+
+            return await WebServer.RequestJsonAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
+        }
+
+        internal static async Task<bool> PrintRequest(string tpid, string minno, string cnt, string jobNe)
+        {
+            var giwanNo = Properties.Settings.Default.GiwanNo;
+
+            var urlCheck = "www.medcerti.com/hp1.0/jsp/report/senddocno.jsp";
+            var urlFile = "www.medcerti.com/hp1.0/jsp/report/sendfile.jsp";
+            var urlPost = "www.medcerti.com/hp1.0/jsp/report/printcomplete.jsp";
+
+            var callurl = "http://127.0.0.1:65432/SSO";
+            var areaurl = "http://127.0.0.1/SHOWREPORT_PRINTAUTO?" +
+                      "URLCheck=" + urlCheck + "|" +
+                      "URLFile=" + urlFile + "|" +
+                      "URLPost=" + urlPost + "|" +
+                      "TPID=" + tpid + "|" +
+                      "MINNO=" + minno + "|" +
+                      "Printable=Y|" +
+                      "Copies=" + cnt + "|" +
+                      "Printed=0|" +
+                      "JOB_NE=" + jobNe + "|" +
+                      "RECEIVE_TYPE=WEB|" +
+                      "RECEIVE_TARGET=|" +
+                      "KOR_YN=Y|" +
+                      "ADV_YN=|" +
+                      "GIWAN_NO=" + giwanNo + "|" +
+                      "Param_1=|" +
+                      "Param_2=|" +
+                      "Param_3=|" +
+                      "Param_4=|" +
+                      "Param_5=|" +
+                      "DisableInfoBox=Y|" +
+                      "LEFT=-4000|" +
+                      "TOP=207|" +
+                      "WIDTH=600|" +
+                      "HEIGHT=1000|" +
+                      "ZOOM=85|" +
+                      "Valid_Time=|" +
+                      "Receiver=|" +
+                      "Use=|" +
+                      "DisableMsgBox=Y|" +
+                      "UserAgent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36";
+
+            string ariadata = await KioskAgent.UseEncAria("10001", areaurl);
+
+            var postData = $"PARAM=dzreportx:{ariadata}";
+
+            var result = await WebServer.RequestStringAsync(postData, callurl, "post");
+
+            if (string.IsNullOrWhiteSpace(result))
+                return false;
+            else
+                return true;
+        }
         #endregion
     }
 }

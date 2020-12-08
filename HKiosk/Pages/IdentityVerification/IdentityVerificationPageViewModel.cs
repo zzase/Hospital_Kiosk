@@ -11,7 +11,10 @@ namespace HKiosk.Pages.IdentityVerification
 
         public IdentityVerificationPageViewModel()
         {
-            NextPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.ConfirmUserInfo));
+            NextPageCommand = new Command((obj) =>
+            {
+                NavigationManager.Navigate(PageElement.ConfirmUserInfo);
+            });
         }
     }
 }

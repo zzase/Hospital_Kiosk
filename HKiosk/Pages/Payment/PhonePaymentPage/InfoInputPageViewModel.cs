@@ -10,37 +10,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace HKiosk.Pages.Payment.PhonePaymentPage
 {
     class InfoInputPageViewModel : PropertyChange
     {
-        private readonly string whiteBackground;
-        private readonly string redBackground;
+        private readonly System.Windows.Media.Brush darkGray = System.Windows.Media.Brushes.DarkGray;
+        private readonly System.Windows.Media.Brush white = System.Windows.Media.Brushes.White;
 
-        private readonly System.Windows.Media.Brush darkGray;
-        private readonly System.Windows.Media.Brush white;
-
-        private readonly bool checkSKT;
-        private readonly bool checkKT;
-        private readonly bool checkLGT;
-        private readonly bool checkHM;
-        private readonly bool checkTelink;
-        private readonly bool checkKCT;
-
-        private readonly string imageSourceSKT;
-        private readonly string imageSourceKT;
-        private readonly string imageSourceLGT;
-        private readonly string imageSourceHM;
-        private readonly string imageSourceTelink;
-        private readonly string imageSourceKCT;
-
-        private readonly System.Windows.Media.Brush brushKT;
-        private readonly System.Windows.Media.Brush brushSKT;
-        private readonly System.Windows.Media.Brush brushLGT;
-        private readonly System.Windows.Media.Brush brushHM;
-        private readonly System.Windows.Media.Brush brushTelink;
-        private readonly System.Windows.Media.Brush brushKCT;
+        private readonly BitmapImage whiteBackground = new BitmapImage(new Uri(@"/Resources/Pages/Payment/Toggle_Phone_1.png", UriKind.Relative));
+        private readonly BitmapImage redBackground = new BitmapImage(new Uri(@"/Resources/Pages/Payment/Toggle_Phone_2.png", UriKind.Relative));
 
         private string frontPhoneNum;
         private string centerPhoneNum;
@@ -49,133 +29,12 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
         private string frontJumin;
         private string backOne;
 
-        private ObservableCollection<bool> checkList;
-        private ObservableCollection<System.Windows.Media.Brush> brushes;
-        private ObservableCollection<string> imageSources;
-
-        private ICommand sktCommand;
-        private ICommand ktCommand;
-        private ICommand lgtCommand;
-        private ICommand hmCommand;
-        private ICommand telinkCommand;
-        private ICommand kctCommand;
+        private ObservableCollection<Agency> agencies = new ObservableCollection<Agency>();
+        private Agency selectedAgency;
 
         public ICommand MainPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
         public ICommand NextPageCommand { get; }
-        public ICommand SKTCommand
-        {
-            get
-            {
-                return (this.sktCommand) ?? (this.sktCommand = new Command((obj) =>
-          {
-              for (int i = 0; i < CheckList.Count; i++)
-              {
-                  CheckList[i] = false;
-              }
-
-              CheckList[0] = true;
-              CheckProcess();
-          }));
-            }
-        }
-        public ICommand KTCommand
-        {
-            get
-            {
-                return (this.ktCommand) ?? (this.ktCommand = new Command((obj) =>
-                {
-                    for (int i = 0; i < CheckList.Count; i++)
-                    {
-                        CheckList[i] = false;
-                    }
-
-                    CheckList[1] = true;
-                    CheckProcess();
-                }));
-            }
-        }
-        public ICommand LGTCommand
-        {
-            get
-            {
-                return (this.lgtCommand) ?? (this.lgtCommand = new Command((obj) =>
-                {
-                    for (int i = 0; i < CheckList.Count; i++)
-                    {
-                        CheckList[i] = false;
-                    }
-
-                    CheckList[2] = true;
-                    CheckProcess();
-                }));
-            }
-        }
-        public ICommand HMCommand
-        {
-            get
-            {
-                return (this.hmCommand) ?? (this.hmCommand = new Command((obj) =>
-                {
-                    for (int i = 0; i < CheckList.Count; i++)
-                    {
-                        CheckList[i] = false;
-                    }
-
-                    CheckList[3] = true;
-                    CheckProcess();
-                }));
-            }
-        }
-        public ICommand TelinkCommand
-        {
-            get
-            {
-                return (this.telinkCommand) ?? (this.telinkCommand = new Command((obj) =>
-                {
-                    for (int i = 0; i < CheckList.Count; i++)
-                    {
-                        CheckList[i] = false;
-                    }
-
-                    CheckList[4] = true;
-                    CheckProcess();
-                }));
-            }
-        }
-        public ICommand KCTCommand
-        {
-            get
-            {
-                return (this.kctCommand) ?? (this.kctCommand = new Command((obj) =>
-                {
-                    for (int i = 0; i < CheckList.Count; i++)
-                    {
-                        CheckList[i] = false;
-                    }
-
-                    CheckList[5] = true;
-                    CheckProcess();
-                }));
-            }
-        }
-
-        public ObservableCollection<bool> CheckList
-        {
-            get => checkList;
-            set => SetProperty(ref checkList, value);
-        }
-
-        public ObservableCollection<System.Windows.Media.Brush> Brushes
-        {
-            get => brushes;
-            set => SetProperty(ref brushes, value);
-        }
-        public ObservableCollection<string> ImageSources
-        {
-            get => imageSources;
-            set => SetProperty(ref imageSources, value);
-        }
 
         public string FrontPhoneNum
         {
@@ -208,67 +67,32 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
         }
 
 
-        private void CheckProcess()
+        public ObservableCollection<Agency> Agencies
         {
-
-            for (int i = 0; i < CheckList.Count; i++)
-            {
-                if (CheckList[i])
-                {
-                    Brushes[i] = white;
-                    ImageSources[i] = redBackground;
-                }
-                else
-                {
-                    Brushes[i] = darkGray;
-                    ImageSources[i] = whiteBackground;
-                }
-            }
+            get => agencies;
+            set => SetProperty(ref agencies, value);
         }
 
-        private void SetCollections()
+        public Agency SelectedAgency
         {
-            CheckList.Add(checkSKT);
-            CheckList.Add(checkKT);
-            CheckList.Add(checkLGT);
-            CheckList.Add(checkHM);
-            CheckList.Add(checkTelink);
-            CheckList.Add(checkKCT);
-
-            Brushes.Add(brushSKT);
-            Brushes.Add(brushKT);
-            Brushes.Add(brushLGT);
-            Brushes.Add(brushHM);
-            Brushes.Add(brushTelink);
-            Brushes.Add(brushKCT);
-
-            ImageSources.Add(imageSourceSKT);
-            ImageSources.Add(imageSourceKT);
-            ImageSources.Add(imageSourceLGT);
-            ImageSources.Add(imageSourceHM);
-            ImageSources.Add(imageSourceTelink);
-            ImageSources.Add(imageSourceKCT);
-
-            for (int i = 0; i < 6; i++)
+            get => selectedAgency;
+            set
             {
-                CheckList[i] = false;
-                ImageSources[i] = whiteBackground;
-                Brushes[i] = darkGray;
+                foreach (var agency in Agencies)
+                {
+                    agency.Foreground = darkGray;
+                    agency.Background = whiteBackground;
+                }
+
+                value.Foreground = white;
+                value.Background = redBackground;
+
+                SetProperty(ref selectedAgency, value);
             }
         }
 
         public InfoInputPageViewModel()
         {
-            CheckList = new ObservableCollection<bool>();
-            Brushes = new ObservableCollection<System.Windows.Media.Brush>();
-            ImageSources = new ObservableCollection<string>();
-
-            whiteBackground = "pack://application:,,,/Resources/Pages/Payment/Toggle_Phone_1.png";
-            redBackground = "pack://application:,,,/Resources/Pages/Payment/Toggle_Phone_2.png";
-
-            darkGray = System.Windows.Media.Brushes.DarkGray;
-            white = System.Windows.Media.Brushes.White;
-
             FrontPhoneNum = "";
             CenterPhoneNum = "";
             BackPhoneNum = "";
@@ -281,23 +105,69 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
                 DataManager.Instance.InitData();
                 NavigationManager.Navigate(PageElement.Main);
             });
+
             PreviousPageCommand = new Command((obj) => NavigationManager.Navigate(PageElement.Agreement));
-            NextPageCommand = new Command((obj) =>
+
+            NextPageCommand = new Command(async (obj) =>
+            {
+                if (SelectedAgency == null)
+                    PopupManager.Instance[PopupElement.Alert]?.Show("이동통신사를 선택해주세요.");
+
+                else if ((FrontPhoneNum != "" && CenterPhoneNum != "" && BackPhoneNum != "") && !(FrontPhoneNum.Length == 3 && CenterPhoneNum.Length == 4 && BackPhoneNum.Length == 4))
+                    PopupManager.Instance[PopupElement.Alert]?.Show("핸드폰번호를\n정확히 입력해주세요.");
+
+                else if (!(FrontJumin != "" && BackOne != "" && FrontJumin.Length == 6 && BackOne.Length == 1))
+                    PopupManager.Instance[PopupElement.Alert]?.Show("주민등록번호를\n정확히 입력해주세요.");
+                else
                 {
+                    var result = await PayPhone();
 
-                    if (!((Brushes[0] == white || Brushes[1] == white || Brushes[2] == white || Brushes[3] == white || Brushes[4] == white || Brushes[5] == white)))
-                        PopupManager.Instance[PopupElement.Alert]?.Show("이동통신사를 선택해주세요.");
-
-                    else if ((FrontPhoneNum != "" && CenterPhoneNum != "" && BackPhoneNum != "") && !(FrontPhoneNum.Length == 3 && CenterPhoneNum.Length == 4 && BackPhoneNum.Length == 4))
-                        PopupManager.Instance[PopupElement.Alert]?.Show("핸드폰번호를\n정확히 입력해주세요.");
-
-                    else if (!(FrontJumin != "" && BackOne != "" && FrontJumin.Length == 6 && BackOne.Length == 1))
-                        PopupManager.Instance[PopupElement.Alert]?.Show("주민등록번호를\n정확히 입력해주세요.");
-                    else
+                    if (result.Contains("SUCCESS"))
+                    {
                         NavigationManager.Navigate(PageElement.ApprovalNumber);
-                });
+                    }
+                    else
+                    {
+                        if (string.IsNullOrWhiteSpace(result))
+                            result = "오류가 발생했습니다. 다시 시도 부탁드립니다.";
+
+                        PopupManager.Instance[PopupElement.Alert]?.Show(result);
+                        KioskAgent.KillPrevProcess();
+                    }
+                }
+            });
 
             SetCollections();
+        }
+
+        private void SetCollections()
+        {
+            Agencies.Add(new Agency() { Name = "SKT", ParamName = "sk", Background = whiteBackground, Foreground = darkGray });
+            Agencies.Add(new Agency() { Name = "KT", ParamName = "kt", Background = whiteBackground, Foreground = darkGray });
+            Agencies.Add(new Agency() { Name = "LGT", ParamName = "lg", Background = whiteBackground, Foreground = darkGray });
+            Agencies.Add(new Agency() { Name = "헬로\n모바일", ParamName = "cjh", Background = whiteBackground, Foreground = darkGray });
+            Agencies.Add(new Agency() { Name = "SK\nTelink", ParamName = "skl", Background = whiteBackground, Foreground = darkGray });
+            Agencies.Add(new Agency() { Name = "KCT", ParamName = "kct", Background = whiteBackground, Foreground = darkGray });
+        }
+
+        private async Task<string> PayPhone()
+        {
+            var finalPrice = DataManager.Instance.FinalPrice.Replace(",","").Replace("원","");
+            var certNe = $"{DataManager.Instance.CertRequestInfos[0].Job.CertNe}" +
+                $"{(DataManager.Instance.CertRequestInfos.Count - 1 > 0 ? $"외{DataManager.Instance.CertRequestInfos.Count - 1}건" : "")}";
+            var hppNo = $"{FrontPhoneNum}{CenterPhoneNum}{BackPhoneNum}";
+            var agency = SelectedAgency.ParamName;
+            var juminNo = $"{FrontJumin}{BackOne}";
+            var orderNo = DataManager.Instance.PaymentInfo.OrderNo;
+            var giwanNe = "디지털존";
+
+            DataManager.Instance.PaymentInfo.BuyerName = "";
+            DataManager.Instance.PaymentInfo.BuyerTel = hppNo;
+            DataManager.Instance.PaymentInfo.Amt = finalPrice;
+            DataManager.Instance.PaymentInfo.GoodsName = certNe;
+
+            return await KioskAgent.PayPhone("", "", finalPrice, certNe,
+                   hppNo, agency, juminNo, orderNo, giwanNe);
         }
     }
 }

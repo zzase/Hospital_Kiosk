@@ -1,6 +1,7 @@
 ﻿using HKiosk.Base;
 using HKiosk.Manager.Data;
 using HKiosk.Manager.Navigation;
+using HKiosk.Util.Server;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,6 +74,23 @@ namespace HKiosk.Pages.Print
         public PrintPageViewModel()
         {
             ProgressProcess();
+            Print();
+        }
+
+        private async void Print()
+        {
+            var certRequestInfos = DataManager.Instance.CertRequestInfos;
+
+            for (int i = 0; i < certRequestInfos.Count; i++)
+            {
+                var tpid = DataManager.Instance.PatientInfo.TPID;
+                var minno = certRequestInfos[i].CertNo;
+                var cnt = certRequestInfos[i].Count;
+                var jobNe = certRequestInfos[i].Job.CertNe;
+
+                await RequestAPI.PrintRequest(tpid, minno, cnt, jobNe);
+            }
+            
         }
     }
 }

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HKiosk.Pages.SelectCert"
+      xmlns:timer="clr-namespace:HKiosk.Controls.Timer"
       mc:Ignorable="d" 
        d:DesignHeight="1145" d:DesignWidth="1080"
       Title="SelectCertPage">
@@ -15,6 +16,18 @@
     <DockPanel>
         <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
             <TextBlock Text="발급을 원하시는 증명서를 확인해주세요" FontSize="35" FontWeight="Bold" Foreground="Black" />
+        </Grid>
+        <Grid DockPanel.Dock="Top" Height="80">
+            <timer:Timer />
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="150">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="이름" FontSize="25" Foreground="DarkRed" Width="80"/>
+                <TextBlock Text="{Binding Name}" FontSize="50" Foreground="Black" FontWeight="Bold" Width="300"/>
+                <TextBlock Text="환자번호" FontSize="25" Foreground="DarkRed" Width="140"/>
+                <TextBlock Text="{Binding PatientNo}" FontSize="50" Foreground="Black" FontWeight="Bold" />
+            </StackPanel>
         </Grid>
 
         <Grid DockPanel.Dock="Bottom">

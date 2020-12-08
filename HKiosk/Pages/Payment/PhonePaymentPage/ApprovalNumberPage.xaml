@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HKiosk.Pages.Payment.PhonePaymentPage"
+      xmlns:timer="clr-namespace:HKiosk.Controls.Timer"
       mc:Ignorable="d" 
       d:DesignHeight="1145" d:DesignWidth="1080"
       Title="ApprovalNumberPage">
@@ -16,8 +17,8 @@
         <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
             <TextBlock Text="결제하실 휴대폰 정보를 입력하신 후 [다음]버튼을 누르세요." FontSize="35" FontWeight="Bold" Foreground="Black" />
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1000" Height="106" Margin="40,0">
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="타이머" HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Right"  FontSize="30" FontWeight="Bold" Height="52" Width="1000" Margin="0,0,0,48" />
+        <Grid DockPanel.Dock="Top" Height="80">
+            <timer:Timer />
         </Grid>
         <Grid DockPanel.Dock="Bottom" Height="150">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -44,7 +45,7 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Left" Width="500" Height="600" Margin="100,0,0,100" >
+        <Grid DockPanel.Dock="Left" Width="500" Height="600" Margin="50,0,0,0" >
             <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Payment/Panel_2.png"/>
             <DockPanel>
                 <Grid DockPanel.Dock="Top" Height="100" Background="IndianRed" Margin="23,0,25,0" >
@@ -64,7 +65,7 @@
                 </Grid>
             </DockPanel>
         </Grid>
-        <Grid DockPanel.Dock="Right" Width="350" Height="550" Margin="0,0,50,100">
+        <Grid DockPanel.Dock="Left" Width="350" Height="550" >
             <Frame Name="NumbericKeyboard" Source="pack://application:,,,/Controls/Keyboard/NumbericKeyboard.xaml"/>
         </Grid>
     </DockPanel>

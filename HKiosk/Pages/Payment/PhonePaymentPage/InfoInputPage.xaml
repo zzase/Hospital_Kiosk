@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HKiosk.Pages.Payment.PhonePaymentPage"
+      xmlns:timer="clr-namespace:HKiosk.Controls.Timer"
       mc:Ignorable="d" 
       d:DesignHeight="1145" d:DesignWidth="1080"
       Title="InfoInputPage">
@@ -16,8 +17,8 @@
         <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
             <TextBlock Text="결제하실 휴대폰 정보를 입력하신 후 [다음]버튼을 누르세요." FontSize="35" FontWeight="Bold" Foreground="Black" />
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1000" Height="106" Margin="40,0">
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="타이머" HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Right"  FontSize="30" FontWeight="Bold" Height="52" Width="1000" Margin="0,0,0,48" />
+        <Grid DockPanel.Dock="Top" Height="80">
+            <timer:Timer />
         </Grid>
         <Grid DockPanel.Dock="Bottom" Height="150">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -44,84 +45,53 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Left" Width="648" Margin="-50,0,0,0">
-            <DockPanel>
-                <Grid DockPanel.Dock="Top" Margin="140,0,0,0">
+        <Grid DockPanel.Dock="Left" Width="550" Height="670" >
+            <DockPanel LastChildFill="False" Margin="50,0,0,0">
+                <Grid DockPanel.Dock="Top">
                     <TextBlock Text="이동통신사" FontSize="30" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Left"  TextAlignment="Center" VerticalAlignment="Center" Height="46" />
                 </Grid>
-                <Grid DockPanel.Dock="Top" Height="200" Margin="140,10,15,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Grid.Column="0">
-
-                        <Button  Margin="15 10" Background="Transparent" Command="{Binding SKTCommand}">
-                            <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="{Binding ImageSources[0]}"/>
-                                <TextBlock Text="SKT"  FontSize="25" Foreground="{Binding Brushes[0]}" FontWeight="Bold"></TextBlock>
+                <ListView ItemsSource="{Binding Agencies}" SelectedItem="{Binding SelectedAgency}" Background="Transparent"  DockPanel.Dock="Top" BorderThickness="0"
+                          Height="200" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <Grid VerticalAlignment="Center" Height="80">
+                                <Image Source="{Binding Background}"/>
+                                <TextBlock Text="{Binding Name}" Foreground="{Binding Foreground}" FontSize="25"  FontWeight="Bold" Focusable="True"></TextBlock>
                             </Grid>
-                        </Button>
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="1">
-                        <Button  Margin="15 10" Background="Transparent" Command="{Binding KTCommand}">
-                            <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="{Binding ImageSources[1]}"/>
-                                <TextBlock Text="KT"  FontSize="25" Foreground="{Binding Brushes[1]}" FontWeight="Bold"></TextBlock>
-                            </Grid>
-                        </Button>
-                    </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
 
-                    <Grid Grid.Row="0" Grid.Column="2">
-                        <Button  Margin="15 10" Background="Transparent" Command="{Binding LGTCommand}">
-                            <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="{Binding ImageSources[2]}"/>
-                                <TextBlock Text="LGT"  FontSize="25" Foreground="{Binding Brushes[2]}" FontWeight="Bold"></TextBlock>
-                            </Grid>
-                        </Button>
-                    </Grid>
+                    
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="Focusable" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="630"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
 
-                    <Grid Grid.Row="1" Grid.Column="0">
-                        <Button  Margin="15 10" Background="Transparent" Command="{Binding HMCommand}">
-                            <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="{Binding ImageSources[3]}"/>
-                                <TextBlock Text="  헬로&#10;모바일"  FontSize="25" Foreground="{Binding Brushes[3]}" FontWeight="Bold"></TextBlock>
-                            </Grid>
-                        </Button>
-                    </Grid>
-
-                    <Grid Grid.Row="1" Grid.Column="1">
-                        <Button  Margin="15 10" Background="Transparent" Command="{Binding TelinkCommand}">
-                            <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="{Binding ImageSources[4]}"/>
-                                <TextBlock Text="  SK&#10;Telink"  FontSize="25" Foreground="{Binding Brushes[4]}" FontWeight="Bold"></TextBlock>
-                            </Grid>
-                        </Button>
-                    </Grid>
-
-                    <Grid Grid.Row="1" Grid.Column="2">
-                        <Button  Margin="15 10" Background="Transparent" Command="{Binding KCTCommand}">
-                            <Grid  Margin="-15,-5">
-                                <Image Stretch="Fill" Source="{Binding ImageSources[5]}"/>
-                                <TextBlock Text="KCT"  FontSize="25" Foreground="{Binding Brushes[5]}" FontWeight="Bold"></TextBlock>
-                            </Grid>
-                        </Button>
-                    </Grid>
-
-                </Grid>
-
-                <Grid DockPanel.Dock="Top" Margin="140,50,0,0">
-                    <TextBlock Text="휴대폰번호" FontSize="30" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Left"  TextAlignment="Center" VerticalAlignment="Center" Height="46" />
+                <Grid DockPanel.Dock="Top" Height="100" >
+                    <TextBlock Text="휴대폰번호" FontSize="30" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="46" />
                 </Grid>
 
 
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="140,20,0,0">
-                    <Grid>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" >
+                    <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="0.1*"/>
@@ -142,11 +112,11 @@
                     </Grid>
                 </StackPanel>
 
-
-                <Grid DockPanel.Dock="Top" Margin="140,50,0,0">
-                    <TextBlock Text="주민등록번호" FontSize="30" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Left"  TextAlignment="Center" VerticalAlignment="Center" Height="46" />
+                <Grid DockPanel.Dock="Top" Height="130" >
+                    <TextBlock Text="주민등록번호" FontSize="30" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Left"  TextAlignment="Center" VerticalAlignment="Bottom" Height="46" />
                 </Grid>
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="140,0,0,150">
+
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" >
                     <Grid Width="488">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="270"/>
@@ -164,11 +134,12 @@
 
                     </Grid>
                 </StackPanel>
-                
+               
+
 
             </DockPanel>
         </Grid>
-        <Grid DockPanel.Dock="Right" Width="350" Height="550" Margin="0,0,50,100">
+        <Grid DockPanel.Dock="Right" Width="350" Height="550" >
             <Frame Name="NumbericKeyboard" Source="pack://application:,,,/Controls/Keyboard/NumbericKeyboard.xaml"/>
         </Grid>
     </DockPanel>

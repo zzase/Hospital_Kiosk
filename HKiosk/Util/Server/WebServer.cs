@@ -65,7 +65,7 @@ namespace HKiosk.Util.Server
         /// <param name="method">HTTP 요청 방법</param>
         /// <param name="usearia">암호화 모듈 사용</param>
         /// <returns></returns>
-        public async static Task<JObject> RequestAsync(string data, string url, string method)
+        public async static Task<JObject> RequestJsonAsync(string data, string url, string method)
         {
             byte[] bytes = Encoding.Default.GetBytes(data);
             string response = string.Empty;
@@ -112,6 +112,47 @@ namespace HKiosk.Util.Server
             }
 
             return result;
+        }
+
+        public async static Task<string> RequestStringAsync(string data, string url, string method)
+        {
+            byte[] bytes = Encoding.Default.GetBytes(data);
+            string response = string.Empty;
+
+            try
+            {
+                // Post
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpWebRequest.Method = method;
+                httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+                httpWebRequest.ContentLength = bytes.Length;
+                httpWebRequest.AllowWriteStreamBuffering = false;
+
+                Stream reqStream = await httpWebRequest.GetRequestStreamAsync();
+                await reqStream.WriteAsync(bytes, 0, bytes.Length);
+                reqStream.Dispose();
+
+                using (HttpWebResponse resp = (HttpWebResponse)await httpWebRequest.GetResponseAsync())
+                {
+                    using (Stream respStream = resp.GetResponseStream())
+                    {
+                        using (StreamReader sr = new StreamReader(respStream))
+                        {
+                            response = sr.ReadToEnd();
+                        }
+                    }
+                }
+                Console.WriteLine(response);
+
+                response = string.IsNullOrEmpty(response) ? "" : response.Trim();
+            }
+            catch (Exception e)
+            {
+                Log.Write($"#### RequestAsync : [{data}], [{url}], [{method}], [{response}]");
+                Log.Write($"Http 비동기요청 예외발생 : {e} URL:{url} DATA:{data}");
+            }
+
+            return response;
         }
 
         public static async Task<string> Get(string url)

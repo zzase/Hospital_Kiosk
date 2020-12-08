@@ -20,7 +20,7 @@ namespace HKiosk.Util
         {
             string DirPath = logPath;
 
-            string FilePath = $@"{DirPath}\Log_{DateTime.Today.ToString("yyyyMMdd")}.log";
+            string FilePath = $@"{DirPath}\Log_{DateTime.Today:yyyyMMdd}.log";
             string temp;
 
             DirectoryInfo di = new DirectoryInfo(DirPath);

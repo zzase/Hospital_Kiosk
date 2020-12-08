@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using HKiosk.Manager.Popup;
 using HKiosk.Util.Server;
 using Newtonsoft.Json.Linq;
+using System.Windows.Media.Imaging;
 
 namespace HKiosk.Pages.SelectHistory
 {
@@ -26,10 +27,25 @@ namespace HKiosk.Pages.SelectHistory
         private ICommand readHistoriesCommand;
         private ICommand allCheckCommand;
 
+        private readonly System.Windows.Media.Brush darkRed = System.Windows.Media.Brushes.DarkRed;
+        private readonly System.Windows.Media.Brush white = System.Windows.Media.Brushes.White;
+
+        private readonly BitmapImage whiteBackground = new BitmapImage(new Uri(@"/Resources/Pages/Payment/Toggle_Phone_1.png", UriKind.Relative));
+        private readonly BitmapImage redBackground = new BitmapImage(new Uri(@"/Resources/Pages/Payment/Toggle_Phone_2.png", UriKind.Relative));
+
+        private ObservableCollection<Interval> intervals = new ObservableCollection<Interval>();
+        private Interval selectedInterval;
+
         public ObservableCollection<SujinHistroy> SujinHistories
         {
             get => sujinHistories;
             set => SetProperty(ref sujinHistories, value);
+        }
+
+        public ObservableCollection<Interval> Intervals
+        {
+            get => intervals;
+            set => SetProperty(ref intervals, value);
         }
 
         public Nullable<DateTime> SelectFromDateTime
@@ -75,6 +91,29 @@ namespace HKiosk.Pages.SelectHistory
             set => SetProperty(ref allChecked, value);
         }
 
+        public string CertNe
+        {
+            get => DataManager.Instance.SelectedJob.CertNe;
+        }
+
+        public Interval SelectedInterval
+        {
+            get => selectedInterval;
+            set
+            {
+                foreach (var interval in Intervals)
+                {
+                    interval.Foreground = darkRed;
+                    interval.Background = whiteBackground;
+                }
+
+                value.Foreground = white;
+                value.Background = redBackground;
+
+                SetProperty(ref selectedInterval, value);
+            }
+        }
+
         public ICommand MainPageCommand { get; }
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
@@ -90,6 +129,7 @@ namespace HKiosk.Pages.SelectHistory
         public SelectHistoryPageViewModel()
         {
             SujinHistories.Clear();
+            SetIntervals();
 
             MainPageCommand = new Command((obj) => NavigateMainPage());
 
@@ -176,6 +216,16 @@ namespace HKiosk.Pages.SelectHistory
                 }
             }
         }
+
+        private void SetIntervals()
+        {
+            Intervals.Add(new Interval { Name = "1개월", Background = whiteBackground, Foreground = darkRed });
+            Intervals.Add(new Interval { Name = "3개월", Background = whiteBackground, Foreground = darkRed });
+            Intervals.Add(new Interval { Name = "6개월", Background = whiteBackground, Foreground = darkRed });
+            Intervals.Add(new Interval { Name = "1년", Background = whiteBackground, Foreground = darkRed });
+        }
+
+
 
         public void AllCheckedProcess()
         {

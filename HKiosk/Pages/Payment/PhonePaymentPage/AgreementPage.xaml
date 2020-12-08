@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HKiosk.Pages.Payment"
+      xmlns:timer="clr-namespace:HKiosk.Controls.Timer"
       mc:Ignorable="d" 
       d:DesignHeight="1145" d:DesignWidth="1080"
       Title="PhonePaymentPage">
@@ -20,11 +21,11 @@
         <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100">
             <TextBlock Text="이용약관을 동의하신 후 [다음]버튼을 누르세요." FontSize="35" FontWeight="Bold" Foreground="Black" />
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1000" Height="106" Margin="40,0">
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="타이머" HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Right"  FontSize="30" FontWeight="Bold" Height="52" Width="1000" Margin="0,0,0,48" />
+        <Grid DockPanel.Dock="Top" Height="80">
+            <timer:Timer />
         </Grid>
-        <Grid DockPanel.Dock="Top"  Height="90" Margin=" 70,0,0,0">
-            <TextBlock Text="휴대폰 결제" FontSize="30" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Left" Margin="0,43,0,1" TextAlignment="Center" VerticalAlignment="Center" Height="46" Width="178" />
+        <Grid DockPanel.Dock="Top"  Height="90" Width="940">
+            <TextBlock Text="휴대폰 결제" FontSize="30" FontWeight="Bold" Foreground="Gray" HorizontalAlignment="Left"  TextAlignment="Center" VerticalAlignment="Bottom" Height="46" Width="178" />
         </Grid>
         <Grid DockPanel.Dock="Bottom" Height="150">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -51,10 +52,10 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Top" Height="200">
+        <Grid DockPanel.Dock="Top" Height="200" Width="940">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <Grid Width="450" Height="105" Margin="50,0,0,0" Background="White">
+                <Grid Width="450" Height="105"  Background="White">
                     <TextBlock Text="통신과금서비스 이용약관" Margin="50,0,0,0" FontSize="25" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Left" ></TextBlock>
                 </Grid>
                 <Button Width="120" Height="110" Margin="15 10" Background="Transparent">
@@ -74,10 +75,10 @@
             </StackPanel>
         </Grid>
 
-        <Grid DockPanel.Dock="Top" Height="170">
+        <Grid DockPanel.Dock="Top" Height="200" Width="940">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <Grid Width="450" Height="105" Margin="50,0,0,0" Background="White">
+                <Grid Width="450" Height="105"  Background="White">
                     <TextBlock Text="개인정보 수집 및 이용동의" Margin="50,0,0,0" FontSize="25" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Left" ></TextBlock>
                 </Grid>
                 <Button Width="120" Height="110" Margin="15 10" Background="Transparent">
@@ -96,10 +97,9 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Top" Height="170" Margin="0,0,0,100">
+        <Grid DockPanel.Dock="Top" Height="200" Width="940" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-
-                <Grid Width="450" Height="105" Margin="50,0,0,0" Background="White">
+                <Grid Width="450" Height="105"  Background="White">
                     <TextBlock Text="개인정보제공 및 위탁동의" Margin="50,0,0,0" FontSize="25" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Left" ></TextBlock>
                 </Grid>
                 <Button Width="120" Height="110"  Margin="15 10" Background="Transparent">
@@ -118,6 +118,6 @@
                 </Button>
             </StackPanel>
         </Grid>
-
+        <Grid DockPanel.Dock="Top" Height="100" Width="940" />
     </DockPanel>
 </Page>

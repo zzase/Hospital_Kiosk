@@ -24,11 +24,13 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
         private ICommand isCancelCommand;
         private Visibility certRequestButtonVisibility;
         private Visibility paymentButtonVisibility;
+        private Visibility printButtonVisibility;
 
         public ICommand MainPageCommand { get; }
         public ICommand PlusCertCommand { get; }
         public ICommand CertRequesetCommnad { get; }
         public ICommand PaymentCommand { get; }
+        public ICommand PrintCommand { get; }
         public ICommand IsCancelCommand
         {
             get { return (this.isCancelCommand) ?? (this.isCancelCommand = new Command((obj) => { CheckProcess(); })); }
@@ -58,6 +60,12 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
             set => SetProperty(ref paymentButtonVisibility, value);
         }
 
+        public Visibility PrintButtonVisibility
+        {
+            get => printButtonVisibility;
+            set => SetProperty(ref printButtonVisibility, value);
+        }
+        
         public ConfirmRequestInfoPageViewModel()
         {
             CertRequestInfos = DataManager.Instance.CertRequestInfos;
@@ -172,6 +180,11 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
                 else
                     NavigationManager.Navigate(PageElement.SelectPayment);
             });
+
+            PrintCommand = new Command((obj) =>
+            {
+                NavigationManager.Navigate(PageElement.Print);
+            });
         }
 
         public async void CheckCertState(CertRequestInfo certRequestInfo, CancellationToken cancelToken)
@@ -249,8 +262,11 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
 
         private void SetButtonVisibility()
         {
+            bool noPayment = Mode.Equals(Mode.ModeFlag.NO_PAYMENT);
+
             CertRequestButtonVisibility = Visibility.Collapsed;
-            PaymentButtonVisibility = Visibility.Visible;
+            PaymentButtonVisibility = noPayment ? Visibility.Collapsed : Visibility.Visible;
+            PrintButtonVisibility = noPayment ? Visibility.Visible : Visibility.Collapsed;
 
             for (int i = 0; i < DataManager.Instance.CertRequestInfos.Count; i++)
             {
@@ -258,6 +274,7 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
                 {
                     CertRequestButtonVisibility = Visibility.Visible;
                     PaymentButtonVisibility = Visibility.Collapsed;
+                    PrintButtonVisibility = Visibility.Collapsed;
                     break;
                 }
             }

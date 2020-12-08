@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HKiosk.Pages.ConfirmRequestInfoPage"
+      xmlns:timer="clr-namespace:HKiosk.Controls.Timer"
       mc:Ignorable="d" 
       d:DesignHeight="1145" d:DesignWidth="1080"
       Title="ConfirmRequestInfoPage">
@@ -52,15 +53,21 @@
                     </Grid>
                 </Button>
 
+                <Button Width="300" Height="105" Command="{Binding PrintCommnad}"  Margin="15 10" Background="Transparent" Visibility="{Binding PrintButtonVisibility}">
+                    <Grid>
+                        <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Btn_Bottom_6.png"/>
+
+                        <TextBlock Text="증명서 출력" Margin="70,0,0,0" FontSize="30" Foreground="White"></TextBlock>
+                    </Grid>
+                </Button>
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1080" Height="50">
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="타이머" HorizontalAlignment="Right"  VerticalAlignment="Center" TextAlignment="Right"  FontSize="30" FontWeight="Bold"  />
+        <Grid DockPanel.Dock="Top" Height="80">
         </Grid>
         <Grid DockPanel.Dock="Top" Width="950" Height="50">
             <TextBlock Text="다른 증명서를 추가 발급하실 경우 [증명서 추가]버튼을 선택하세요" FontSize="15" Foreground="DarkGray"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1000" Height="210">
+        <Grid DockPanel.Dock="Top" Width="1000" Height="290">
             <ListView x:Name="RequestInfoList" ItemsSource="{Binding CertRequestInfos}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="3"
                       HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Grid.IsSharedSizeScope="True">
                 <ListView.ItemContainerStyle>
@@ -69,7 +76,7 @@
                         <Setter Property="FontSize" Value="25"/>
                     </Style>
                 </ListView.ItemContainerStyle>
-                
+
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" >
                         <GridView.ColumnHeaderContainerStyle>
@@ -77,7 +84,7 @@
                                 <Setter Property="IsHitTestVisible" Value="False"/>
                             </Style>
                         </GridView.ColumnHeaderContainerStyle>
-                        
+
                         <GridView.Columns>
                             <GridViewColumn Header="증명서종류" Width="300" >
                                 <GridViewColumn.CellTemplate>
@@ -86,7 +93,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            
+
                             <GridViewColumn Header="입원(발급)일자" Width="150" >
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -118,7 +125,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            
+
                             <GridViewColumn Header="상태" Width="120">
                                 <GridViewColumn.CellTemplate >
                                     <DataTemplate >
@@ -126,7 +133,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            
+
                             <GridViewColumn Header="취소" Width="70">
                                 <GridViewColumn.CellTemplate >
                                     <DataTemplate >
@@ -141,8 +148,8 @@
             </ListView>
         </Grid>
 
-        <Grid DockPanel.Dock="Top" Width="950"  Margin="0,50,0,0">
-            <Button Width="200" Height="80" Command="{Binding IsCancelCommand}">
+        <Grid DockPanel.Dock="Top" Width="1000" Height="150"   >
+            <Button Width="200" Height="80" Command="{Binding IsCancelCommand}" VerticalAlignment="Bottom">
                 <Grid>
                     <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Btn_Bottom_10.png"/>
                     <TextBlock Text="선택취소" FontSize="25" Margin="50,0,0,0" />
@@ -162,15 +169,23 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <RichTextBox   x:Name="Line1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="829*"/>
+                    <ColumnDefinition Width="121*"/>
+                </Grid.ColumnDefinitions>
+                <RichTextBox   x:Name="Line1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0" Grid.ColumnSpan="2" Margin="0,12,0,11"/>
             </Grid>
             <Grid Grid.Row="1">
                 <RichTextBox   x:Name="Line2" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0"/>
             </Grid>
             <Grid Grid.Row="2">
-                <RichTextBox   x:Name="Line3" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="841*"/>
+                    <ColumnDefinition Width="109*"/>
+                </Grid.ColumnDefinitions>
+                <RichTextBox   x:Name="Line3" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0" Grid.ColumnSpan="2" Margin="0,12,0,11"/>
             </Grid>
-            
+
         </Grid>
     </DockPanel>
 </Page>

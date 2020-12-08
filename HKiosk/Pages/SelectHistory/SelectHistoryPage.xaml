@@ -4,11 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HKiosk.Pages.SelectHistory"
+      xmlns:timer="clr-namespace:HKiosk.Controls.Timer"
       mc:Ignorable="d" 
       d:DesignHeight="1145" d:DesignWidth="1080"
       Title="SelectHistoryPage">
-
-
 
     <Page.DataContext>
         <local:SelectHistoryPageViewModel/>
@@ -47,14 +46,57 @@
 
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1000" Height="100">
-
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="타이머" HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Right"  FontSize="30" FontWeight="Bold" Height="100" Width="1000" />
+        <Grid DockPanel.Dock="Top" Height="80">
+            <timer:Timer />
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1000" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+        <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100" Width="900">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock Text="증명서명" FontSize="20" Foreground="DarkRed" Width="200" TextAlignment="Center"/>
+                <TextBlock Text="{Binding CertNe}" FontSize="30" Foreground="Black" FontWeight="Bold" Width="500"/>
+            </StackPanel>
+        </Grid>
+
+        <ListView ItemsSource="{Binding Intervals}" SelectedItem="{Binding SelectedInterval}" Background="Transparent"  DockPanel.Dock="Top" BorderThickness="0"
+                          Height="100" Width="900" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <Grid VerticalAlignment="Center" Height="80">
+                        <Image Source="{Binding Background}" Width="200"/>
+                        <TextBlock Text="{Binding Name}" Foreground="{Binding Foreground}" FontSize="25" Focusable="True"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="Focusable" Value="True"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="900"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+
+        <Grid DockPanel.Dock="Top" Width="900" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="700"/>
+                <ColumnDefinition Width="4.5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4.5*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -63,9 +105,9 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Column="0" Grid.Row="0">
-                <TextBlock Text="조회시작일자        :" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Left"/>
+                <TextBlock Text="시작일자" FontSize="25" HorizontalAlignment="left" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="DarkRed"/>
             </Grid>
-            <DatePicker x:Name="FromDate" Grid.Column="1" Grid.Row="0" Width="500" Height="40" FontSize="25" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectFromDateTime, Mode=TwoWay}">
+            <DatePicker x:Name="FromDate" Grid.Column="0" Grid.Row="1" Height="40" FontSize="25" FontWeight="Bold" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectFromDateTime, Mode=TwoWay}">
                 <DatePicker.Resources>
                     <Style x:Key="CalendarStyle"  TargetType="{x:Type Calendar}">
                         <Setter Property="Template">
@@ -85,10 +127,14 @@
                 </DatePicker.Resources>
             </DatePicker>
 
-            <Grid Grid.Column="0" Grid.Row="1">
-                <TextBlock Text="조회종료일자        :" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Left" />
+            <Grid Grid.Column="1" Grid.Row="1">
+                <TextBlock Text="~" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
             </Grid>
-            <DatePicker x:Name="ToDate" Grid.Column="1" Grid.Row="1" Width="500" Height="40" FontSize="25" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectToDateTime, Mode=TwoWay}">
+
+            <Grid Grid.Column="2" Grid.Row="0">
+                <TextBlock Text="종료일자" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="DarkRed" />
+            </Grid>
+            <DatePicker x:Name="ToDate" Grid.Column="2" Grid.Row="1" Height="40" FontSize="25" FontWeight="Bold" CalendarStyle="{DynamicResource CalendarStyle}" SelectedDate="{Binding SelectToDateTime, Mode=TwoWay}">
                 <DatePicker.Resources>
                     <Style x:Key="CalendarStyle"  TargetType="{x:Type Calendar}">
                         <Setter Property="Template">
@@ -112,7 +158,11 @@
             <Grid Grid.Column="0" Grid.Row="2"/>
         </Grid>
         <Grid DockPanel.Dock="Top" Width="1000" Height="50">
-            <Button Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ReadHistoriesCommand}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="84*"/>
+                <ColumnDefinition Width="41*"/>
+            </Grid.ColumnDefinitions>
+            <Button Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ReadHistoriesCommand}" Margin="400,0,72,0">
                 <Grid>
                     <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Popup_Green.png"/>
                     <TextBlock Text="검색" FontSize="25" Foreground="White"/>

@@ -3,10 +3,12 @@ using HKiosk.Manager.Data;
 using HKiosk.Manager.Navigation;
 using HKiosk.Manager.Popup;
 using HKiosk.Util;
+using HKiosk.Util.Server;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -80,9 +82,12 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
                 NavigationManager.Navigate(PageElement.InfoInput);
             });
 
-            NextPageCommand = new Command((obj) =>
+            NextPageCommand = new Command(async (obj) =>
             {
-                if(ApprovalNum == null)
+                var result = await KioskAgent.AuthPhone(ApprovalNum);
+                result = result.Replace(Environment.NewLine, "");
+
+                if (ApprovalNum == null)
                 {
                     PopupManager.Instance[PopupElement.Alert]?.Show("승인번호를 입력해주세요.");
                 }
@@ -90,8 +95,12 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
                 {
                     PopupManager.Instance[PopupElement.Alert]?.Show("승인번호는 6자리 입니다.");
                 }
-                else if(ApprovalNum.Equals("123456"))
+                else if(!result.Contains("승인내역오류"))
                 {
+                    DataManager.Instance.PaymentInfo.ResultCode = Regex.Replace(result, @"\D", "");
+
+                    var payResult = await RequestAPI.PayRequest();
+
                     timer.Stop();
                     NavigationManager.Navigate(PageElement.Print);
                 }
@@ -100,9 +109,7 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
                     DataManager.Instance.FailText = "[핸드폰] 결제에 실패하였습니다.";
                     DataManager.Instance.FailReason = "승인번호 불일치";
                     NavigationManager.Navigate(PageElement.Fail);
-
                 }
-
             });
         }
     }

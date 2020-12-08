@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HKiosk.Windows.Main"
+        xmlns:videoPlayer="clr-namespace:HKiosk.Controls.VideoPlayer"
         xmlns:popup="clr-namespace:HKiosk.Controls.Popup"
         xmlns:navigationBar="clr-namespace:HKiosk.Controls.NavigationBar"
         mc:Ignorable="d"
@@ -17,9 +18,7 @@
     <Viewbox>
         <Grid x:Name="panel" Width="1080" Height="1920" Background="#FFF2F2F2" PreviewMouseDown="Panel_MouseDown">
             <DockPanel>
-                <Grid DockPanel.Dock="Top" Height="708" Background="Green">
-                    <!--Video-->
-                </Grid>
+                <videoPlayer:VideoPlayer DockPanel.Dock="Top" Height="708" />
 
                 <navigationBar:NavigationBar x:Name="navigationBar" DataContext="{Binding NavigationBarViewModel}" DockPanel.Dock="Top" Height="67" ClipToBounds="True"/>
 

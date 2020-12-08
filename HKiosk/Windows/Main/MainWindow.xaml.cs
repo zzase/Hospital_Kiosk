@@ -12,13 +12,10 @@ using HKiosk.Pages.Payment;
 using HKiosk.Pages.Payment.PhonePaymentPage;
 using HKiosk.Pages.Fail;
 using HKiosk.Util;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.ComponentModel;
-using HKiosk.Manager.Data;
+using HKiosk.Manager.Timer;
 
 namespace HKiosk.Windows.Main
 {
@@ -39,7 +36,6 @@ namespace HKiosk.Windows.Main
         public void Navigate(PageElement page)
         {
             var vm = this.DataContext as MainWindowViewModel;
-
             Page pageToNavigate = null;
 
             switch (page)
@@ -57,18 +53,19 @@ namespace HKiosk.Windows.Main
                 case PageElement.ConfirmUserInfo:
                     pageToNavigate = new ConfirmUserInfoPage();
                     vm?.MoveNavigationBar(NaviElement.ConfirmUserInfo);
+                    TimerManager.Timer.Start(300);
                     break;
 
                 case PageElement.SelectCert:
                     pageToNavigate = new SelectCertPage();
-
                     vm?.MoveNavigationBar(NaviElement.SelectCert);
+                    TimerManager.Timer.Start(300);
                     break;
 
                 case PageElement.SelectHistory:
                     pageToNavigate = new SelectHistoryPage();
-
                     vm?.MoveNavigationBar(NaviElement.SelectHistory);
+                    TimerManager.Timer.Start(300);
                     break;
 
                 case PageElement.ConfirmRequestInfo:
@@ -79,6 +76,7 @@ namespace HKiosk.Windows.Main
                 case PageElement.SelectPayment:
                     pageToNavigate = new SelectPaymentPage();
                     vm?.MoveNavigationBar(NaviElement.Payment);
+                    TimerManager.Timer.Start(300);
                     break;
 
                 case PageElement.CardPayment:
@@ -122,6 +120,7 @@ namespace HKiosk.Windows.Main
                 case PageElement.PrintSuccess:
                     pageToNavigate = new PrintSuccessPage();
                     vm?.MoveNavigationBar(NaviElement.Print);
+                    TimerManager.Timer.Start(300);
                     break;
 
                 case PageElement.Fail:
