@@ -68,15 +68,25 @@
             <TextBlock Text="다른 증명서를 추가 발급하실 경우 [증명서 추가]버튼을 선택하세요" FontSize="15" Foreground="DarkGray"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
         <Grid DockPanel.Dock="Top" Width="1000" Height="290">
-            <ListView x:Name="RequestInfoList" ItemsSource="{Binding CertRequestInfos}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="3"
-                      HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Grid.IsSharedSizeScope="True">
+            <ListView x:Name="RequestInfoList" ItemsSource="{Binding CertRequestInfos}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0"
+                      HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="23" Grid.IsSharedSizeScope="True" FontWeight="Bold">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="Foreground" Value="DimGray"/>
+                        <Setter Property="FontWeight" Value="Medium"/>
                     </Style>
                 </ListView.ItemContainerStyle>
-
+                <ListView.Resources>
+                    <Style x:Key="HeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                        <Setter Property="Background" Value="DarkRed"/>
+                        <Setter Property="TextBlock.Foreground" Value="White"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="Height" Value="70"/>
+                    </Style>
+                </ListView.Resources>
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" >
                         <GridView.ColumnHeaderContainerStyle>
@@ -84,9 +94,17 @@
                                 <Setter Property="IsHitTestVisible" Value="False"/>
                             </Style>
                         </GridView.ColumnHeaderContainerStyle>
-
+                        
                         <GridView.Columns>
-                            <GridViewColumn Header="증명서종류" Width="300" >
+                            <GridViewColumn Header="선택" Width="70" HeaderContainerStyle="{StaticResource HeaderStyle}">
+                                <GridViewColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <CheckBox IsChecked="{Binding Path=IsCheckedForCancel,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                            <GridViewColumn Header="증명서종류" Width="300"  HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate >
                                         <TextBlock Text="{Binding Path=Job.CertNe}"/>
@@ -94,23 +112,15 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="입원(발급)일자" Width="150" >
+                            <GridViewColumn Header="신청상세" Width="300"  HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=SujinHistroy.InDate}" />
+                                        <TextBlock Text="{Binding Path=RequestDetail}" Foreground="DarkRed" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="퇴원일자" Width="150">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Path=SujinHistroy.OutDate}" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <GridViewColumn Header="매수" Width="50">
+                            <GridViewColumn Header="매수" Width="50" HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Path=Count}" />
@@ -118,7 +128,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="수수료" Width="100">
+                            <GridViewColumn Header="금액" Width="100" HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Path=Job.Price}"/>
@@ -126,22 +136,13 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="상태" Width="120">
+                            <GridViewColumn Header="상태" Width="120" HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate >
                                     <DataTemplate >
-                                        <TextBlock Text="{Binding State}"/>
+                                        <TextBlock Text="{Binding State}" Foreground="DarkRed" FontWeight="Bold"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
-                            <GridViewColumn Header="취소" Width="70">
-                                <GridViewColumn.CellTemplate >
-                                    <DataTemplate >
-                                        <CheckBox IsChecked="{Binding Path=IsCheckedForCancel,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
                         </GridView.Columns>
                     </GridView>
                 </ListView.View>

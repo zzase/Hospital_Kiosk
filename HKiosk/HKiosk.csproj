@@ -189,6 +189,10 @@
       <DependentUpon>SelectCertPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SelectCert\SelectCertPageViewModel.cs" />
+    <Compile Include="Pages\SelectDetail\SelectDetailPage.xaml.cs">
+      <DependentUpon>SelectDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SelectDetail\SelectDetailPageViewModel.cs" />
     <Compile Include="Pages\SelectHistory\Interval.cs" />
     <Compile Include="Pages\SelectHistory\SelectHistoryPage.xaml.cs">
       <DependentUpon>SelectHistoryPage.xaml</DependentUpon>
@@ -288,6 +292,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Payment\TmoneyPaymentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SelectDetail\SelectDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -448,6 +456,14 @@
     <Resource Include="Resources\Controls\VideoPlayer\Navi_F.png" />
     <Resource Include="Resources\Controls\VideoPlayer\Navi_T.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Btn_Return.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Toggle_Lang_1.png" />
+    <Resource Include="Resources\Common\Buttons\Toggle_Lang_2.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>IF NOT EXIST "$(TargetDir)Libs\" MD "$(TargetDir)Libs\"

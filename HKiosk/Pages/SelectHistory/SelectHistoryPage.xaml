@@ -58,11 +58,11 @@
         </Grid>
 
         <ListView ItemsSource="{Binding Intervals}" SelectedItem="{Binding SelectedInterval}" Background="Transparent"  DockPanel.Dock="Top" BorderThickness="0"
-                          Height="100" Width="900" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                          Height="120" Width="900" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <ListView.ItemTemplate>
                 <DataTemplate >
-                    <Grid VerticalAlignment="Center" Height="80">
-                        <Image Source="{Binding Background}" Width="200"/>
+                    <Grid Width="210" Height="60">
+                        <Image Stretch="Fill" Source="{Binding Background}"/>
                         <TextBlock Text="{Binding Name}" Foreground="{Binding Foreground}" FontSize="25" Focusable="True"></TextBlock>
                     </Grid>
                 </DataTemplate>
@@ -158,61 +158,7 @@
             <Grid Grid.Column="0" Grid.Row="2"/>
         </Grid>
         <Grid DockPanel.Dock="Top" Width="1000" Height="50">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="84*"/>
-                <ColumnDefinition Width="41*"/>
-            </Grid.ColumnDefinitions>
-            <Button Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ReadHistoriesCommand}" Margin="400,0,72,0">
-                <Grid>
-                    <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Popup_Green.png"/>
-                    <TextBlock Text="검색" FontSize="25" Foreground="White"/>
-                </Grid>
-            </Button>
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1000" Height="500">
-            <ListView x:Name="HistoryList" ItemsSource="{Binding SujinHistories,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="2"
-                      HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Left" FontSize="20" Grid.IsSharedSizeScope="True">
-                <ListView.View>
-                    <GridView>
-                        <GridView.Columns>
-                            <GridViewColumn  Width="100">
-                                <GridViewColumn.Header>
-                                    <CheckBox  Name="HeadCheck" Command="{Binding AllCheckCommand}" IsChecked="{Binding AllChecked}" />
-                                </GridViewColumn.Header>
-                                <GridViewColumn.CellTemplate >
-                                    <DataTemplate >
-                                        <Grid Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <CheckBox IsChecked="{Binding Path=IsChecked,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="25"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="발급일자" Width="400">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Path=InDate}" FontSize="25" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="450" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="진료과" Width="400">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Path=DeptNe}" FontSize="25" TextAlignment="Center" Width="450"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <GridViewColumn Header="매수" Width="100">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ComboBox x:Name="CountCert" ItemsSource="{Binding BoxItems}"  SelectedItem="{Binding BoxItems[0]}" SelectedValue="{Binding Count,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView.Columns>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>
+      
     </DockPanel>
 </Page>

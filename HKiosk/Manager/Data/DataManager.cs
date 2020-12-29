@@ -12,6 +12,7 @@ namespace HKiosk.Manager.Data
         public List<Job> Jobs { get; set; }
         public Job SelectedJob { get; set; }
         public ObservableCollection<CertRequestInfo> CertRequestInfos { get; set; }
+        public ObservableCollection<SujinHistroy> SujinHistroys { get; set; }
         public PaymentInfo PaymentInfo { get; set; }
         public CancellationTokenSource CancellationTokenSource { get; private set; }
         public string FinalPrice { get; set; }
@@ -27,6 +28,7 @@ namespace HKiosk.Manager.Data
             Jobs = null;
             SelectedJob = null;
             CertRequestInfos = new ObservableCollection<CertRequestInfo>();
+            SujinHistroys = new ObservableCollection<SujinHistroy>();
             PaymentInfo = new PaymentInfo();
             CancellationTokenSource = new CancellationTokenSource();
             FinalPrice = "";

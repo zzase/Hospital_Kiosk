@@ -6,6 +6,7 @@ using HKiosk.Pages.Main;
 using HKiosk.Pages.ConfirmUserInfo;
 using HKiosk.Pages.SelectCert;
 using HKiosk.Pages.SelectHistory;
+using HKiosk.Pages.SelectDetail;
 using HKiosk.Pages.ConfirmRequestInfoPage;
 using HKiosk.Pages.Print;
 using HKiosk.Pages.Payment;
@@ -65,6 +66,12 @@ namespace HKiosk.Windows.Main
                 case PageElement.SelectHistory:
                     pageToNavigate = new SelectHistoryPage();
                     vm?.MoveNavigationBar(NaviElement.SelectHistory);
+                    TimerManager.Timer.Start(300);
+                    break;
+
+                case PageElement.SelectDetail:
+                    pageToNavigate = new SelectDetailPage();
+                    vm?.MoveNavigationBar(NaviElement.SelectDetail);
                     TimerManager.Timer.Start(300);
                     break;
 

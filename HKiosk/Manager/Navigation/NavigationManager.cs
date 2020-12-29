@@ -38,6 +38,7 @@ namespace HKiosk.Manager.Navigation
         ConfirmUserInfo,// 사용자 정보 확인
         SelectCert,// 증명서 선택
         SelectHistory, // 수진이력 선택
+        SelectDetail, // 수진이력 선택 후 세부 옵션 선택 
         ConfirmRequestInfo, // 신청내용 확인
         SelectPayment, // 결제방법 선택
         CardPayment, // 카드 결제

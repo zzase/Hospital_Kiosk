@@ -68,6 +68,7 @@ namespace HKiosk.Controls.NavigationBar
         ConfirmUserInfo,
         SelectCert,
         SelectHistory,
+        SelectDetail,
         ConfirmRequestInfo,
         Payment,
         SelectIssuanceMethod,

@@ -24,14 +24,11 @@ namespace HKiosk.Pages.SelectHistory
         private Nullable<DateTime> selectFromDateTime = null;
         private Nullable<DateTime> selectToDateTime = null;
 
-        private ICommand readHistoriesCommand;
-        private ICommand allCheckCommand;
-
         private readonly System.Windows.Media.Brush darkRed = System.Windows.Media.Brushes.DarkRed;
         private readonly System.Windows.Media.Brush white = System.Windows.Media.Brushes.White;
 
-        private readonly BitmapImage whiteBackground = new BitmapImage(new Uri(@"/Resources/Pages/Payment/Toggle_Phone_1.png", UriKind.Relative));
-        private readonly BitmapImage redBackground = new BitmapImage(new Uri(@"/Resources/Pages/Payment/Toggle_Phone_2.png", UriKind.Relative));
+        private readonly BitmapImage whiteBackground = new BitmapImage(new Uri(@"/Resources/Common/Buttons/Toggle_Lang_1.png", UriKind.Relative));
+        private readonly BitmapImage redBackground = new BitmapImage(new Uri(@"/Resources/Common/Buttons/Toggle_Lang_2.png", UriKind.Relative));
 
         private ObservableCollection<Interval> intervals = new ObservableCollection<Interval>();
         private Interval selectedInterval;
@@ -110,6 +107,27 @@ namespace HKiosk.Pages.SelectHistory
                 value.Foreground = white;
                 value.Background = redBackground;
 
+                if (value.Name.Equals("1개월"))
+                {
+                    SelectFromDateTime = SelectToDateTime.Value.AddDays(-30);
+                }
+
+                else if (value.Name.Equals("3개월"))
+                {
+                    SelectFromDateTime = SelectToDateTime.Value.AddDays(-90);
+                }
+
+                else if (value.Name.Equals("6개월"))
+                {
+                    SelectFromDateTime = SelectToDateTime.Value.AddDays(-180);
+                }
+
+                else if (value.Name.Equals("1년"))
+                {
+                    SelectFromDateTime = SelectToDateTime.Value.AddDays(-365);
+                }
+
+                ReadHistories();
                 SetProperty(ref selectedInterval, value);
             }
         }
@@ -117,15 +135,7 @@ namespace HKiosk.Pages.SelectHistory
         public ICommand MainPageCommand { get; }
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
-        public ICommand AllCheckCommand
-        {
-            get { return (this.allCheckCommand)??(this.allCheckCommand = new Command((obj)=>{ AllCheckedProcess(); })); }
-        }
-        public ICommand ReadHistoriesCommand
-        {
-            get { return (this.readHistoriesCommand) ?? (this.readHistoriesCommand = new Command((obj) => { ReadHistories(); })); }
-        }
-
+       
         public SelectHistoryPageViewModel()
         {
             SujinHistories.Clear();
@@ -142,8 +152,7 @@ namespace HKiosk.Pages.SelectHistory
                 }
                 else
                 {
-                    SelectHistories();
-                    NavigationManager.Navigate(PageElement.ConfirmRequestInfo);
+                    NavigationManager.Navigate(PageElement.SelectDetail);
                 }
             });
             PreviousPageCommand = new Command((obj) =>
@@ -171,6 +180,12 @@ namespace HKiosk.Pages.SelectHistory
                 try
                 {
                     SujinHistories = new ObservableCollection<SujinHistroy>(RequestAPI.JArrayToList<SujinHistroy>(data["list"]?.Value<JArray>()));
+                    for(int i=0; i<SujinHistories.Count; i++)
+                    {
+                        SujinHistories[i].InDate = FormatStringToDate(SujinHistories[i].InDate);
+                        SujinHistories[i].OutDate = FormatStringToDate(SujinHistories[i].OutDate);
+                    }
+                    DataManager.Instance.SujinHistroys = SujinHistories;
                 }
                 catch (Exception ex)
                 {
@@ -199,24 +214,6 @@ namespace HKiosk.Pages.SelectHistory
 
         }
 
-        public void SelectHistories()
-        {
-            for (int i = 0; i < SujinHistories.Count; i++)
-            {
-                if (SujinHistories[i].IsChecked)
-                {
-                    CertRequestInfo certRequestInfo = new CertRequestInfo
-                    {
-                        Job = DataManager.Instance.SelectedJob,
-                        Count = SujinHistories[i].Count,
-                        SujinHistroy = SujinHistories[i],
-                        IsCheckedForCancel = false
-                    };
-                    DataManager.Instance.CertRequestInfos.Add(certRequestInfo);
-                }
-            }
-        }
-
         private void SetIntervals()
         {
             Intervals.Add(new Interval { Name = "1개월", Background = whiteBackground, Foreground = darkRed });
@@ -225,25 +222,31 @@ namespace HKiosk.Pages.SelectHistory
             Intervals.Add(new Interval { Name = "1년", Background = whiteBackground, Foreground = darkRed });
         }
 
-
-
-        public void AllCheckedProcess()
-        {
-            for (int i = 0; i < SujinHistories.Count; i++)
-            {
-                if (AllChecked)
-                {
-                    SujinHistories[i].IsChecked = true;
-                }
-                else
-                    SujinHistories[i].IsChecked = false;
-            }
-        }
-
         private void NavigateMainPage()
         {
             DataManager.Instance.InitData();
             NavigationManager.Navigate(PageElement.Main);
+        }
+
+        public static string FormatStringToDate(string tdrDate)
+        {
+            if (tdrDate != null)
+            {
+                if (tdrDate.Length > 4)
+                {
+                    return DateTime.ParseExact(tdrDate, "yyyyMMdd", null).ToString("yyyy.MM.dd");
+                }
+                else if (tdrDate.Length == 4)
+                {
+                    return tdrDate + "년";
+                }
+                else
+                    return tdrDate;
+                    
+            }
+            else return tdrDate;
+            
+            
         }
     }
 }

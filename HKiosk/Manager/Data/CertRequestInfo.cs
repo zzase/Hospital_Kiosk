@@ -5,6 +5,7 @@ namespace HKiosk.Manager.Data
     public class CertRequestInfo : PropertyChange
     {
         private string state;
+        private string requestDetail;
 
         public string CertNo { get; set; }    // 증명서 일련번호
         public string Count { get; set; }    // 매수
@@ -16,6 +17,11 @@ namespace HKiosk.Manager.Data
         { 
             get => state; 
             set => SetProperty(ref state, value); 
+        }
+        public string RequestDetail
+        {
+            get => requestDetail;
+            set => SetProperty(ref requestDetail, value);
         }
     }
 }
