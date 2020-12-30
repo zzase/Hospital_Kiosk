@@ -34,6 +34,7 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
             InitializeComponent();
             RichBoxTextHighLight(Line1, line1Start, line1Highlight, line1End);
             RichBoxTextHighLight(Line2, line2Start, line2Highlight, line2End);
+
         }
 
         private void RichBoxTextHighLight(RichTextBox richTextBox, string start, string highlight, string end)

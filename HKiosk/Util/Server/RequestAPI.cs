@@ -335,6 +335,41 @@ namespace HKiosk.Util.Server
 
             return paramData;
         }
+        /// <summary>
+        /// 기간 조회 필요없는 수진이력 조회 
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task<JObject> CertSujinRequest()
+        {
+            var giwanNo = Properties.Settings.Default.GiwanNo;
+            var uPatNo = DataManager.Instance.PatientInfo.PatientNo;
+            var uName = DataManager.Instance.PatientInfo.Name;
+            var uBirth = DataManager.Instance.PatientInfo.Birth;
+            var certCd = DataManager.Instance.SelectedJob.CertCd;
+            var certNe = DataManager.Instance.SelectedJob.CertNe;
+            var hosCertCd = DataManager.Instance.SelectedJob.HosCertCd;
+
+            var paramData = new JObject
+            {
+                { "command", "certSujinReq" },
+                { "giwanNo", giwanNo },
+                { "uPatNo", uPatNo },
+                { "uName", uName },
+                { "uBirth", uBirth },
+                { "certCd", certCd },
+                { "certNe", certNe },
+                { "hosCertCd", hosCertCd },
+
+            };
+
+            var postdata = new JObject
+            {
+                {"reqData", KISA_SEED_CBC_DLL_Importer.Encrypt(paramData.ToString())},
+                {"requester", "BBMC"}
+            };
+
+            return await WebServer.RequestJsonAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
+        }
 
         /// <summary>
         /// 수진이력 조회
@@ -491,6 +526,27 @@ namespace HKiosk.Util.Server
                 { "resultCode", resultCode },
                 { "goodsName", goodsName },
                 { "amt", amt }
+            };
+
+            var postdata = new JObject
+            {
+                {"reqData", KISA_SEED_CBC_DLL_Importer.Encrypt(paramData.ToString())},
+                {"requester", "BBMC"}
+            };
+
+            return await WebServer.RequestJsonAsync(postdata.ToString(), $"{operationURL}/ModuleC.do", "post");
+        }
+
+        internal static async Task<JObject> CheckSujinHistory(string giwanNo,string certCd)
+        {
+            giwanNo = Properties.Settings.Default.GiwanNo;
+            certCd = DataManager.Instance.SelectedJob.CertCd;
+            var paramData = new JObject
+            {
+                { "command", "certForm" },
+                { "giwanNo", giwanNo },
+                { "certCd", certCd }
+
             };
 
             var postdata = new JObject

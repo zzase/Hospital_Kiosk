@@ -11,6 +11,7 @@ using HKiosk.Manager.Popup;
 using HKiosk.Util.Server;
 using Newtonsoft.Json.Linq;
 using System.Windows.Media.Imaging;
+using System.Threading.Tasks;
 
 namespace HKiosk.Pages.SelectHistory
 {
@@ -127,7 +128,7 @@ namespace HKiosk.Pages.SelectHistory
                     SelectFromDateTime = SelectToDateTime.Value.AddDays(-365);
                 }
 
-                ReadHistories();
+                //ReadHistories();
                 SetProperty(ref selectedInterval, value);
             }
         }
@@ -143,7 +144,7 @@ namespace HKiosk.Pages.SelectHistory
 
             MainPageCommand = new Command((obj) => NavigateMainPage());
 
-            NextPageCommand = new Command((obj) =>
+            NextPageCommand = new Command(async (obj) =>
             {
                 if (SujinHistories == null)
                 {
@@ -152,16 +153,18 @@ namespace HKiosk.Pages.SelectHistory
                 }
                 else
                 {
-                    NavigationManager.Navigate(PageElement.SelectDetail);
+                    if (await ReadHistories())
+                        NavigationManager.Navigate(PageElement.SelectDetail);
                 }
             });
             PreviousPageCommand = new Command((obj) =>
             {
+
                 NavigationManager.Navigate(PageElement.SelectCert);
             });
         }
 
-        public async void ReadHistories()
+        public async Task<bool>  ReadHistories()
         {
             PopupManager.Instance[PopupElement.Loding].Show("수진이력을 가져오는 중입니다.\n잠시만 기다려주세요.");
 
@@ -172,7 +175,7 @@ namespace HKiosk.Pages.SelectHistory
             if (data == null)
             {
                 PopupManager.Instance[PopupElement.Alert]?.Show("서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.");
-                return;
+                return false;
             }
 
             if (data["resultCode"]?.ToString() == "200")
@@ -191,13 +194,13 @@ namespace HKiosk.Pages.SelectHistory
                 {
                     PopupManager.Instance[PopupElement.Alert]?.Show("서버에 일시적인 오류가 발생했습니다. 재시도 부탁드립니다.");
                     Log.Write($"[SelectHistoryPageViewModel] ReadHistories exception : {ex}");
-                    return;
+                    return false;
                 }
 
                 if ((SujinHistories?.Count ?? 0) < 1)
                 {
                     PopupManager.Instance[PopupElement.Alert].Show("수진이력이 없습니다.");
-                    return;
+                    return false;
                 }
             }
             else
@@ -210,8 +213,10 @@ namespace HKiosk.Pages.SelectHistory
                 }
 
                 PopupManager.Instance[PopupElement.Alert].Show(resultMessage);
+                return false;
             }
 
+            return true;
         }
 
         private void SetIntervals()

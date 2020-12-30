@@ -8,11 +8,13 @@ using HKiosk.Util.Server;
 using Newtonsoft.Json.Linq;
 using HKiosk.Manager.Popup;
 using System;
+using System.Collections.ObjectModel;
 
 namespace HKiosk.Pages.SelectCert
 {
     public class SelectCertPageViewModel : PropertyChange
     {
+        private ObservableCollection<SujinHistroy> sujinHistories = new ObservableCollection<SujinHistroy>();
         public ICommand MainPageCommand { get; }
 
         public List<Job> Jobs
@@ -27,6 +29,12 @@ namespace HKiosk.Pages.SelectCert
         public string PatientNo
         {
             get => DataManager.Instance.PatientInfo.PatientNo;
+        }
+
+        public ObservableCollection<SujinHistroy> SujinHistories
+        {
+            get => sujinHistories;
+            set => SetProperty(ref sujinHistories, value);
         }
 
         private async void InitJobs()

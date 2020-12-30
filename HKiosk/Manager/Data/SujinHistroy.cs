@@ -28,7 +28,6 @@ namespace HKiosk.Manager.Data
             get => count;
             set => SetProperty(ref count, value); 
         }    
-      
         public bool IsChecked    // 선택 여부
         {
             get => isChecked; 
@@ -61,7 +60,6 @@ namespace HKiosk.Manager.Data
                 Count = (Int32.Parse(Count) - 1).ToString();
                 if (Int32.Parse(Count) < 0) Count = "0";
             });
-
         }
 
     }

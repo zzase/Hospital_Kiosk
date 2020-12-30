@@ -106,7 +106,13 @@ namespace HKiosk.Pages.SelectDetail
             });
             PreviousPageCommand = new Command((obj) =>
             {
-                NavigationManager.Navigate(PageElement.SelectHistory);
+                if (DataManager.Instance.SelectedJob.NeedSujinHistory)
+                {
+                    NavigationManager.Navigate(PageElement.SelectHistory);
+                }
+                else
+                    NavigationManager.Navigate(PageElement.SelectCert);
+
             });
         }
         private void NavigateMainPage()
