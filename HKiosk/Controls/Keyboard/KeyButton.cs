@@ -139,7 +139,7 @@ namespace HKiosk.Controls.Keyboard
             _dicKeyData.Add(VirtualKeyCode.OEM_3, new KeyData { DefaultKey = "`", ShiftKey = "~" });
             _dicKeyData.Add(VirtualKeyCode.OEM_MINUS, new KeyData { DefaultKey = "-", ShiftKey = "_" });
             _dicKeyData.Add(VirtualKeyCode.OEM_PLUS, new KeyData { DefaultKey = "=", ShiftKey = "+" });
-            _dicKeyData.Add(VirtualKeyCode.BACK, new KeyData { DefaultKey = "← 지움" });
+            _dicKeyData.Add(VirtualKeyCode.BACK, new KeyData { DefaultKey = "X 지움" });
             _dicKeyData.Add(VirtualKeyCode.TAB, new KeyData { DefaultKey = "Tab" });
             _dicKeyData.Add(VirtualKeyCode.OEM_4, new KeyData { DefaultKey = "[", ShiftKey = "{" });
             _dicKeyData.Add(VirtualKeyCode.OEM_6, new KeyData { DefaultKey = "]", ShiftKey = "}" });

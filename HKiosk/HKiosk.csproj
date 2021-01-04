@@ -93,6 +93,9 @@
     </Compile>
     <Compile Include="Controls\Keyboard\KeyButton.cs" />
     <Compile Include="Controls\Keyboard\KeyData.cs" />
+    <Compile Include="Controls\Keyboard\LogInNumbericKeyboard.xaml.cs">
+      <DependentUpon>LogInNumbericKeyboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Keyboard\NumbericKeyboard.xaml.cs">
       <DependentUpon>NumbericKeyboard.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,10 @@
     <Page Include="Controls\Keyboard\GeneralKeyboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Keyboard\LogInNumbericKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Keyboard\NumbericKeyboard.xaml">
       <SubType>Designer</SubType>
@@ -463,7 +470,21 @@
     <Resource Include="Resources\Common\Buttons\Toggle_Lang_1.png" />
     <Resource Include="Resources\Common\Buttons\Toggle_Lang_2.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Controls\Keyboard\Btn_Keyboard_8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\Btn_Bottom_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controls\Keyboard\Btn_Keyboard_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controls\Keyboard\Btn_Keyboard_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controls\Keyboard\Btn_Keyboard_2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>IF NOT EXIST "$(TargetDir)Libs\" MD "$(TargetDir)Libs\"

@@ -38,6 +38,8 @@ namespace HKiosk.Pages.ConfirmUserInfo
 
         public ConfirmUserInfoPageViewModel()
         {
+            Name = "김종길";
+            FrontNationNo = "770120";
             MainPageCommand = new Command((obj) =>
             {
                 DataManager.Instance.InitData();
