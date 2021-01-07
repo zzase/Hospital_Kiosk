@@ -45,7 +45,7 @@ namespace HKiosk.Controls.NavigationBar
 
                     if (itemIndex > 3)
                     {
-                        MarginBetweenElement = new Thickness((itemIndex - 3) * -215, 0, 0, 0);
+                        MarginBetweenElement = new Thickness((itemIndex - 3) * -235, 0, 0, 0);
                     }
                     else
                         MarginBetweenElement = new Thickness(0);

@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="80" d:DesignWidth="1080">
 
-    <Grid  Height="60" Width="140" HorizontalAlignment="Right" Visibility="{Binding Visibility}">
-        <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Timer/Icon_31.png" HorizontalAlignment="Left" Width="25" Height="33" RenderTransformOrigin="0.5,0.5">
+    <Grid  Height="60" Width="125" HorizontalAlignment="Right" Visibility="{Binding Visibility}">
+        <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Timer/Icon_31.png" HorizontalAlignment="Left" Width="20" Height="30" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <RotateTransform x:Name="rotateTransform" Angle="0"/>
             </Image.RenderTransform>
@@ -27,7 +27,7 @@
                 </EventTrigger>
             </Image.Triggers>
         </Image>
-        <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Timer/Panel_9.png" Width="120" Height="50"/>
-        <TextBlock Text="{Binding TimerText}"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="27" FontWeight="Bold"/>
+        <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Timer/Panel_9.png" Width="100" Height="50"/>
+        <TextBlock Text="{Binding TimerText}"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="23"/>
     </Grid>
 </UserControl>

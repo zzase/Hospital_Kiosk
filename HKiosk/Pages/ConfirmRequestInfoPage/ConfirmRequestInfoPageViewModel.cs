@@ -14,6 +14,7 @@ using HKiosk.Util.Server;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Linq;
 
 namespace HKiosk.Pages.ConfirmRequestInfoPage
 {
@@ -111,7 +112,10 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
 
                     if (certRequestJson["resultCode"]?.ToString() == "200")
                     {
-                        DataManager.Instance.PaymentInfo.OrderNo = certRequestJson["orderNo"]?.ToString();
+                        DataManager.Instance.PaymentInfo = new PaymentInfo
+                        {
+                            OrderNo = certRequestJson["orderNo"]?.ToString()
+                        };
 
                         try
                         {
@@ -172,11 +176,25 @@ namespace HKiosk.Pages.ConfirmRequestInfoPage
 
             PaymentCommand = new Command((obj) =>
             {
+                var issuing = CertRequestInfos.Any(info => info.StateCode == "10" || info.StateCode == "20");
+                var isuuedComplete = CertRequestInfos.Any(info => info.StateCode == "30");
+
+                if (issuing)
+                {
+                    PopupManager.Instance[PopupElement.Alert]?.Show("증명서 발급중입니다. 잠시만 기다려주세요.");
+                    return;
+                }
+
+                if (!isuuedComplete)
+                {
+                    PopupManager.Instance[PopupElement.Alert]?.Show("발급된 문서가 없습니다.");
+                    return;
+                }
+
                 DataManager.Instance.FinalPrice = FinalPrice;
 
                 if (DataManager.Instance.FinalPrice.Equals("0원"))
                     NavigationManager.Navigate(PageElement.Print);
-
                 else
                     NavigationManager.Navigate(PageElement.SelectPayment);
             });

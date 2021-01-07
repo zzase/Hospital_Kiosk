@@ -32,7 +32,6 @@ namespace HKiosk.Manager.Data
             PaymentInfo = new PaymentInfo();
             CancellationTokenSource = new CancellationTokenSource();
             FinalPrice = "";
-            PaymentInfo.OrderNo = "";
             SettingInfo.GiwanNo = "HG0002";
         }
 

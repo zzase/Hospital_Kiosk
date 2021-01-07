@@ -18,7 +18,7 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type local:NaviPart}">
-                        <Grid Margin="{Binding GridMargin}">
+                        <Grid Margin="{Binding GridMargin}" Width="235">
                             <Image Source="{Binding NaviImage}" Stretch="Fill"/>
                             <TextBlock Text="{Binding Text}" FontSize="20"
                                    Foreground="{Binding ForegroundColor}" Margin="{Binding TextBlockMargin}"/>

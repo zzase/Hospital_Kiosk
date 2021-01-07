@@ -415,7 +415,7 @@ namespace HKiosk.Util.Server
         /// </summary>
         internal static async Task<JObject> CertRequest()
         {
-            var giwanNo = DataManager.Instance.SettingInfo.GiwanNo;
+            var giwanNo = Properties.Settings.Default.GiwanNo;
             var uPatNo = DataManager.Instance.PatientInfo.PatientNo;
             var uName = DataManager.Instance.PatientInfo.Name;
             var uBirth = DataManager.Instance.PatientInfo.Birth;

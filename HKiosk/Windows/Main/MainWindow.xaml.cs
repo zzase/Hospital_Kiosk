@@ -31,6 +31,16 @@ namespace HKiosk.Windows.Main
 
             this.DataContext = new MainWindowViewModel(this);
 
+            NavigationCommands.BrowseBack.InputGestures.Clear();
+            NavigationCommands.BrowseForward.InputGestures.Clear();
+            this.Loaded += (s, e) =>
+            {
+                KeyboardWindow keyboardWindow = new KeyboardWindow();
+                keyboardWindow.Owner = this;
+                keyboardWindow.Focusable = false;
+                keyboardWindow.ShowActivated = false;
+                keyboardWindow.Show();
+            };
             Navigate(PageElement.Main);
         }
 
