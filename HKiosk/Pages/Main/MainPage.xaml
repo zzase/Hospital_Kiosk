@@ -21,12 +21,12 @@
             <RowDefinition Height="7.6*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Image Source="pack://application:,,,/Resources/Pages/Main/logo1.jpg" />
+        <Grid Grid.Row="0" >
+            <Image Source="pack://application:,,,/Resources/Pages/Main/logo1.jpg" Width="386"  />
         </Grid>
         
         <Grid Grid.Row="1">
-            <TextBlock Text="무인증명발급서비스" FontSize="30" Foreground="IndianRed" Width="300" Height="55"  Background="LightGray" TextAlignment="Center" Padding="15" FontWeight="Bold"/>
+            <TextBlock Text="무인증명발급서비스" FontSize="30" Foreground="IndianRed" Width="320" Height="55"  Background="LightGray" TextAlignment="Center" Padding="15" FontWeight="Bold"/>
         </Grid>
         
         <Grid Grid.Row="2">
@@ -70,7 +70,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <Grid Grid.Row="4" Height="100" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-30,0,0,0">
+        <Grid Grid.Row="4" Height="100" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-30,25,0,0">
             <Image  Source="pack://application:,,,/Resources/Pages/Main/Panel_14.png" Width="196.5" Height="76.5"/>
             <TextBlock Text="서비스안내" FontSize="35" Foreground="White" FontWeight="Bold"></TextBlock>
         </Grid>

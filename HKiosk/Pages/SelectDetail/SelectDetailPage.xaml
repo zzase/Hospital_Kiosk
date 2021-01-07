@@ -46,12 +46,12 @@
 
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Top" Height="80">
-            <timer:Timer />
-        </Grid>
-
-        <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100" Width="900">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+        
+        <Grid DockPanel.Dock="Top" >
+            <Grid Height="80" VerticalAlignment="Top">
+                <timer:Timer />
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Background="#FFE7E7E5" Height="100" Width="800" VerticalAlignment="Center" Margin="0,30,0,0">
                 <TextBlock Text="증명서명" FontSize="20" Foreground="DarkRed" Width="200" TextAlignment="Center"/>
                 <TextBlock Text="{Binding CertNe}" FontSize="30" Foreground="Black" FontWeight="Bold" Width="500"/>
             </StackPanel>

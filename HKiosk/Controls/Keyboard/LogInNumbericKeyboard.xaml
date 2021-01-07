@@ -76,7 +76,6 @@
             <Grid Height="120" Width="120" Grid.Column="4" >
                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
                 <local:KeyButton KeyCode="NUMPAD0"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
-
             </Grid>
         </Grid>
     </Grid>

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HKiosk.Controls.Keyboard"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="500">
-    <Grid>
+    <Grid Background="#FFE7E7E5">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -21,9 +21,18 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <local:KeyButton KeyCode="NUMPAD1" Grid.Column="0"/>
-            <local:KeyButton KeyCode="NUMPAD2" Grid.Column="1"/>
-            <local:KeyButton KeyCode="NUMPAD3" Grid.Column="2"/>
+            <Grid Grid.Column="0">
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD1"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
+            <Grid  Grid.Column="1">
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD2"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD3"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -33,9 +42,18 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <local:KeyButton KeyCode="NUMPAD4" Grid.Column="0"/>
-            <local:KeyButton KeyCode="NUMPAD5" Grid.Column="1"/>
-            <local:KeyButton KeyCode="NUMPAD6" Grid.Column="2"/>
+            <Grid Grid.Column="0">
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD4"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD5"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
+            <Grid  Grid.Column="2">
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD6"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -45,9 +63,18 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <local:KeyButton KeyCode="NUMPAD7" Grid.Column="0"/>
-            <local:KeyButton KeyCode="NUMPAD8" Grid.Column="1"/>
-            <local:KeyButton KeyCode="NUMPAD9" Grid.Column="2"/>
+            <Grid Grid.Column="0" >
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD7"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
+            <Grid  Grid.Column="1" >
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD8"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
+            <Grid  Grid.Column="2" >
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD9"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -56,8 +83,14 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <local:KeyButton KeyCode="NUMPAD0" Grid.Column="0"/>
-            <local:KeyButton KeyCode="BACK" Background="#FF31B465" Foreground="White" Grid.Column="1"/>
+            <Grid  Grid.Column="0" >
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
+                <local:KeyButton KeyCode="NUMPAD0"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+            </Grid>
+            <Grid  Grid.Column="1">
+                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_5.png"/>
+                <local:KeyButton KeyCode="BACK" Foreground="White" Grid.Column="5" FontSize="45" Background="Transparent"/>
+            </Grid>
         </Grid>
     </Grid>
 </local:VirtualKeyboard>

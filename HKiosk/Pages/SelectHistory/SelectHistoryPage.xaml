@@ -46,22 +46,22 @@
 
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Top" Height="80">
-            <timer:Timer />
-        </Grid>
-
-        <Grid DockPanel.Dock="Top" Background="#FFE7E7E5" Height="100" Width="900">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+        
+        <Grid DockPanel.Dock="Top" >
+            <Grid VerticalAlignment="Top">
+                <timer:Timer />
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Background="#FFE7E7E5" Height="100" Width="800" VerticalAlignment="Center" Margin="0,30,0,0">
                 <TextBlock Text="증명서명" FontSize="20" Foreground="DarkRed" Width="200" TextAlignment="Center"/>
                 <TextBlock Text="{Binding CertNe}" FontSize="30" Foreground="Black" FontWeight="Bold" Width="500"/>
             </StackPanel>
         </Grid>
 
         <ListView ItemsSource="{Binding Intervals}" SelectedItem="{Binding SelectedInterval}" Background="Transparent"  DockPanel.Dock="Top" BorderThickness="0"
-                          Height="120" Width="900" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                          Height="120" Width="800" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,30,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate >
-                    <Grid Width="210" Height="60">
+                    <Grid Width="180" Height="60" Margin="0,0,10,0">
                         <Image Stretch="Fill" Source="{Binding Background}"/>
                         <TextBlock Text="{Binding Name}" Foreground="{Binding Foreground}" FontSize="25" Focusable="True"></TextBlock>
                     </Grid>
@@ -92,7 +92,7 @@
             </ListView.ItemsPanel>
         </ListView>
 
-        <Grid DockPanel.Dock="Top" Width="900" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid DockPanel.Dock="Top" Width="800" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4.5*"/>
                 <ColumnDefinition Width="1*"/>
