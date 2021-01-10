@@ -47,24 +47,29 @@
         <Grid Grid.Row="4" Background="White" Height="380" Width="1000" >
             <Grid Height="242" Width="1000">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" >
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="#474747"/>
+                        </Style>
+                    </StackPanel.Resources>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <TextBlock Text="   ●   " FontSize="32" Foreground="Gold"/>
-                        <TextBlock Text="발급비용   " Foreground="DimGray" FontSize="32" FontWeight="Bold"/>
-                        <TextBlock Text="외래진료사실확인서, 입퇴원확인서, 일반진단서 : 1,000원&#10;그 외 증명서 : 무상" FontSize="22" Foreground="DimGray" />
+                        <TextBlock Text="발급비용   "  FontSize="32" FontWeight="Bold" Height="50"/>
+                        <TextBlock Text="외래진료사실확인서, 입퇴원확인서, 일반진단서 : 1,000원&#10;그 외 증명서 : 무상" FontSize="22" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                        <TextBlock Text="   ●   " FontSize="35" Foreground="White"/>
-                        <TextBlock Text="  (1매기준)   " Foreground="DimGray" FontSize="22" VerticalAlignment="Top" FontWeight="Bold" />
-                    </StackPanel>
+                    <Grid Margin="0,0,0,20">
+                    <TextBlock Text="(1매기준)" FontSize="22" VerticalAlignment="Top" FontWeight="Bold" Width="330" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,-20,0,0"/>
+                    </Grid>
+                     
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <TextBlock Text="   ●   " FontSize="32" Foreground="Gold"/>
-                        <TextBlock Text="결제방법   " Foreground="DimGray" FontSize="32" FontWeight="Bold"/>
-                        <TextBlock Text="휴대폰,신용/체크카드,티머니,캐시비" FontSize="22" Foreground="DimGray" />
+                        <TextBlock Text="결제방법   " FontSize="32" FontWeight="Bold"/>
+                        <TextBlock Text="휴대폰,신용/체크카드,티머니,캐시비" FontSize="22" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,40,0,0">
                         <TextBlock Text="   ●   " FontSize="32" Foreground="Gold"/>
-                        <TextBlock Text="기타사항   " Foreground="DimGray" FontSize="32" FontWeight="Bold"/>
-                        <TextBlock Text="휴대폰 본인인증을 통해 본인인증 후 발급가능(환자 본인명의 휴대폰 필요)" FontSize="22" Foreground="DimGray" />
+                        <TextBlock Text="기타사항   " FontSize="32" FontWeight="Bold"/>
+                        <TextBlock Text="휴대폰 본인인증을 통해 본인인증 후 발급가능(환자 본인명의 휴대폰 필요)" FontSize="22" />
                     </StackPanel>
                     
                 </StackPanel>
