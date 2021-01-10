@@ -11,10 +11,16 @@ namespace HKiosk.Pages.IdentityVerification
 {
     public class IdentityVerificationPageViewModel : PropertyChange
     {
+        public ICommand MainPageCommand { get; }
         public ICommand NextPageCommand { get; }
 
         public IdentityVerificationPageViewModel()
         {
+            MainPageCommand = new Command((obj) =>
+            {
+                DataManager.Instance.InitData();
+                NavigationManager.Navigate(PageElement.Main);
+            });
             NextPageCommand = new Command((obj) =>
             {
                 DataManager.Instance.PatientInfo.Name = "김종길";
