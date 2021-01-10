@@ -104,11 +104,13 @@ namespace HKiosk.Windows.Main
                 case PageElement.Agreement:
                     pageToNavigate = new AgreementPage();
                     vm?.MoveNavigationBar(NaviElement.Payment);
+                    TimerManager.Timer.Start(300);
                     break;
 
                 case PageElement.InfoInput:
                     pageToNavigate = new InfoInputPage();
                     vm?.MoveNavigationBar(NaviElement.Payment);
+                    TimerManager.Timer.Start(300);
                     break;
 
                 case PageElement.ApprovalNumber:
