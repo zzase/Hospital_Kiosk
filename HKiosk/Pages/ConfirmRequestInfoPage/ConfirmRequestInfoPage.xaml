@@ -65,26 +65,29 @@
         <Grid DockPanel.Dock="Top" Height="80">
         </Grid>
         <Grid DockPanel.Dock="Top" Width="950" Height="50">
-            <TextBlock Text="다른 증명서를 추가 발급하실 경우 [증명서 추가]버튼을 선택하세요" FontSize="15" Foreground="DarkGray"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Text="다른 증명서를 추가 발급하실 경우 [증명서 추가]버튼을 선택하세요." FontSize="20" Foreground="DimGray" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="1000" Height="290">
-            <ListView x:Name="RequestInfoList" ItemsSource="{Binding CertRequestInfos}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0"
-                      HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="23" Grid.IsSharedSizeScope="True" FontWeight="Bold">
+        <Grid DockPanel.Dock="Top" Width="970" Height="445">
+            <ListView x:Name="RequestInfoList" ItemsSource="{Binding CertRequestInfos}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0" BorderBrush="IndianRed"
+                      HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="23" Grid.IsSharedSizeScope="True" FontWeight="Bold" Focusable="False" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="FontSize" Value="20"/>
                         <Setter Property="Foreground" Value="DimGray"/>
+                        <Setter Property="Background" Value="White" />
                         <Setter Property="FontWeight" Value="Medium"/>
+                        <Setter Property="Height" Value="52"/>
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.Resources>
                     <Style x:Key="HeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
-                        <Setter Property="Background" Value="DarkRed"/>
+                        <Setter Property="Background" Value="IndianRed"/>
                         <Setter Property="TextBlock.Foreground" Value="White"/>
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
                         <Setter Property="Height" Value="70"/>
+                        <Setter Property="IsHitTestVisible" Value="False"/>
                     </Style>
                 </ListView.Resources>
                 <ListView.View>
@@ -104,10 +107,10 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             
-                            <GridViewColumn Header="증명서종류" Width="300"  HeaderContainerStyle="{StaticResource HeaderStyle}">
+                            <GridViewColumn Header="증명서명" Width="300"  HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate >
-                                        <TextBlock Text="{Binding Path=Job.CertNe}"/>
+                                        <TextBlock Text="{Binding Path=Job.CertNe}" HorizontalAlignment="Left" Margin="20,0,0,0"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -115,12 +118,12 @@
                             <GridViewColumn Header="신청상세" Width="300"  HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=RequestDetail}" Foreground="DarkRed" />
+                                        <TextBlock Text="{Binding Path=RequestDetail}" Foreground="DarkRed"  HorizontalAlignment="Left" Margin="20,0,0,0"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="매수" Width="50" HeaderContainerStyle="{StaticResource HeaderStyle}">
+                            <GridViewColumn Header="매수" Width="100" HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Path=Count}" />
@@ -131,12 +134,15 @@
                             <GridViewColumn Header="금액" Width="100" HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Job.Price}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=Job.Price}"/>
+                                            <TextBlock Text=" 원"/>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="상태" Width="120" HeaderContainerStyle="{StaticResource HeaderStyle}">
+                            <GridViewColumn Header="상태" Width="100" HeaderContainerStyle="{StaticResource HeaderStyle}">
                                 <GridViewColumn.CellTemplate >
                                     <DataTemplate >
                                         <TextBlock Text="{Binding State}" Foreground="DarkRed" FontWeight="Bold"/>
@@ -149,7 +155,7 @@
             </ListView>
         </Grid>
 
-        <Grid DockPanel.Dock="Top" Width="1000" Height="150"   >
+        <Grid DockPanel.Dock="Top" Width="1000" Height="100"   >
             <Button Width="200" Height="80" Command="{Binding IsCancelCommand}" VerticalAlignment="Bottom">
                 <Grid>
                     <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/Btn_Bottom_10.png"/>
@@ -158,35 +164,14 @@
             </Button>
         </Grid>
 
-        <Grid DockPanel.Dock="Top" Width="1000" Height="100" Margin="0,50,0,0" Background="Gray">
+        <Grid DockPanel.Dock="Top" Width="960" Height="70" Margin="0,50,0,0" Background="DarkGray">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="총 결제금액" FontSize="35" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Left" Margin="0,0,100,0" />
-                <TextBlock x:Name="FinalPrice" Text="{Binding FinalPrice}" FontSize="35" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Right" Margin="0,0,100,0" />
+                <TextBlock Text="총 결제금액" FontSize="30" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Left" Margin="0,0,70,0" />
+                <TextBlock x:Name="FinalPrice" Text="{Binding FinalPrice}" FontSize="30" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Right" Margin="0,0,70,0" />
             </StackPanel>
         </Grid>
-        <Grid DockPanel.Dock="Top" Width="950" Height="100">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="829*"/>
-                    <ColumnDefinition Width="121*"/>
-                </Grid.ColumnDefinitions>
-                <RichTextBox   x:Name="Line1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0" Grid.ColumnSpan="2" Margin="0,12,0,11"/>
-            </Grid>
-            <Grid Grid.Row="1">
-                <RichTextBox   x:Name="Line2" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0"/>
-            </Grid>
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="841*"/>
-                    <ColumnDefinition Width="109*"/>
-                </Grid.ColumnDefinitions>
-                <RichTextBox   x:Name="Line3" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="0" Grid.ColumnSpan="2" Margin="0,12,0,11"/>
-            </Grid>
 
-        </Grid>
+        <Grid DockPanel.Dock="Top" Height="100"></Grid>
+        
     </DockPanel>
 </Page>
