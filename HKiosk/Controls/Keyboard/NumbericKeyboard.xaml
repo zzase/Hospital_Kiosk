@@ -23,15 +23,15 @@
 
             <Grid Grid.Column="0">
                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
-                <local:KeyButton KeyCode="NUMPAD1"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+                <local:KeyButton KeyCode="NUMPAD7"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
             </Grid>
             <Grid  Grid.Column="1">
                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
-                <local:KeyButton KeyCode="NUMPAD2"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+                <local:KeyButton KeyCode="NUMPAD8"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
             </Grid>
             <Grid Grid.Column="2">
                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
-                <local:KeyButton KeyCode="NUMPAD3"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+                <local:KeyButton KeyCode="NUMPAD9"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
             </Grid>
         </Grid>
 
@@ -65,15 +65,15 @@
 
             <Grid Grid.Column="0" >
                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
-                <local:KeyButton KeyCode="NUMPAD7"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+                <local:KeyButton KeyCode="NUMPAD1"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
             </Grid>
             <Grid  Grid.Column="1" >
                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
-                <local:KeyButton KeyCode="NUMPAD8"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+                <local:KeyButton KeyCode="NUMPAD2"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
             </Grid>
             <Grid  Grid.Column="2" >
                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Controls/Keyboard/Btn_Keyboard_3.png"/>
-                <local:KeyButton KeyCode="NUMPAD9"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
+                <local:KeyButton KeyCode="NUMPAD3"  FontSize="60" Foreground="DimGray" Background="Transparent"/>
             </Grid>
         </Grid>
 
