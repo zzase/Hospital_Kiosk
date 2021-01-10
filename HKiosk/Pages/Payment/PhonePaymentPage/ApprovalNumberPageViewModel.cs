@@ -107,7 +107,8 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
                 else
                 {
                     DataManager.Instance.FailText = "[핸드폰] 결제에 실패하였습니다.";
-                    DataManager.Instance.FailReason = "승인번호 불일치";
+                    DataManager.Instance.FailReason = "승인번호 입력시간 초과";
+                    timer.Stop();
                     NavigationManager.Navigate(PageElement.Fail);
                 }
             });

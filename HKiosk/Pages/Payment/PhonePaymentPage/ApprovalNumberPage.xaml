@@ -52,7 +52,7 @@
                     <TextBlock Text="승인번호 6자리" FontSize="25" FontWeight="Bold" Foreground="DimGray"/>
                 </Grid>
                 <Grid DockPanel.Dock="Top" Margin="23,0,25,0" >
-                    <TextBox Text="{Binding ApprovalNum}" Width="270" FontSize="70" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Center" MaxLength="6"/>
+                    <TextBox Text="{Binding ApprovalNum}" Width="270" FontSize="65" FontWeight="Bold" Foreground="DimGray" HorizontalAlignment="Center" MaxLength="6"/>
                 </Grid>
                 <Grid DockPanel.Dock="Top" Margin="23,70,25,0" >
                     <TextBlock Text="{Binding LimitTime}" FontSize="25" FontWeight="Bold" Foreground="IndianRed"/>

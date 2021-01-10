@@ -82,7 +82,7 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" x:Name="FrontNationNo" Text="{Binding FrontNationNo}" FontSize="45" AllowDrop="False" Width="160" FontWeight="Bold" />
+                            <TextBlock Grid.Column="0" x:Name="FrontNationNo" Text="{Binding FrontNationNo}" FontSize="45" AllowDrop="False" Width="163" FontWeight="Bold" />
                             <TextBlock Grid.Column="1" FontSize="50" Text="-"/>
                             <PasswordBox Grid.Column="2" x:Name="BackNationNo" FontSize="20" 
                                    MaxLength="7" VerticalContentAlignment="Center" Width="250" PasswordChanged="PasswordChanged"/>

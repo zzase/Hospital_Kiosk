@@ -113,7 +113,7 @@ namespace HKiosk.Pages.Payment.PhonePaymentPage
                 if (SelectedAgency == null)
                     PopupManager.Instance[PopupElement.Alert]?.Show("이동통신사를 선택해주세요.");
 
-                else if ((FrontPhoneNum != "" && CenterPhoneNum != "" && BackPhoneNum != "") && !(FrontPhoneNum.Length == 3 && CenterPhoneNum.Length == 4 && BackPhoneNum.Length == 4))
+                else if ((FrontPhoneNum == "" && CenterPhoneNum == "" && BackPhoneNum == "") && !(FrontPhoneNum.Length == 3 && CenterPhoneNum.Length == 4 && BackPhoneNum.Length == 4))
                     PopupManager.Instance[PopupElement.Alert]?.Show("핸드폰번호를\n정확히 입력해주세요.");
 
                 else if (!(FrontJumin != "" && BackOne != "" && FrontJumin.Length == 6 && BackOne.Length == 1))

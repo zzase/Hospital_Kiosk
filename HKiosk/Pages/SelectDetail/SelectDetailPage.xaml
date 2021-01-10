@@ -68,6 +68,7 @@
                         <Setter Property="TextBlock.Foreground" Value="DarkRed"/>
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="IsHitTestVisible" Value="False"/>
                     </Style>
                 </ListView.Resources>
                 <ListView.View>

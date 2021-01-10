@@ -46,7 +46,7 @@
                       FontWeight="Bold" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Center" BorderThickness="0" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Button Width="210" Height="150" Command="{Binding SelectCommand }" Background="Transparent">
+                        <Button Width="265" Height="180" Command="{Binding SelectCommand }" Background="Transparent">
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="5" >
                                 <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/기관선택버튼.png"/>
                                 <TextBlock Text="{Binding CertNe}" FontSize="20"  VerticalAlignment="Center" Foreground="Black" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
