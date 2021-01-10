@@ -8,7 +8,7 @@
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="/RTKiosk;component/Resources/Fonts/#나눔스퀘어_ac"/>
+            <Setter Property="FontFamily" Value="/HKiosk;component/Resources/Fonts/#나눔스퀘어_ac"/>
         </Style>
 
         <Style TargetType="{x:Type CheckBox}">
@@ -22,7 +22,7 @@
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="AllowDrop" Value="False"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="/RTKiosk;component/Resources/Fonts/#나눔스퀘어_ac"/>
+            <Setter Property="FontFamily" Value="/HKiosk;component/Resources/Fonts/#나눔스퀘어_ac"/>
             <Setter Property="BorderThickness" Value="5"/>
             <Setter Property="Padding" Value="6, 15, 6, 15"/>
             <Setter Property="Template">
@@ -51,7 +51,7 @@
             <Setter Property="Padding" Value="6, 15, 6, 15"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="AllowDrop" Value="False"/>
-            <Setter Property="FontFamily" Value="/RTKiosk;component/Resources/Font/#나눔스퀘어_ac"/>
+            <Setter Property="FontFamily" Value="/HKiosk;component/Resources/Font/#나눔스퀘어_ac"/>
             <Setter Property="BorderThickness" Value="5"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -76,7 +76,7 @@
         </Style>
 
         <Style TargetType="{x:Type Button}">
-            <Setter Property="FontFamily" Value="/RTKiosk;component/Resources/Fonts/#나눔스퀘어_ac"/>
+            <Setter Property="FontFamily" Value="/HKiosk;component/Resources/Fonts/#나눔스퀘어_ac"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
@@ -113,7 +113,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="1"/>
-            <Setter Property="FontFamily" Value="/RTKiosk;component/Resources/Fonts/#나눔스퀘어_ac"/>
+            <Setter Property="FontFamily" Value="/HKiosk;component/Resources/Fonts/#나눔스퀘어_ac"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Template">
                 <Setter.Value>
