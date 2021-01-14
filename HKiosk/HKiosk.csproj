@@ -536,6 +536,10 @@
   <ItemGroup>
     <Resource Include="Resources\Pages\Main\logo1.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Common\Buttons\m.png" />
+    <Resource Include="Resources\Common\Buttons\p.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>IF NOT EXIST "$(TargetDir)Libs\" MD "$(TargetDir)Libs\"

@@ -107,7 +107,7 @@
                                         <Grid Width="100" Height="130">
                                             <Button Width="50" Height="50" Background="Transparent" HorizontalAlignment="Right" Command="{Binding MinusCommand}">
                                                 <Grid  HorizontalAlignment="Right">
-                                                    <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Fail/Icon_33.png"/>
+                                                    <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/m.png"/>
                                                 </Grid>
                                             </Button>
                                         </Grid>
@@ -129,7 +129,7 @@
                                         <Grid Width="100" Height="130">
                                         <Button Width="50" Height="50" Background="Transparent" HorizontalAlignment="Left" Command="{Binding PlusCommand}">
                                             <Grid>
-                                                <Image Stretch="Fill" Source="pack://application:,,,/Resources/Pages/Print/Icon_32.png"/>
+                                                    <Image Stretch="Fill" Source="pack://application:,,,/Resources/Common/Buttons/p.png"/>
                                             </Grid>
                                         </Button>
                                         </Grid>
